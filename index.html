@@ -4,19 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Knipsel</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolygon points='2,2 22,2 2,22' fill='%231F1B16'/%3E%3Cpolygon points='23.2,5.7 23.2,23.2 5.7,23.2' fill='%23F26B4E'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolygon points='2,2 22,2 2,22' fill='%232B2C2E'/%3E%3Cpolygon points='23.2,5.7 23.2,23.2 5.7,23.2' fill='%23FBE38F'/%3E%3C/svg%3E">
 <style>
-:root{--ink:#1F1B16;--muted:#6B6358;--line:#E6DECF;--panel:#F8F4EC;--hl:#FFC9B8;--accent:#F26B4E;--bg:#FFFFFF;--f:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif}
-:root[data-theme="dark"]{--ink:#F3EEE6;--muted:#B5AA9A;--line:#3A342C;--panel:#26221C;--hl:#7A3A2A;--bg:#16130F}
+:root{--lila:#D1DAF9;--ink:#2B2C2E;--muted:#66635D;--line:#E3E1DC;--panel:#F7F6F3;--hl:#FFF2C4;--accent:#FBE38F;--accent-line:#9E7700;--on-accent:#2B2C2E;--bg:#FFFFFF;--f:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif}
+:root[data-theme="dark"]{--ink:#F2F1EE;--muted:#AEABA5;--line:#383633;--panel:#23221F;--hl:#5C4A10;--accent-line:#FBE38F;--bg:#151413}
 *{box-sizing:border-box;border-radius:0}
 html{color-scheme:light}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--f)}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
-.b{border:1px solid var(--line);background:var(--bg);padding:0 12px;min-height:32px;font-weight:500;font-size:13px}
+.b{-webkit-appearance:none;appearance:none;border:1px solid var(--line);background:var(--bg);padding:0 12px;min-height:32px;font-weight:500;font-size:13px}
 .b:hover{border-color:var(--ink)}
 .b.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.b.p{background:var(--accent);border-color:var(--accent);color:#1F1B16;font-weight:600}
+.b.dirty::after{content:'';display:inline-block;width:7px;height:7px;background:var(--accent-line);margin-left:7px;vertical-align:1px}
+.b.p{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
 .b:disabled{opacity:.4;cursor:default}
 input[type=text],input[type=date],input[type=number],select,textarea{border:1px solid var(--line);background:var(--bg);padding:0 8px;min-height:32px;font-size:13px}
 input:focus,select:focus,textarea:focus,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
@@ -29,55 +30,87 @@ nav.st{display:flex;gap:4px;margin-left:auto;font-size:13px}
 .hr0{flex:1 1 auto}
 .taal{font-size:12px;color:var(--muted);align-self:flex-start;padding-top:6px}
 .taal button{border:0;background:none;padding:2px 3px;color:var(--muted);font-size:12px}
-.taal button.on{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+.taal button.on{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--accent-line);text-underline-offset:3px}
 nav.st button{border:0;background:none;padding:6px 10px;color:var(--muted);border-bottom:2px solid transparent}
-nav.st button.on{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+nav.st button.on{color:var(--ink);font-weight:600;border-bottom-color:var(--accent-line)}
 .hr{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 #naam{border:0;border-bottom:1px solid var(--line);width:130px;min-height:28px}
 .wrap{padding:0 32px 60px}
 .zin{font-size:26px;line-height:1.75;letter-spacing:-.02em;font-weight:500;padding:26px 0 10px;max-width:1150px}
-.zin .n{background:var(--accent);color:#1F1B16;padding:0 6px;font-weight:700}
-.v{border:0;border-bottom:3px solid var(--accent);background:none;padding:0 2px;font:inherit;letter-spacing:inherit;line-height:1.2}
+.zin .n{background:var(--accent);color:var(--on-accent);padding:0 6px;font-weight:700}
+.v{border:0;background:linear-gradient(transparent 70%,var(--accent) 70%);padding:0 2px;font:inherit;letter-spacing:inherit;line-height:1.2}
 .nw{white-space:nowrap}
+.tlk .v{background:none;border-bottom:1px solid var(--accent-line)}
 .v:hover,.v.on{background:var(--panel)}
 .pop{border:1px solid var(--ink);padding:14px 16px;margin:4px 0 12px;max-width:760px;background:var(--bg)}
 .pop h3{margin:0 0 8px;font-size:13px;font-weight:600}
 .pop .rij{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
 .lst{max-height:300px;overflow:auto;border-top:1px solid var(--line)}
 .lst label,.lst .kr{display:flex;gap:8px;align-items:center;min-height:30px;border-bottom:1px solid var(--line);font-size:13px}
+.knm{border:0!important;border-bottom:1px dashed var(--line)!important;padding:0 2px!important;min-height:24px!important;width:100%;background:none!important}
+.knm:hover{border-bottom-color:var(--ink)!important}
 .lst .kr span.nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lst select{min-height:26px;font-size:12px}
 .tl{margin:8px 0 0}
 .tlk{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:var(--muted);margin-bottom:6px}
 .tlk i{display:inline-block;width:10px;height:10px;margin:0 4px 0 10px}
 .bars{position:relative;height:110px;display:flex;align-items:flex-end;gap:2px;border-bottom:1px solid var(--ink);cursor:crosshair;user-select:none;touch-action:none}
+.tlsw button{border:0;background:none;padding:0 2px;font:inherit;color:var(--muted);cursor:pointer}
+.tlsw button.on{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--accent-line);text-underline-offset:3px;cursor:default}
 .bars .w{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;height:100%;pointer-events:none}
 .bars .w.uit{opacity:.25}
-.bars .sel{position:absolute;top:0;bottom:0;background:var(--accent);opacity:.14;pointer-events:none}
+.bars .sel{position:absolute;top:0;bottom:0;background:var(--accent);opacity:.35;pointer-events:none}
 .as{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);padding-top:4px}
 .cols{display:flex;flex-wrap:wrap;gap:0 40px;margin-top:22px}
 .zij{flex:0 0 170px;position:sticky;top:10px;align-self:flex-start;padding-top:8px}
+.zij .b{font-size:12px;padding:0 8px;white-space:nowrap}
 .zij .g{font-size:40px;font-weight:700;letter-spacing:-.04em;line-height:1}
-.spoor{height:4px;background:var(--line);margin:14px 0 6px}.spoor div{height:4px;background:var(--accent)}
-.kbd{font-size:12px;line-height:1.9;margin-top:16px}
-.kbd b{display:inline-block;min-width:34px;font-weight:600}
+.spoor{height:4px;background:var(--line);margin:14px 0 6px}.spoor div{height:4px;background:var(--ink)}
+.kbd{font-size:12px;line-height:1.4;margin-top:4px}
+.kbd>div{display:flex;align-items:center;gap:4px;margin-bottom:5px}
+.kr2{display:grid;grid-template-columns:62px 1fr;align-items:center;width:100%;border:0;background:none;padding:2px 4px;margin:0 0 3px -4px;font:inherit;font-size:12px;color:var(--ink);text-align:left;cursor:pointer}
+.kr2:hover{background:var(--panel)}
+.kr2.leeg{opacity:.45;cursor:default}.kr2.leeg:hover{background:none}
+.kk{display:flex;gap:4px;align-items:center}
+.kpijl{border:0;background:none;padding:0;cursor:pointer}.kpijl:hover kbd{border-color:var(--ink)}
+.kbd>div.kr2{display:grid;cursor:default;gap:0}div.kr2:hover{background:none}
+.lnk{border:0;background:none;padding:0;text-align:left;font:inherit;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}.lnk:hover{color:var(--ink)}
+.kbd .kg{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 6px;border-bottom:1px solid var(--line);padding-bottom:3px}
+.kbd kbd{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;border:1px solid var(--line);font:600 11px var(--f);padding:0 4px;color:var(--ink)}
+.kbd kbd.sel{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .stroom{flex:1 1 520px;max-width:800px;min-width:0}
-.k{padding:16px 14px 18px;border-top:1px solid var(--line);border-left:3px solid transparent}
-.k.act{background:var(--panel);border-left-color:var(--accent)}
-.k.nee>h2,.k.nee>.ea{opacity:.45}
+.k{padding:16px 14px 18px 82px;border-top:1px solid var(--line)}
+.k.act{background:var(--panel)}
 .k h2{font-size:21px;line-height:1.18;letter-spacing:-.02em;margin:4px 0 8px}
 .k .lead{font-weight:600;margin:0 0 8px}
 .k .ea{margin:0 0 12px;font-size:16px;line-height:1.55}
 .k .acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .k .acts .sp{flex:1}
-.k .vol{margin:12px 0 0;border-top:1px dashed var(--line);padding-top:10px}
-.al{display:flex;gap:10px;margin:0 0 10px;font-size:15px;line-height:1.55}
-.al button{flex:none;width:30px;height:24px;min-height:0;padding:0;font-size:11px;margin-top:2px}
-.al.e1{background:var(--bg);box-shadow:inset 3px 0 0 var(--accent);padding:6px 8px 6px 10px}
-.k.act .al.e1{background:var(--bg)}
+.k .vol{margin:10px 0 12px}
+.al{position:relative;margin:0 0 12px;font-size:16px;line-height:1.55}
+.al .txt{display:block}
+.al.x .txt{opacity:.35;text-decoration:line-through}
+.al .ctl{position:absolute;left:-68px;top:3px;display:flex;gap:3px;width:63px}
+.m1{-webkit-appearance:none;appearance:none;width:19px;height:19px;padding:0;border:1px solid var(--line);background:var(--bg);font:600 11px/1 var(--f);color:var(--muted);visibility:hidden;display:flex;align-items:center;justify-content:center}
+.m1:hover{border-color:var(--ink);color:var(--ink)}
+.m1.aan{visibility:visible;background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.m1.kr{font-size:14px}
+.al.x .m1,.m1.txr{visibility:visible}
+[data-ed]{cursor:text}
+[data-ed]:hover{background:var(--bg);box-shadow:0 0 0 4px var(--bg)}
+.edt{display:block;width:100%;font:inherit;line-height:inherit;color:var(--ink);border:1px solid var(--accent-line);background:var(--bg);padding:4px 6px;margin:-5px -7px;resize:none;overflow:hidden;width:calc(100% + 14px)}
+.edt:focus{outline:2px solid var(--accent);outline-offset:0}
+.al:hover .m1,.al:focus-within .m1,.al.x .m1{visibility:visible}
+@media (hover:none){.m1{visibility:visible}}
+.tref{margin-top:3px}.tref b{font-weight:600;color:var(--ink)}.tref .nul{opacity:.55}
+.gbalk{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;background:var(--accent);padding:10px 14px;margin:0 0 12px;font-size:14px;scroll-margin-top:12px}
+.tags{display:flex;flex-wrap:wrap;align-items:baseline;margin-top:4px;font-size:12px;color:var(--muted);line-height:1.6}
+.tags .sep{margin:0 7px}
+.tag{-webkit-appearance:none;appearance:none;border:0;background:none;padding:0 1px;font:inherit;color:var(--muted);min-height:0}
+.tag.st{color:var(--ink);font-weight:600}
+.tag.klik{color:var(--ink);cursor:pointer;background:linear-gradient(transparent 68%,var(--accent) 68%)}
+.tag.klik:hover{background:var(--accent)}
 mark{background:var(--hl);color:inherit;padding:0 2px}
-.tag{font-size:11px;border:1px solid var(--line);padding:1px 6px;margin-left:6px;white-space:nowrap}
-.tag.ja{background:var(--ink);color:var(--bg);border-color:var(--ink)}.tag.tw{background:var(--hl)}
 .corr{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
 .corr{background:var(--bg);border:1px solid var(--line);padding:10px}
 .corr label{font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:2px;min-width:0}
@@ -89,12 +122,30 @@ h1.t{font-size:26px;letter-spacing:-.02em;margin:28px 0 6px;font-weight:600}
 table.f{border-collapse:collapse;font-size:13px;margin:8px 0 18px}
 table.f td,table.f th{border-bottom:1px solid var(--line);padding:5px 18px 5px 0;text-align:left;font-weight:400}
 table.f th{color:var(--muted);font-size:12px}
+.exh{font-size:15px;margin:28px 0 10px;font-weight:600}
+.exk label{display:flex;gap:8px;align-items:center;margin-bottom:6px;font-size:14px;cursor:pointer}
+.exr{display:grid;grid-template-columns:220px 1fr;gap:12px;align-items:center;max-width:860px;padding:8px 0;border-bottom:1px solid var(--line)}
+.exr .b{width:100%}
 .note{max-width:760px;color:var(--muted);font-size:13px}
+.hoe{max-width:760px;margin-top:26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px;line-height:1.55}
+.hoe summary{cursor:pointer;padding:10px 0;font-weight:600;font-size:15px}
+.hoe h4{font-size:13px;margin:16px 0 4px}.hoe p,.hoe ul,.hoe ol{margin:0 0 8px}.hoe ul,.hoe ol{padding-left:20px}.hoe li{margin-bottom:3px}.hoe code{font-size:12px;background:var(--panel);padding:0 3px}
 .note li{margin-bottom:4px}
-.warn{border-left:3px solid var(--accent);padding:6px 12px;background:var(--panel);max-width:760px;margin:8px 0;font-size:13px}
+.warn{padding:8px 12px;background:var(--hl);max-width:760px;margin:8px 0;font-size:13px}
 textarea.ver{width:100%;max-width:760px;height:150px;padding:8px;font-size:12px}
+dialog#fb{border:0;padding:0;max-width:640px;width:calc(100% - 32px);max-height:90vh;background:var(--bg);color:var(--ink);box-shadow:0 10px 40px rgba(0,0,0,.18)}
+dialog#fb::backdrop{background:rgba(43,44,46,.35)}
+#fb .fbb{padding:6px 20px 20px;font-size:14px}
+#fb textarea{width:100%;min-height:150px;padding:8px;font:inherit;font-size:14px;border:1px solid var(--line);resize:vertical}
+#fb .fbnm{display:flex;gap:10px;margin-top:10px}#fb .fbnm label{flex:1;display:flex;flex-direction:column;gap:3px;color:var(--muted)}#fb .fbnm input{color:var(--ink)}
+#fb pre{white-space:pre-wrap;background:var(--panel);padding:8px 10px;font-size:11px;margin:6px 0 0;color:var(--muted)}
+dialog#uitleg{border:1px solid var(--ink);padding:0;max-width:760px;width:calc(100% - 32px);max-height:85vh;background:var(--bg);color:var(--ink)}
+dialog#uitleg::backdrop{background:rgba(43,44,46,.35)}
+.dk{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:var(--bg);border-bottom:1px solid var(--line);font-size:15px}
+#uitlegB{padding:4px 20px 20px;font-size:14px;line-height:1.55}
+#uitlegB h4{font-size:13px;margin:16px 0 4px}#uitlegB p,#uitlegB ul,#uitlegB ol{margin:0 0 8px}#uitlegB ul,#uitlegB ol{padding-left:20px}#uitlegB code{font-size:12px;background:var(--panel);padding:0 3px}
 #toast{position:fixed;left:32px;bottom:20px;background:var(--ink);color:var(--bg);padding:8px 14px;font-size:13px;display:none}
-@media(max-width:700px){header,.wrap{padding-left:16px;padding-right:16px}.zin{font-size:20px}.nw{white-space:normal}.v{text-align:left}.zij{position:static;flex:1 1 100%;margin-bottom:10px}.kbd{display:none}}
+@media(max-width:700px){.exr{grid-template-columns:1fr}header,.wrap{padding-left:16px;padding-right:16px}.zin{font-size:20px}.nw{white-space:normal}.v{text-align:left}.zij{position:static;flex:1 1 100%;margin-bottom:10px}.kbd{display:none}}
 </style>
 </head>
 <body>
@@ -106,6 +157,8 @@ textarea.ver{width:100%;max-width:760px;height:150px;padding:8px;font-size:12px}
 </header>
 <div class="wrap" id="app"></div>
 <div id="toast" role="status"></div>
+<dialog id="fb"></dialog>
+<dialog id="uitleg"><div class="dk"><b id="uitlegT"></b><button class="b" data-a="sluitUitleg" aria-label="sluiten">×</button></div><div id="uitlegB"></div></dialog>
 <input type="file" id="fin" multiple accept=".html,.htm,.rtf,.json,.pdf" hidden>
 <script>
 'use strict';
@@ -113,11 +166,11 @@ textarea.ver{width:100%;max-width:760px;height:150px;padding:8px;font-size:12px}
    Corpustool. Alles gebeurt in de browser: bestanden worden niet verstuurd.
    ========================================================================= */
 const T = {
-nl:{s1:'1 Inlezen',s2:'2 Filteren en nakijken',s3:'3 Exporteren',opslaan:'Project opslaan',openen:'Project openen',nieuw:'Nieuw project',
+nl:{s1:'1 Inlezen',s2:'2 Filteren en nakijken',s3:'3 Exporteren',opslaan:'Project opslaan',openen:'Project openen',alIn:'dit bestand is al ingelezen en werd overgeslagen. Wil je het opnieuw inlezen, verwijder het dan eerst met ×.',wegLabel:'Bestand verwijderen',wegVraag:'{f} verwijderen? {n} artikels die alleen in dit bestand staan, verdwijnen uit je project.',wegBeoord:'Je verliest ook je beoordelingen en correcties van {n} van die artikels.',nieuw:'Alles wissen en opnieuw beginnen',nieuwS:'Wist alle ingelezen bestanden en je beoordelingen. Sla je project eerst op als je het wilt bewaren.',contact:'Vragen, een fout gevonden of een idee? Neem contact op met Elisa Nelissen (KU Leuven).',contactUrl:'https://www.kuleuven.be/wieiswie/nl/person/00065215',hoeT:'Hoe Knipsel beslist',
  projnaam:'naam van project',drop:'Sleep je exports hierheen, of',kies:'kies bestanden',dropS:'Belga.press (.html), Nexis Uni (.rtf) of een eerder bewaard project (.json)',
- inl:'Exports inlezen',inlS:'Voeg zoveel bestanden toe als je wilt. Komt hetzelfde record (zelfde krant, datum, titel en tekst) in meer dan één export voor, dan houdt de tool het maar één keer. Gelijkaardige artikels uit verschillende kranten, zoals overgenomen persberichten of agentschapsberichten, blijven gewoon apart staan.',
+ inl:'Exports inlezen',inlS:'Voeg zoveel bestanden toe als je wilt. Komt hetzelfde record (zelfde krant, datum, titel en tekst) in meer dan één export voor, dan houdt de tool het maar één keer. Gelijkaardige artikels uit verschillende kranten, zoals overgenomen stukken of berichten van persagentschappen, blijven gewoon staan.',
  bestand:'Bestand',bron:'Bron',art:'Artikels',verder:'Verder naar filteren',geen:'Nog geen artikels ingelezen.',
- over:'Met deze tool stel je een corpus van krantenartikels samen uit exports van Belga.press en Nexis Uni. Je leest je exports in, filtert ze op zoektermen, land, krant, periode en journalist, en kijkt elk artikel na: klopt de eerste alinea, en hoort het artikel in je corpus? Fouten in de metadata kan je zelf corrigeren. Je eindigt met een Excel-bestand, een tekstbestand per artikel en een verantwoording van elke stap.',
+ over:'Met deze tool stel je een corpus van krantenartikels samen uit exports van Belga.press en Nexis Uni. Je leest je exports in, filtert ze op zoektermen, land, krant en periode, en kijkt elk artikel na: klopt de eerste alinea, en hoort het artikel in je corpus? Fouten in de metadata kan je zelf corrigeren. Je eindigt met een Excel-bestand, een tekstbestand per artikel en een verantwoording van elke stap.',
  hoe:'Zo maak je je exports',
  belga:'<b>Belga.press</b>: voer je zoekopdracht uit en open de resultatenlijst. Doe alsof je die lijst wilt afdrukken, zodat alle artikels volledig onder elkaar op één pagina staan. Druk niet af, maar bewaar die pagina in je browser als html: in Chrome of Edge via <i>Bestand › Pagina opslaan als</i> en kies <i>Webpagina, volledig</i>; in Firefox via <i>Bestand › Pagina opslaan als</i>. Je krijgt een .html-bestand en een map met afbeeldingen; voor deze tool heb je alleen het .html-bestand nodig.',
  nexis:'<b>Nexis Uni</b>: selecteer de artikels in je resultatenlijst, kies <i>Downloaden</i>, zet het formaat op <i>RTF</i> en kies voor één bestand per download (niet elk artikel apart). Nexis Uni laat maximaal 100 artikels per download toe; maak dus meerdere downloads en lees ze hier allemaal samen in.',
@@ -130,28 +183,28 @@ nl:{s1:'1 Inlezen',s2:'2 Filteren en nakijken',s3:'3 Exporteren',opslaan:'Projec
  alleTypes:'print en online',tussen:'tussen',en:'en',begin:'het begin',einde:'het einde',met:'met',elkWoord:'om het even welke woorden',
  inW:'in',w_titel:'titel',w_lead:'lead',w_eerste:'eerste alinea',w_tekst:'hele tekst',of:'of',minstens:'minstens {n} keer in het hele artikel',
  van:'van',elkeJ:'elke journalist',zonderJ:'zonder journalistennaam',st_alle:'alles tonen',st_open:'nog niet beoordeeld',st_ja:'opgenomen',st_twijfel:'twijfel',st_nee:'niet opgenomen',
- ea_alle:'',ea_open:'eerste alinea niet nagekeken',ea_twijfel:'eerste alinea onzeker volgens de tool',
+ ea_alle:'',ea_open:'eerste alinea niet nagekeken',ea_twijfel:'eerste alinea nakijken',
  pLand:'Land',pKrant:'Kranten',pType:'Soort publicatie',pDatum:'Periode',pQ:'Zoektermen',pWaar:'Waar moeten de zoektermen staan?',pAuteur:'Journalist',pStatus:'Status',
  alles:'alles',niets:'niets',nat:'nationaal',reg:'regionaal',nin:'niet ingedeeld',soortKr:'Soort krant',landVan:'land',
- qUitleg:'Zet OR tussen alternatieven en AND tussen woorden die allemaal moeten voorkomen. Een sterretje staat voor nul of meer letters: *chloroquin* vindt ook "hydroxychloroquine". Zet een woordgroep tussen "aanhalingstekens".',
+ qUitleg:'Zet OR tussen alternatieven en AND tussen woorden die allemaal moeten voorkomen. Een sterretje staat voor nul of meer letters: klimaat* vindt ook "klimaatverandering" en "klimaatbeleid". Zet een woordgroep tussen "aanhalingstekens". Met NOT sluit je artikels uit waarin een woord voorkomt. Voorbeelden: vaccin* AND kind* · chloroquin* NOT malaria · "artificiële intelligentie" OR AI · klimaat* OR "opwarming van de aarde".',
  minT:'Minimum aantal treffers in het hele artikel',jBevat:'Naam bevat',beoord:'Beoordeling',eaStatus:'Eerste alinea',minW:'Minimum aantal woorden',
  hele:'hele periode',perWeek:'Artikels per week',perDag:'Artikels per dag',perMaand:'Artikels per maand',sleep:'sleep om een periode te kiezen',overig:'overig',
- vanN:'van {n}',nagekeken:'{n} beoordeeld',opgen:'{n} opgenomen',kJ:'opnemen',kT:'twijfel',kN:'niet opnemen',kP:'vorige / volgende',kE:'eerste alinea klopt',
- klopt:'Eerste alinea klopt',bevestigd:'Eerste alinea bevestigd',lees:'Hele artikel',sluit:'Inklappen',ja:'Opnemen',twijfel:'Twijfel',nee:'Niet',
+ vanN:'van {n}',nagekeken:'{n} beoordeeld',opgen:'{n} opgenomen',kJ:'opnemen',kT:'twijfel',kN:'niet opnemen',kP:'vorige / volgende',kE:'hele artikel',
+ uitlegK:'Uitleg',fbNaam:'Naam (optioneel)',fbMail:'E-mailadres (optioneel, als je een antwoord wilt)',hoeExp:'In welk formaat?',xlsxU:'Eén rij per artikel, met alle metadata, je beslissingen, correcties en een tweede blad met de verantwoording.',zipK:'Alles in één zip',zipU:'Excel, csv, een tekstbestand per artikel, de verantwoording en je projectbestand.',kopieer:'Kopieer',gekopieerd:'Gekopieerd',zAlles:'volledige periode',zKern:'drukste periode (80%)',buiten:'{n} buiten beeld',begrepen:'Begrepen, verberg dit',zonderZoek:'zonder zoekterm',z_open:'die nog niet beoordeeld zijn',z_ja:'die je opnam',z_twijfel:'waarover je twijfelt',z_nee:'die je niet opnam',z_ea:'waarvan de eerste alinea nagekeken moet worden',z_sim:'die op andere artikels lijken',z_minW:'met minstens {n} woorden',uitGroep:'uit',groepN:'groep {n} van gelijkaardige artikels',fbUitleg:'Liep er iets mis, was iets onduidelijk, of heb je een idee? Bij een probleem: wat probeerde je te doen, wat gebeurde er en wat had je verwacht? Bij een idee: wat zou je willen kunnen en waarom? Plak geen artikeltekst uit Belga.press of Nexis Uni. ',fbTech:'Technische gegevens meesturen (geen artikels of bestandsnamen):',fbStap1:'Je bericht wordt in het feedbackformulier van KU Leuven (Microsoft Forms) gezet. Daar klik je op Verzenden.',fbStap2:'Je bericht wordt naar het klembord gekopieerd en het feedbackformulier van KU Leuven (Microsoft Forms) gaat open. Plak het daar (Ctrl+V of ⌘V) en klik op Verzenden.',fbVerstuur:'Naar het formulier',annuleer:'Annuleren',fbGekopieerd:'Gekopieerd. Plak je bericht in het formulier.',fbNietGekopieerd:'Kopiëren lukte niet. Selecteer de tekst en kopieer hem zelf.',gBalk:'Je bekijkt een groep van {k} gelijkaardige artikels. Je andere filters staan zolang uit.',terugAlle:'Terug naar alle artikels (Esc)',woorden:'woorden',simT:'Gelijkaardige artikels',simAlleen:'alleen artikels die op andere artikels lijken',simDrempel:'Drempel',simUitleg:'{g} groepen, samen {n} artikels.',inGroep:'alleen groep {n} van gelijkaardige artikels (andere filters staan uit)',inGroepUitleg:'Je ziet alle {k} artikels uit deze groep, ook als ze niet aan je andere voorwaarden voldoen.',groepUit:'Alle artikels tonen',lijktOp:'Lijkt op',simTag:'lijkt op {n} {n2} ({p})',trefK:'Treffers',nietOpgeslagen:'Er zijn wijzigingen die nog niet in een projectbestand staan',ongedaanK:'Ongedaan maken',ongedaanT:'Ongedaan gemaakt',l_besl:'beoordeling',l_weg:'alinea verwijderd of teruggezet',l_krant:'krant aangepast',l_corr:'correctie',l_tekst:'tekst bewerkt',volgOpen:'Volgende onbeoordeelde',allesbeoordeeld:'Alle getoonde artikels zijn beoordeeld',kV:'volgende onbeoordeelde',kAlg:'Algemeen',kZ:'ongedaan maken',feedback:'Geef feedback of vraag een feature aan',versie:'versie',oudEerst:'Oudste eerst',nieuwEerst:'Nieuwste eerst',perLand:'per land',perKrant:'per krant',klikBewerk:'Klik om de tekst te bewerken (Enter bewaart, Esc annuleert)',origTekst:'Originele tekst terugzetten',plakVorige:'Samenvoegen met de vorige alinea',plakLead:'Toevoegen aan de lead',kCorpus:'Corpus',kNav:'Navigeren',kO:'hele artikel openen',hint:'Klik op een alinea of de lead om de tekst te bewerken. In de marge maakt 1 een alinea de eerste alinea en verwijdert × tekst die niet bij het artikel hoort.',pasAan:'Eerste alinea aanpassen',maakEerste:'Maak eerste alinea',andere:'Andere kiezen',verwijder:'Verwijder',terug:'Terugzetten',lees:'Bekijk het hele artikel',sluit:'Inklappen',ja:'Opnemen',twijfel:'Twijfel',nee:'Niet opnemen',
  corr:'corrigeer',krant:'Krant',datum:'Datum',journalist:'Journalist',type:'Type',klaar:'Klaar',herstel:'Herstel origineel',gecorr:'gecorrigeerd',
- opm:'Opmerking',kiesE:'Klik op 1e bij de alinea die de echte eerste alinea is.',twijfelT:'Tool twijfelt',handm:'handmatig gekozen',
- meer:'Meer tonen',geenRes:'Geen artikels voldoen aan deze voorwaarden.',dubbels:'{n} identieke records overgeslagen',
+ opm:'Opmerking',kiesE:'Ga met de muis over een alinea om ze als eerste alinea te kiezen of te verwijderen. Verwijder tekst die niet bij het artikel hoort maar van de website of de databank komt, zoals "Lees ook" of "Dit artikel verscheen oorspronkelijk op …". Verwijderde alinea\'s tellen niet mee bij het zoeken en staan niet in de export',twijfelT:'eerste alinea nakijken',handm:'handmatig aangepast',
+ meer:'Meer tonen',geenRes:'Geen artikels voldoen aan deze voorwaarden.',dubbels:'{n} {rec} overgeslagen',
  exp:'Corpus exporteren',welke:'Welke artikels?',e_ja:'Opgenomen artikels',e_jt:'Opgenomen en twijfel',e_f:'Alles wat nu aan de filters voldoet',
- xlsx:'Excel downloaden',zip:'Alles downloaden (zip: Excel, txt per artikel, project)',verant:'Verantwoording (om over te nemen in je methodesectie)',
+ xlsx:'Excel downloaden',csv:'Csv downloaden',csvUitleg:'Csv gebruikt komma\'s als scheidingsteken en UTF-8, zoals R, Python, SPSS en de meeste analyseprogramma\'s verwachten. Werk je in Excel, gebruik dan het Excel-bestand: een Nederlandstalige Excel verwacht puntkomma\'s en toont een csv vaak in één kolom.',zip:'Alles downloaden (zip: Excel, csv, txt per artikel, project)',verant:'Verantwoording (om over te nemen in je methodesectie)',
  bewaard:'bewaard',geladen:'geladen',print:'print',online:'online',krantT:'krant',onbekend:'onbekend',
- v_tot:'Ingelezen: {a} artikels uit {b} bestanden ({c} identieke records overgeslagen).',v_f:'Voorwaarden: {z}',v_r:'Resultaat: {a} artikels voldoen aan de voorwaarden; {b} opgenomen, {c} twijfel, {d} niet opgenomen, {e} nog niet beoordeeld.',
- v_e:'Eerste alinea: bij {a} artikels handmatig aangepast, bij {b} bevestigd.',v_d:'Datum van export: {d}.',wis:'Weet je zeker dat je een nieuw project wilt beginnen? Sla je huidige project eerst op.',
+ v_tot:'Ingelezen: {a} artikels uit {b} bestanden ({c}).',v_f:'Voorwaarden: {z}',v_r:'Resultaat: {a} artikels voldoen aan de voorwaarden; {b} opgenomen, {c} twijfel, {d} niet opgenomen, {e} nog niet beoordeeld.',
+ v_e:'Eerste alinea: bij {a} artikels handmatig gekozen; bij {b} artikels alinea\'s verwijderd die niet bij het artikel hoorden.',v_d:'Datum van export: {d}.',wis:'Weet je zeker dat je een nieuw project wilt beginnen? Sla je huidige project eerst op.',
  BE:'België',NL:'Nederland',ON:'Onbekend'},
-en:{s1:'1 Import',s2:'2 Filter and review',s3:'3 Export',opslaan:'Save project',openen:'Open project',nieuw:'New project',
+en:{s1:'1 Import',s2:'2 Filter and review',s3:'3 Export',opslaan:'Save project',openen:'Open project',alIn:'this file has already been imported and was skipped. To import it again, remove it first with ×.',wegLabel:'Remove file',wegVraag:'Remove {f}? {n} articles that only occur in this file will disappear from your project.',wegBeoord:'You will also lose your reviews and corrections of {n} of those articles.',nieuw:'Clear everything and start over',nieuwS:'Removes all imported files and your reviews. Save your project first if you want to keep it.',contact:'Questions, found an error or have an idea? Contact Elisa Nelissen (KU Leuven).',contactUrl:'https://www.kuleuven.be/wieiswie/en/person/00065215',hoeT:'How Knipsel decides',
  projnaam:'project name',drop:'Drop your exports here, or',kies:'choose files',dropS:'Belga.press (.html), Nexis Uni (.rtf) or a previously saved project (.json)',
- inl:'Import exports',inlS:'Add as many files as you like. If the same record (same newspaper, date, title and text) appears in more than one export, the tool keeps it only once. Similar articles in different newspapers, such as reused press releases or agency copy, stay separate.',
+ inl:'Import exports',inlS:'Add as many files as you like. If the same record (same newspaper, date, title and text) appears in more than one export, the tool keeps it only once. Similar articles in different newspapers, such as republished pieces or news agency reports, are kept.',
  bestand:'File',bron:'Source',art:'Articles',verder:'Continue to filtering',geen:'No articles imported yet.',
- over:'This tool helps you build a corpus of newspaper articles from Belga.press and Nexis Uni exports. You import your exports, filter them by search terms, country, newspaper, period and journalist, and review each article: is the first paragraph right, and does the article belong in your corpus? You can correct metadata errors yourself. You end up with an Excel file, a text file per article and an account of every step.',
+ over:'This tool helps you build a corpus of newspaper articles from Belga.press and Nexis Uni exports. You import your exports, filter them by search terms, country, newspaper and period, and review each article: is the first paragraph right, and does the article belong in your corpus? You can correct metadata errors yourself. You end up with an Excel file, a text file per article and an account of every step.',
  hoe:'How to make your exports',
  belga:'<b>Belga.press</b>: run your search and open the results list. Act as if you were going to print that list, so that all articles appear in full on one page. Do not print it, but save that page in your browser as html: in Chrome or Edge via <i>File › Save page as</i> and choose <i>Webpage, complete</i>; in Firefox via <i>File › Save page as</i>. You get an .html file and a folder of images; this tool only needs the .html file.',
  nexis:'<b>Nexis Uni</b>: select the articles in your results list, choose <i>Download</i>, set the format to <i>RTF</i> and choose a single file per download (not one file per article). Nexis Uni allows at most 100 articles per download, so make several downloads and import them all here together.',
@@ -164,31 +217,36 @@ en:{s1:'1 Import',s2:'2 Filter and review',s3:'3 Export',opslaan:'Save project',
  alleTypes:'print and online',tussen:'between',en:'and',begin:'the start',einde:'the end',met:'with',elkWoord:'any words',
  inW:'in the',w_titel:'title',w_lead:'lead',w_eerste:'first paragraph',w_tekst:'full text',of:'or',minstens:'at least {n} times in the whole article',
  van:'by',elkeJ:'any journalist',zonderJ:'no journalist name',st_alle:'show everything',st_open:'not yet reviewed',st_ja:'included',st_twijfel:'unsure',st_nee:'excluded',
- ea_alle:'',ea_open:'first paragraph not checked',ea_twijfel:'first paragraph uncertain according to the tool',
+ ea_alle:'',ea_open:'first paragraph not checked',ea_twijfel:'first paragraph to check',
  pLand:'Country',pKrant:'Newspapers',pType:'Publication type',pDatum:'Period',pQ:'Search terms',pWaar:'Where should the search terms appear?',pAuteur:'Journalist',pStatus:'Status',
  alles:'all',niets:'none',nat:'national',reg:'regional',nin:'unclassified',soortKr:'Newspaper type',landVan:'country',
- qUitleg:'Put OR between alternatives and AND between words that must all occur. An asterisk stands for zero or more letters: *chloroquin* also finds "hydroxychloroquine". Put a phrase between "quotation marks".',
+ qUitleg:'Put OR between alternatives and AND between words that must all occur. An asterisk stands for zero or more letters: climate* also finds "climate change" and "climate policy". Put a phrase between "quotation marks". NOT excludes articles that contain a word. Examples: vaccin* AND child* · chloroquin* NOT malaria · "artificial intelligence" OR AI · climate* OR "global warming".',
  minT:'Minimum number of hits in the whole article',jBevat:'Name contains',beoord:'Review',eaStatus:'First paragraph',minW:'Minimum number of words',
  hele:'whole period',perWeek:'Articles per week',perDag:'Articles per day',perMaand:'Articles per month',sleep:'drag to choose a period',overig:'other',
- vanN:'of {n}',nagekeken:'{n} reviewed',opgen:'{n} included',kJ:'include',kT:'unsure',kN:'exclude',kP:'previous / next',kE:'first paragraph is right',
- klopt:'First paragraph is right',bevestigd:'First paragraph confirmed',lees:'Full article',sluit:'Collapse',ja:'Include',twijfel:'Unsure',nee:'Exclude',
+ vanN:'of {n}',nagekeken:'{n} reviewed',opgen:'{n} included',kJ:'include',kT:'unsure',kN:'exclude',kP:'previous / next',kE:'full article',
+ uitlegK:'Help',fbNaam:'Name (optional)',fbMail:'E-mail address (optional, if you would like a reply)',hoeExp:'In which format?',xlsxU:'One row per article, with all metadata, your decisions, corrections and a second sheet with the account of the procedure.',zipK:'Everything in one zip',zipU:'Excel, csv, a text file per article, the account of the procedure and your project file.',kopieer:'Copy',gekopieerd:'Copied',zAlles:'full period',zKern:'busiest period (80%)',buiten:'{n} out of view',begrepen:'Got it, hide this',zonderZoek:'without a search term',z_open:'that have not been reviewed',z_ja:'that you included',z_twijfel:'that you are unsure about',z_nee:'that you excluded',z_ea:'whose first paragraph needs checking',z_sim:'that resemble other articles',z_minW:'with at least {n} words',uitGroep:'from',groepN:'group {n} of similar articles',fbUitleg:'Did something go wrong, was something unclear, or do you have an idea? For a problem: what were you trying to do, what happened and what did you expect? For an idea: what would you like to be able to do, and why? Do not paste article text from Belga.press or Nexis Uni. ',fbTech:'Include technical details (no articles or file names):',fbStap1:'Your message will be filled in on the KU Leuven feedback form (Microsoft Forms). Click Submit there.',fbStap2:'Your message is copied to the clipboard and the KU Leuven feedback form (Microsoft Forms) opens. Paste it there (Ctrl+V or ⌘V) and click Submit.',fbVerstuur:'Go to the form',annuleer:'Cancel',fbGekopieerd:'Copied. Paste your message in the form.',fbNietGekopieerd:'Copying failed. Select the text and copy it yourself.',gBalk:'You are viewing a group of {k} similar articles. Your other filters are paused meanwhile.',terugAlle:'Back to all articles (Esc)',woorden:'words',simT:'Similar articles',simAlleen:'only articles that resemble other articles',simDrempel:'Threshold',simUitleg:'{g} groups, {n} articles in total.',inGroep:'only group {n} of similar articles (other filters paused)',inGroepUitleg:'You see all {k} articles in this group, even if they do not meet your other conditions.',groepUit:'Show all articles',lijktOp:'Resembles',simTag:'resembles {n} {n2} ({p})',trefK:'Hits',nietOpgeslagen:'There are changes that are not yet in a project file',ongedaanK:'Undo',ongedaanT:'Undone',l_besl:'review',l_weg:'paragraph removed or restored',l_krant:'newspaper changed',l_corr:'correction',l_tekst:'text edited',volgOpen:'Next unreviewed',allesbeoordeeld:'All shown articles have been reviewed',kV:'next unreviewed',kAlg:'General',kZ:'undo',feedback:'Give feedback or request a feature',versie:'version',oudEerst:'Oldest first',nieuwEerst:'Newest first',perLand:'by country',perKrant:'by newspaper',klikBewerk:'Click to edit the text (Enter saves, Esc cancels)',origTekst:'Restore original text',plakVorige:'Merge with the previous paragraph',plakLead:'Add to the lead',kCorpus:'Corpus',kNav:'Navigate',kO:'open full article',hint:'Click a paragraph or the lead to edit its text. In the margin, 1 makes a paragraph the first paragraph and × removes text that does not belong to the article.',pasAan:'Adjust first paragraph',maakEerste:'Make first paragraph',andere:'Choose another',verwijder:'Remove',terug:'Restore',lees:'View the full article',sluit:'Collapse',ja:'Include',twijfel:'Unsure',nee:'Exclude',
  corr:'correct',krant:'Newspaper',datum:'Date',journalist:'Journalist',type:'Type',klaar:'Done',herstel:'Restore original',gecorr:'corrected',
- opm:'Note',kiesE:'Click 1st next to the paragraph that is the real first paragraph.',twijfelT:'Tool is unsure',handm:'chosen by hand',
- meer:'Show more',geenRes:'No articles match these conditions.',dubbels:'{n} identical records skipped',
+ opm:'Note',kiesE:'Hover over a paragraph to make it the first paragraph or remove it. Remove text that does not belong to the article but comes from the website or the database, such as "Read also" or "This article was first published on …". Removed paragraphs are ignored in searches and left out of the export',twijfelT:'check first paragraph',handm:'adjusted by hand',
+ meer:'Show more',geenRes:'No articles match these conditions.',dubbels:'{n} {rec} skipped',
  exp:'Export corpus',welke:'Which articles?',e_ja:'Included articles',e_jt:'Included and unsure',e_f:'Everything that currently matches the filters',
- xlsx:'Download Excel',zip:'Download everything (zip: Excel, txt per article, project)',verant:'Account of the procedure (to adapt for your methods section)',
+ xlsx:'Download Excel',csv:'Download csv',csvUitleg:'The csv uses commas as separators and UTF-8, as R, Python, SPSS and most analysis software expect. If you work in Excel, use the Excel file instead: Excel in some languages expects semicolons and may show a csv in a single column.',zip:'Download everything (zip: Excel, csv, txt per article, project)',verant:'Account of the procedure (to adapt for your methods section)',
  bewaard:'saved',geladen:'loaded',print:'print',online:'online',krantT:'newspaper',onbekend:'unknown',
- v_tot:'Imported: {a} articles from {b} files ({c} identical records skipped).',v_f:'Conditions: {z}',v_r:'Result: {a} articles match the conditions; {b} included, {c} unsure, {d} excluded, {e} not yet reviewed.',
- v_e:'First paragraph: changed by hand in {a} articles, confirmed in {b}.',v_d:'Export date: {d}.',wis:'Are you sure you want to start a new project? Save your current project first.',
+ v_tot:'Imported: {a} articles from {b} files ({c}).',v_f:'Conditions: {z}',v_r:'Result: {a} articles match the conditions; {b} included, {c} unsure, {d} excluded, {e} not yet reviewed.',
+ v_e:'First paragraph: chosen by hand in {a} articles; paragraphs that did not belong to the article removed in {b} articles.',v_d:'Export date: {d}.',wis:'Are you sure you want to start a new project? Save your current project first.',
  BE:'Belgium',NL:'Netherlands',ON:'Unknown'}};
-const ACCENTEN = ['#F26B4E','#FF8A5C','#F5A183','#F4B860'];
+const MIN_W = 15, REGELS = 2, VERSIE = '0.9 · 20-11-2026';
+/* Feedbackformulier. FEEDBACK_VELD: naam van de URL-parameter voor vooraf invullen (bv. 'r1a2b3c4d'); leeg = via het klembord. */
+const FEEDBACK_URL = 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=m1hzOUCetU6ADrC2OD0WIY1IvtKchCpKr4MX6bqNUP5UODY1S0xVQ1RLQ1pOQUFZTFc0REVONUNOMy4u';
+const FEEDBACK_VELD = 'r9eca6724bb9140afa16640ae8ff88c20';
+const ACCENTEN = ['#FBE38F','#FF8A5C','#F5A183','#F4B860'];
 const VLAAMS = ['De Standaard','Het Nieuwsblad','Nieuwsblad','De Gazet van Antwerpen','Gazet van Antwerpen','Het Belang van Limburg','Het Laatste Nieuws','De Morgen','De Tijd','Knack','Humo','Trends','Krant van West-Vlaanderen','De Zondag','Belga','Metro (BE)'];
 const NATIONAAL = ['De Standaard','De Morgen','Het Laatste Nieuws','Het Nieuwsblad','Nieuwsblad','De Tijd','De Zondag','Knack','Humo','Trends','de Volkskrant','Volkskrant','NRC','Trouw','De Telegraaf','Telegraaf','AD/Algemeen Dagblad','Algemeen Dagblad','AD.nl','Het Financieele Dagblad','Nederlands Dagblad','Reformatorisch Dagblad','Metro'];
-const REGIONAAL = ['Het Nieuwsblad - Regionaal','Het Laatste Nieuws - Regionaal'];
+const NEDERLANDS = ['AD/','De Twentsche Courant Tubantia','de Volkskrant','Volkskrant','NRC','Trouw','De Telegraaf','Telegraaf','AD/Algemeen Dagblad','Algemeen Dagblad','AD.nl','Het Parool','Het Financieele Dagblad','Nederlands Dagblad','Reformatorisch Dagblad','Friesch Dagblad','Dagblad van het Noorden','Leeuwarder Courant','De Limburger','Dagblad De Limburger','Limburgs Dagblad','Brabants Dagblad','Eindhovens Dagblad','BN/DeStem','BN DeStem','PZC','Provinciale Zeeuwse Courant','Tubantia','De Gelderlander','De Stentor','Haarlems Dagblad','Leidsch Dagblad','Noordhollands Dagblad','IJmuider Courant','Metro (NL)'];
+const REGIONAAL = ['Het Nieuwsblad - Regionaal','Het Laatste Nieuws - Regionaal','Gazet van Antwerpen','De Gazet van Antwerpen','Het Belang van Limburg','AD/','Dagblad van het Noorden','Leeuwarder Courant','De Limburger','Dagblad De Limburger','Limburgs Dagblad','Brabants Dagblad','Eindhovens Dagblad','BN/DeStem','BN DeStem','PZC','Provinciale Zeeuwse Courant','Tubantia','De Twentsche Courant Tubantia','De Gelderlander','De Stentor','Haarlems Dagblad','Leidsch Dagblad','Noordhollands Dagblad','IJmuider Courant','Friesch Dagblad'];
 
-const leegFilter = () => ({q:'',waar:{titel:1,lead:1,eerste:1,tekst:0},min:1,landUit:[],krantUit:[],soortUit:[],typeUit:[],van:'',tot:'',auteur:'',zonderJ:0,besl:'alle',ea:'alle',minW:0});
+const leegFilter = () => ({sort:'oud',tlg:'land',sim:0.5,simAlleen:0,groep:0,q:'',waar:{titel:1,lead:1,eerste:1,tekst:0},min:1,landUit:[],krantUit:[],soortUit:[],typeUit:[],van:'',tot:'',auteur:'',zonderJ:0,besl:'alle',ea:'alle',minW:0});
 let P = nieuwProject();
-function nieuwProject(){ return {v:1,naam:'',taal:'nl',accent:ACCENTEN[0],bestanden:[],dubbels:0,art:[],st:{},kranten:{},f:leegFilter()}; }
+function nieuwProject(){ return {v:1,naam:'',taal:'nl',accent:ACCENTEN[0],bestanden:[],dubbels:0,art:[],st:{},kranten:{},alias:{},regels:REGELS,f:leegFilter()}; }
 let view = 1, pop = null, actief = 0, getoond = 40, zichtbaar = [], open = {}, corrOpen = {}, meldingen = [];
 const $ = s => document.querySelector(s);
 const t = (k, o) => { let s = (T[P.taal] || T.nl)[k]; if (s === undefined) s = k; if (o) for (const x in o) s = s.replace('{' + x + '}', o[x]); return s; };
@@ -201,17 +259,17 @@ function hash(str){ let h1 = 0xdeadbeef, h2 = 0x41c6ce57; for (let i = 0; i < st
 function toast(s){ const e = $('#toast'); e.textContent = s; e.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(() => e.style.display = 'none', 2500); }
 
 /* ---------- Inlezen: gedeelde regels voor de eerste alinea ---------- */
-const NIET_INH = /^(bekijk|lees) (ook|nu|meer)\b|^van onze (redacteur|redactrice|correspondent|medewerker|reporter)|^-\S|^(read|see) (also|more)\b/i;
+const NIET_INH = /^(bekijk|lees) (ook|nu|meer)\b|^van onze (redacteur|redactrice|correspondent|medewerker|reporter)|^-\S|^(read|see) (also|more)\b|^dit artikel verscheen (oorspronkelijk|eerder|eerst)\b|^this article (was )?(originally|first) (appeared|published)\b/i;
 function zoekEerste(al, kaders){
   const kand = al.map((a, i) => i).filter(i => !(kaders && kaders.has(al[i])) && !NIET_INH.test(al[i]));
-  for (const i of kand){ const a = al[i]; if (!(a.split(/\s+/).length < 8 && !/[.!?:"”’']$/.test(a))) return i; }
+  for (const i of kand){ if (al[i].split(/\s+/).length >= MIN_W) return i; }
   return kand.length ? kand[0] : -1;
 }
 function controle(al, ei, extra){
   const c = extra || [], e = ei >= 0 ? al[ei] : '';
   if (al.length === 1) c.push('geen alineagrenzen in bron');
   if (!al.length) c.push('geen tekst gevonden');
-  if (e && (e.split(/\s+/).length < 10 || e.endsWith('?'))) c.push('kort of vraag');
+  if (e && e.split(/\s+/).length < 10) c.push('kort');
   if (e.endsWith('...') || e.endsWith('…')) c.push('afgekapte tekst');
   if (ei > 0) c.push('alinea overgeslagen');
   return c;
@@ -249,12 +307,13 @@ function leesBelga(html, naam){
     kl.querySelectorAll('br').forEach(b => b.replaceWith('\n'));
     kl.querySelectorAll('p,h3,li,div').forEach(b => { b.prepend('\n'); b.append('\n'); });
     const al = kl.textContent.split('\n').map(s => s.replace(/\s+/g, ' ').trim()).filter(Boolean);
+    const kd = al.map((x, j) => kaders.has(x) ? j : -1).filter(j => j >= 0);
     const ei = zoekEerste(al, kaders), extra = [];
     if (ei >= 0){ const g = al[ei].match(/^([A-Z][a-zë]{3,}|[A-Z]{4,})([A-Z][a-zë])/); if (g){ al[ei] = g[1] + ' – ' + al[ei].slice(g[1].length); extra.push('plaatsnaam losgemaakt'); } }
     const vl = voor[1] || '';
     uit.push(maakArtikel({bron:'Belga.press',bestand:naam,pos:pos + 1,krant,editie:vl && vl !== krant ? vl : '',
       type:({WEBSITE:'online',NEWSPAPER:'krant',MAGAZINE:'magazine'})[soort] || soort.toLowerCase() || 'onbekend',
-      datum:m[3] + '-' + m[2] + '-' + m[1],tijd:m[4] || '',titel:kop[0] || '',onder:kop.slice(1).join(' '),lead,al,ei,c:controle(al, ei, extra),
+      datum:m[3] + '-' + m[2] + '-' + m[1],tijd:m[4] || '',titel:kop[0] || '',onder:kop.slice(1).join(' '),lead,al,ei,kd,c:controle(al, ei, extra),
       auteur:tx(blok.querySelector('div.css-1yuhvjn')),sectie:'',taal:''}));
   });
   return uit;
@@ -334,14 +393,14 @@ function begintMet(naam, lijst){ const l = naam.toLowerCase(); return lijst.some
 function krantInfo(naam){
   if (!P.kranten[naam]){
     const a = P.art.find(x => x.krant === naam) || {};
-    const land = a.bron === 'Belga.press' || begintMet(naam, VLAAMS) ? 'BE' : (/dutch|nederlands/.test(a.taal || '') ? 'NL' : 'ON');
+    const land = a.bron === 'Belga.press' || begintMet(naam, VLAAMS) ? 'BE' : begintMet(naam, NEDERLANDS) ? 'NL' : 'ON';
     P.kranten[naam] = {land, soort: begintMet(naam, REGIONAAL) ? 'reg' : begintMet(naam, NATIONAAL) ? 'nat' : 'nin'};
   }
   return P.kranten[naam];
 }
 function voegToe(lijst, naam, bron){
-  const ids = new Set(P.art.map(a => a.id)); let n = 0, dub = 0;
-  for (const a of lijst){ if (ids.has(a.id)){ dub++; continue; } ids.add(a.id); P.art.push(a); n++; }
+  const ids = new Map(P.art.map(a => [a.id, a])); let n = 0, dub = 0;
+  for (const a of lijst){ const b = ids.get(a.id); if (b){ dub++; (b.ook = b.ook || []).push(naam); continue; } ids.set(a.id, a); P.art.push(a); n++; }
   P.dubbels += dub;
   P.bestanden.push({naam, bron, n, dub});
   P.art.sort((a, b) => (a.datum + a.tijd + a.krant).localeCompare(b.datum + b.tijd + b.krant));
@@ -353,6 +412,7 @@ async function leesBestanden(files){
     try {
       if (ext === 'json'){ laadProject(JSON.parse(await f.text())); toast(f.name + ' ' + t('geladen')); continue; }
       if (ext === 'pdf'){ meldingen.push(f.name + ' ' + t('pdf')); continue; }
+      if (P.bestanden.some(b => b.naam === f.name)){ meldingen.push(f.name + ': ' + t('alIn')); continue; }
       let lijst, bron;
       if (ext === 'rtf'){ lijst = leesNexis(new TextDecoder('windows-1252').decode(await f.arrayBuffer()), f.name); bron = 'Nexis Uni'; }
       else if (ext === 'html' || ext === 'htm'){ lijst = leesBelga(await f.text(), f.name); bron = 'Belga.press'; }
@@ -361,66 +421,141 @@ async function leesBestanden(files){
       voegToe(lijst, f.name, bron);
     } catch (e){ console.error(e); meldingen.push(f.name + ': ' + t('onb')); }
   }
-  bewaar(); teken();
+  if (P.art.length) wijzig(); bewaar(); teken();
+}
+function verwijderBestand(i){
+  const b = P.bestanden[i]; if (!b) return;
+  const weg = P.art.filter(a => a.bestand === b.naam && !(a.ook || []).some(x => x !== b.naam));
+  const beoordeeld = weg.filter(a => P.st[a.id]).length;
+  if (!confirm(t('wegVraag', {f: b.naam, n: weg.length}) + (beoordeeld ? ' ' + t('wegBeoord', {n: beoordeeld}) : ''))) return;
+  snap(t('wegLabel') + ' ' + b.naam);
+  const wegIds = new Set(weg.map(a => a.id));
+  P.art = P.art.filter(a => !wegIds.has(a.id));
+  for (const id of wegIds) delete P.st[id];
+  for (const a of P.art){ if (a.ook){ a.ook = a.ook.filter(x => x !== b.naam); if (a.bestand === b.naam){ a.bestand = a.ook.shift(); } if (!a.ook.length) delete a.ook; } }
+  P.bestanden.splice(i, 1);
+  for (const f of P.bestanden){ f.n = P.art.filter(a => a.bestand === f.naam).length; f.dub = P.art.filter(a => (a.ook || []).includes(f.naam)).length; }
+  P.dubbels = P.bestanden.reduce((x, f) => x + f.dub, 0);
+  const krantenNu = new Set(P.art.map(a => a.krant)); P.f.krantUit = P.f.krantUit.filter(k => kranten().some(x => x[0] === k));
+  for (const k of Object.keys(P.kranten)) if (!kranten().some(x => x[0] === k) && !krantenNu.has(k)) delete P.kranten[k];
+  meldingen = []; bewaar(); teken();
 }
 function laadProject(o){
   if (!o || !Array.isArray(o.art)) throw new Error('geen project');
-  P = Object.assign(nieuwProject(), o); P.f = Object.assign(leegFilter(), o.f || {}); P.f.waar = Object.assign(leegFilter().waar, (o.f || {}).waar || {});
+  P = Object.assign(nieuwProject(), o);
+  for (const k in P.kranten) if (P.kranten[k].soort === 'nin' && begintMet(k, REGIONAAL)) P.kranten[k].soort = 'reg';
+  if ((o.regels || 1) < REGELS){ for (const a of P.art) a.ei = zoekEerste(a.al, new Set((a.kd || []).map(j => a.al[j]))); P.regels = REGELS; } P.f = Object.assign(leegFilter(), o.f || {}); P.f.waar = Object.assign(leegFilter().waar, (o.f || {}).waar || {});
   view = P.art.length ? 2 : 1; pop = null; actief = 0; getoond = 40; open = {}; corrOpen = {};
-  zetAccent(); bewaar(); teken();
+  P.ongesaved = 0; zetAccent(); bewaar(); teken();
 }
 
 /* ---------- Bewaren ---------- */
 let db = null, bewT = null;
 function idb(){ return new Promise(res => { try { const r = indexedDB.open('corpustool', 1); r.onupgradeneeded = () => r.result.createObjectStore('p'); r.onsuccess = () => res(r.result); r.onerror = () => res(null); } catch (e){ res(null); } }); }
+const UNDO = [];
+function snap(label){
+  UNDO.push({label, st: JSON.stringify(P.st), alias: JSON.stringify(P.alias || {}), kranten: JSON.stringify(P.kranten), f: JSON.stringify(P.f), art: P.art.slice(), bron: P.art.map(a => [a.bestand, a.ook ? a.ook.slice() : null]), bestanden: JSON.stringify(P.bestanden), dubbels: P.dubbels});
+  if (UNDO.length > 50) UNDO.shift(); wijzig(); tekenUndo();
+}
+function ongedaan(){
+  const u = UNDO.pop(); if (!u) return;
+  P.st = JSON.parse(u.st); P.alias = JSON.parse(u.alias); P.kranten = JSON.parse(u.kranten); P.f = JSON.parse(u.f);
+  P.art = u.art; u.art.forEach((a, i) => { a.bestand = u.bron[i][0]; if (u.bron[i][1]) a.ook = u.bron[i][1]; else delete a.ook; });
+  P.bestanden = JSON.parse(u.bestanden); P.dubbels = u.dubbels;
+  tekstGewijzigd(); wijzig(); bewaar(); toast(t('ongedaanT') + ': ' + u.label); const ak = actief; teken(); if (view === 2) zetActief(Math.min(ak, zichtbaar.length - 1), false);
+}
+function tekenUndo(){ const b = $('#undo'); if (b){ b.classList.toggle('leeg', !UNDO.length); b.title = UNDO.length ? t('ongedaanT') + ': ' + UNDO[UNDO.length - 1].label : ''; } }
+function wijzigTekst(){ tekstGewijzigd(); }
+function wijzig(){ if (!P.ongesaved){ P.ongesaved = 1; markeer(); } }
+function markeer(){ const b = $('#kopR [data-a="opslaan"]'); if (b){ b.classList.toggle('dirty', !!P.ongesaved); b.title = P.ongesaved ? t('nietOpgeslagen') : ''; } }
 function bewaar(){ clearTimeout(bewT); bewT = setTimeout(async () => { try { db = db || await idb(); if (!db) return; db.transaction('p', 'readwrite').objectStore('p').put(JSON.stringify(P), 'huidig'); } catch (e){} }, 600); }
 async function herstel(){ try { db = await idb(); if (!db) return; const r = db.transaction('p').objectStore('p').get('huidig'); r.onsuccess = () => { if (r.result){ try { const o = JSON.parse(r.result); if (o.art && o.art.length) laadProject(o); else { P.taal = o.taal || P.taal; P.accent = o.accent || P.accent; zetAccent(); teken(); } } catch (e){} } }; } catch (e){} }
 function download(naam, data, type){ const b = data instanceof Blob ? data : new Blob([data], {type: type || 'application/octet-stream'}); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = naam; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
 const bestandsnaam = () => (P.naam || 'corpus').replace(/[^\w\-]+/g, '_');
-function slaOp(){ download(bestandsnaam() + '_project_' + new Date().toISOString().slice(0, 10) + '.json', JSON.stringify(P), 'application/json'); toast(t('opslaan') + ': ' + t('bewaard')); }
-function zetAccent(){ document.documentElement.style.setProperty('--accent', P.accent); document.documentElement.lang = P.taal; }
+function slaOp(){ P.ongesaved = 0; markeer(); bewaar(); download(bestandsnaam() + '_project_' + new Date().toISOString().slice(0, 10) + '.json', JSON.stringify(P), 'application/json'); toast(t('opslaan') + ': ' + t('bewaard')); }
+function zetAccent(){ P.accent = ACCENTEN[0]; document.documentElement.style.setProperty('--accent', P.accent); document.documentElement.lang = P.taal; }
 
 /* ---------- Zoeken en filteren ---------- */
 let zoek = {groepen: [], alle: null};
 function bouwZoek(){
-  const q = P.f.q.trim(); zoek = {groepen: [], alle: null}; if (!q) return;
+  let q = P.f.q.trim(); zoek = {groepen: [], alle: null, termen: [], niet: null}; if (!q) return;
+  const delen = (' ' + q).split(/\s+(?:NOT|NIET)\s+/); q = delen.shift().trim();
   const rx = term => { let s = term.trim().replace(/^["“”]|["“”]$/g, ''); if (!s) return null;
     s = s.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '[\\p{L}\\p{N}]*').replace(/\s+/g, '\\s+');
     return '(?<![\\p{L}\\p{N}])' + s + '(?![\\p{L}\\p{N}])'; };
   const alle = [];
-  for (const g of q.split(/\s+(?:AND|EN)\s+/)){
-    const termen = g.split(/\s+(?:OR|OF)\s+|,/).map(rx).filter(Boolean);
+  for (const g of (q ? q.split(/\s+(?:AND|EN)\s+/) : [])){
+    const ruw = g.split(/\s+(?:OR|OF)\s+|,/).map(x => x.trim()).filter(x => rx(x));
+    for (const x of ruw){ const lab = x.replace(/^["“”]|["“”]$/g, ''); if (!zoek.termen.some(z => z.label.toLowerCase() === lab.toLowerCase())) try { zoek.termen.push({label: lab, re: new RegExp(rx(x), 'giu')}); } catch (e){} }
+    const termen = ruw.map(rx);
     if (termen.length){ try { zoek.groepen.push(new RegExp(termen.join('|'), 'iu')); alle.push(...termen); } catch (e){} }
   }
   if (alle.length) try { zoek.alle = new RegExp(alle.join('|'), 'giu'); } catch (e){}
+  const niet = delen.join(' OR ').split(/\s+(?:OR|OF|AND|EN)\s+|,/).map(rx).filter(Boolean);
+  if (niet.length) try { zoek.niet = new RegExp(niet.join('|'), 'iu'); } catch (e){}
 }
-const eIdx = a => { const s = P.st[a.id]; return s && s.e != null ? s.e : a.ei; };
-const veld = (a, k) => { const s = P.st[a.id]; return s && s.v && s.v[k] != null ? s.v[k] : a[k]; };
+const alOf = a => { const s = P.st[a.id]; return s && s.tx ? a.al.map((p, j) => s.tx[j] != null ? s.tx[j] : p) : a.al; };
+const eIdx = a => { const s = P.st[a.id], al = alOf(a); if (s && s.e != null) return s.e; const w = weg(a); if (!w.includes(a.ei)) return a.ei; for (let j = Math.max(a.ei, 0); j < al.length; j++) if (!w.includes(j)) return j; for (let j = 0; j < al.length; j++) if (!w.includes(j)) return j; return -1; };
+const basisKrant = a => (P.alias && P.alias[a.krant]) || a.krant;
+const veld = (a, k) => { const s = P.st[a.id]; return s && s.v && s.v[k] != null ? s.v[k] : k === 'krant' ? basisKrant(a) : a[k]; };
 const landVan = a => veld(a, 'land') || krantInfo(veld(a, 'krant')).land;
-const eersteTekst = a => { const i = eIdx(a); return i >= 0 ? a.al[i] || '' : ''; };
+const weg = a => { const s = P.st[a.id]; return (s && s.weg) || []; };
+const alineas = a => { const w = weg(a), al = alOf(a); return w.length ? al.filter((x, j) => !w.includes(j)) : al; };
+const woorden = a => weg(a).length || (P.st[a.id] || {}).tx ? (alineas(a).join(' ') + ' ' + (veld(a, 'lead') || '')).split(/\s+/).filter(Boolean).length : a.w;
+const aangepast = a => { const s = P.st[a.id]; return !!(s && (s.e != null || s.tx || (s.weg && s.weg.length))); };
+const eersteTekst = a => { const i = eIdx(a); return i >= 0 ? alOf(a)[i] || '' : ''; };
 const typeGroep = ty => ty === 'krant' ? 'print' : ty === 'online' ? 'online' : ty;
 function past(a, zonderDatum){
   const f = P.f, kr = veld(a, 'krant'), ki = krantInfo(kr), d = veld(a, 'datum'), s = P.st[a.id] || {};
+  if (f.groep) return SIM.groep[a.id] === f.groep;
   if (f.landUit.includes(landVan(a)) || f.krantUit.includes(kr) || f.soortUit.includes(ki.soort)) return false;
   if (f.typeUit.includes(typeGroep(veld(a, 'type')))) return false;
   if (!zonderDatum && ((f.van && d < f.van) || (f.tot && d > f.tot))) return false;
-  const au = veld(a, 'auteur') || '';
-  if (f.zonderJ && au.trim()) return false;
-  if (f.auteur && !au.toLowerCase().includes(f.auteur.toLowerCase())) return false;
-  if (f.minW && a.w < f.minW) return false;
+  if (f.minW && woorden(a) < f.minW) return false;
+  if (f.groep && SIM.groep[a.id] !== f.groep) return false;
+  if (f.simAlleen && !SIM.groep[a.id]) return false;
   if (f.besl !== 'alle' && (s.b || 'open') !== f.besl) return false;
-  if (f.ea === 'open' && (s.ok || s.e != null)) return false;
-  if (f.ea === 'twijfel' && (!a.c.length || s.ok || s.e != null)) return false;
-  if (zoek.groepen.length){
+  if (f.ea === 'twijfel' && (!redenen(a).length || aangepast(a))) return false;
+  if (zoek.groepen.length || zoek.niet){
     const w = f.waar, delen = [];
-    if (w.titel) delen.push(veld(a, 'titel'), veld(a, 'onder')); if (w.lead) delen.push(veld(a, 'lead')); if (w.eerste) delen.push(eersteTekst(a)); if (w.tekst) delen.push(a.al.join('\n'));
+    if (w.titel) delen.push(veld(a, 'titel'), veld(a, 'onder')); if (w.lead) delen.push(veld(a, 'lead')); if (w.eerste) delen.push(eersteTekst(a)); if (w.tekst) delen.push(alineas(a).join('\n'));
     const tx = delen.join('\n');
     if (!zoek.groepen.every(g => g.test(tx))) return false;
+    if (zoek.niet && zoek.niet.test(tx)) return false;
     if (f.min > 1 && treffers(a) < f.min) return false;
   }
   return true;
 }
-function treffers(a){ if (!zoek.alle) return 0; const m = (veld(a, 'titel') + '\n' + veld(a, 'onder') + '\n' + veld(a, 'lead') + '\n' + a.al.join('\n')).match(zoek.alle); return m ? m.length : 0; }
+/* ---------- Gelijkaardige artikels (containment van woordreeksen, Broder 1997) ---------- */
+const SH = 5, SH_MIN = 10, SH_MAX_DF = 300;
+let SIM = {sleutel: null, groep: {}, buren: {}, aantal: 0}, simVer = 0;
+const tekstGewijzigd = () => { simVer++; };
+function fnv(str){ let h = 0x811c9dc5; for (let i = 0; i < str.length; i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function shingles(a){
+  const w = (veld(a, 'titel') + ' ' + (veld(a, 'lead') || '') + ' ' + alineas(a).join(' ')).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(' ').filter(Boolean);
+  const set = new Set(); for (let i = 0; i + SH <= w.length; i++) set.add(fnv(w.slice(i, i + SH).join(' '))); return set;
+}
+function zorgSim(){
+  const sleutel = P.art.length + '|' + P.f.sim + '|' + simVer + '|' + (P.art[0] || {}).id;
+  if (SIM.sleutel === sleutel) return;
+  const n = P.art.length, sets = P.art.map(shingles), idx = new Map(), gedeeld = new Map();
+  sets.forEach((st, i) => { if (st.size < SH_MIN) return; for (const h of st){ let l = idx.get(h); if (!l) idx.set(h, l = []); l.push(i); } });
+  for (const l of idx.values()){ if (l.length < 2 || l.length > SH_MAX_DF) continue; for (let x = 0; x < l.length; x++) for (let y = x + 1; y < l.length; y++){ const k = l[x] * n + l[y]; gedeeld.set(k, (gedeeld.get(k) || 0) + 1); } }
+  const ouder = P.art.map((_, i) => i), wortel = i => { while (ouder[i] !== i){ ouder[i] = ouder[ouder[i]]; i = ouder[i]; } return i; };
+  const buren = {};
+  for (const [k, c] of gedeeld){ const i = Math.floor(k / n), j = k % n, c2 = c / Math.min(sets[i].size, sets[j].size);
+    if (c2 >= P.f.sim){ ouder[wortel(i)] = wortel(j); (buren[P.art[i].id] = buren[P.art[i].id] || []).push([P.art[j].id, c2]); (buren[P.art[j].id] = buren[P.art[j].id] || []).push([P.art[i].id, c2]); } }
+  const groep = {}, nr = {}; let teller = 0;
+  P.art.forEach((a, i) => { if (!buren[a.id]) return; const w = wortel(i); if (nr[w] == null) nr[w] = ++teller; groep[a.id] = nr[w]; });
+  for (const id in buren) buren[id].sort((x, y) => y[1] - x[1]);
+  SIM = {sleutel, groep, buren, aantal: teller};
+}
+const groepGrootte = g => Object.values(SIM.groep).filter(x => x === g).length;
+const pct = x => Math.round(x * 100) + '%';
+function burenTekst(a){ return (SIM.buren[a.id] || []).map(([id, c]) => { const b = P.art.find(x => x.id === id); return b ? veld(b, 'krant') + ' ' + dmy(veld(b, 'datum')) + ' (' + pct(c) + ')' : ''; }).filter(Boolean); }
+function trefTekst(a){ return veld(a, 'titel') + '\n' + veld(a, 'onder') + '\n' + veld(a, 'lead') + '\n' + alineas(a).join('\n'); }
+function trefPerTerm(a){ const tx = trefTekst(a); return zoek.termen.map(z => { const m = tx.match(z.re); return [z.label, m ? m.length : 0]; }); }
+function treffers(a){ if (!zoek.alle) return 0; const m = (veld(a, 'titel') + '\n' + veld(a, 'onder') + '\n' + veld(a, 'lead') + '\n' + alineas(a).join('\n')).match(zoek.alle); return m ? m.length : 0; }
 function mark(s){ if (!zoek.alle || !s) return esc(s); let uit = '', l = 0, m; zoek.alle.lastIndex = 0;
   while ((m = zoek.alle.exec(s))){ if (!m[0]){ zoek.alle.lastIndex++; continue; } uit += esc(s.slice(l, m.index)) + '<mark>' + esc(m[0]) + '</mark>'; l = m.index + m[0].length; }
   return uit + esc(s.slice(l)); }
@@ -429,23 +564,129 @@ function mark(s){ if (!zoek.alle || !s) return esc(s); let uit = '', l = 0, m; z
 function tekenKop(){
   $('#stappen').innerHTML = [1, 2, 3].map(i => `<button data-view="${i}" class="${view === i ? 'on' : ''}" ${i > 1 && !P.art.length ? 'disabled' : ''}>${t('s' + i)}</button>`).join('');
   $('#kopR').innerHTML = `<input id="naam" type="text" aria-label="${t('projnaam')}" placeholder="${t('projnaam')}" value="${esc(P.naam)}">
-   <button class="b" data-a="opslaan" ${P.art.length ? '' : 'disabled'}>${t('opslaan')}</button><button class="b" data-a="openen">${t('openen')}</button>
+   <button class="b ${P.ongesaved ? 'dirty' : ''}" data-a="opslaan" ${P.art.length ? '' : 'disabled'} title="${P.ongesaved ? t('nietOpgeslagen') : ''}">${t('opslaan')}</button><button class="b" data-a="openen">${t('openen')}</button>
 `;
   $('#taal').innerHTML = `<button class="${P.taal === 'nl' ? 'on' : ''}" data-taal="nl" lang="nl" aria-pressed="${P.taal === 'nl'}">NL</button>·<button class="${P.taal === 'en' ? 'on' : ''}" data-taal="en" lang="en" aria-pressed="${P.taal === 'en'}">EN</button>`;
 }
 function teken(){ tekenKop(); bouwZoek(); if (view === 2 && !P.art.length) view = 1; ({1: tekenInlezen, 2: tekenFilter, 3: tekenExport})[view](); }
 
 /* ---------- Stap 1 ---------- */
+function nakijkTekst(){
+  if (P.taal === 'en') return `<h4>Reviewing articles</h4><ul>
+  <li>Each card shows the title, lead and the first paragraph. Click "View the full article" (or press O) to see all paragraphs.</li>
+  <li>In the margin of each paragraph: <b>1</b> makes it the first paragraph, <b>×</b> removes it, <b>↺</b> restores a removed paragraph. The current first paragraph has a filled <b>1</b>. "Restore original" undoes all your changes to the paragraphs of that article.</li>
+  <li>Click a paragraph or the lead to edit its text, for example to move a broken-off sentence back into the lead. Enter saves, Esc cancels; emptying a paragraph removes it. An edited paragraph gets a <b>↺</b> in the margin to restore the original text. The export lists every edit with the original text.</li>
+  <li>Remove text that does not belong to the article but comes from the website or the database, such as "Read also" or "This article was first published on …". Removed paragraphs are ignored in searches, hit counts and word counts, and left out of the export text; the export lists them in a separate column.</li>
+  <li>Below the metadata, a line shows the state of the article: your review (bold), followed by what the tool or you changed. Everything with a yellow underline can be clicked. "Check first paragraph" means the tool may have chosen wrongly (hover to see why; click to open the article). "Resembles … other article" shows only the group of similar articles. "Corrected" opens the metadata you changed, "adjusted by hand" the paragraphs.</li>
+  <li>Include, Unsure, Exclude: keys J, T and N. Arrow keys move to the previous or next article.</li></ul>`;
+  return `<h4>Artikels nakijken</h4><ul>
+  <li>Elke kaart toont titel, lead en de eerste alinea. Klik op "Bekijk het hele artikel" (of druk op O) om alle alinea's te zien.</li>
+  <li>In de marge van elke alinea: <b>1</b> maakt ze de eerste alinea, <b>×</b> verwijdert ze, <b>↺</b> zet een verwijderde alinea terug. De huidige eerste alinea heeft een gevulde <b>1</b>. "Herstel origineel" maakt al je wijzigingen aan de alinea's van dat artikel ongedaan.</li>
+  <li>Klik op een alinea of op de lead om de tekst te bewerken, bijvoorbeeld om een afgebroken zin terug aan de lead toe te voegen. Enter bewaart, Esc annuleert; maak je een alinea leeg, dan wordt ze verwijderd. Een bewerkte alinea krijgt een <b>↺</b> in de marge om de originele tekst terug te zetten. De export vermeldt elke bewerking met de originele tekst.</li>
+  <li>Verwijder tekst die niet bij het artikel hoort maar van de website of de databank komt, zoals "Lees ook" of "Dit artikel verscheen oorspronkelijk op …". Verwijderde alinea's tellen niet mee bij het zoeken, de treffers en het aantal woorden, en staan niet in de exporttekst; de export vermeldt ze wel in een aparte kolom.</li>
+  <li>Onder de metadata staat een regel met de stand van het artikel: je beoordeling (vet), en daarna wat de tool of jij eraan veranderde. Alles met een gele onderlijning is klikbaar. "Eerste alinea nakijken" betekent dat de tool misschien verkeerd koos (ga erop staan om te zien waarom; klik om het artikel te openen). "Lijkt op … ander artikel" toont alleen de groep gelijkaardige artikels. "Gecorrigeerd" opent de metadata die je aanpaste, "handmatig aangepast" de alinea's.</li>
+  <li>Opnemen, Twijfel, Niet: toetsen J, T en N. Met de pijltjestoetsen ga je naar het vorige of volgende artikel.</li></ul>`;
+}
+function hoeTekst(){
+  const lijst = l => l.map(esc).join(', ');
+  if (P.taal === 'en') return `
+  <p>Knipsel makes a few decisions automatically when importing your files. Everything below can be changed by hand afterwards; changes appear in the export and the account of the procedure.</p>
+  <h4>Importing Belga.press (.html)</h4>
+  <ul><li>Newspaper: the first line above the publication type; edition: the second line, if present.</li>
+  <li>Type: NEWSPAPER → print, WEBSITE → online, MAGAZINE → magazine.</li>
+  <li>Title: the first line of the headline; further lines become the subtitle. Lead: the introduction Belga marks separately.</li>
+  <li>Text: every paragraph or line break in the source becomes a separate paragraph; empty lines are dropped and spacing is normalised.</li></ul>
+  <h4>Importing Nexis Uni (.rtf)</h4>
+  <ul><li>Title: the line(s) above the newspaper name (first line title, rest subtitle). Edition: lines between the date and the first metadata field.</li>
+  <li>Fields used: Section → section, Byline → journalist, Highlight → lead, Publication-Type → type (newspaper → print; anything containing web, online or blog → online).</li>
+  <li>Text: everything between "Body" and "Graphic" (or "Classification"). Photo captions under "Graphic" are left out. Lines reading "PDF-bestand van dit document", "Link naar PDF"/"Link to PDF", "Bekijk de oorspronkelijke pagina…" and "* Vervangende titel…" are removed.</li>
+  <li>Title made by Nexis: when an article has no title of its own, Nexis Uni generates one, shown between [square brackets] followed by an asterisk. Knipsel keeps that title but labels the article "title made by Nexis".</li></ul>
+  <h4>Identical records</h4>
+  <p>Two records are identical when newspaper, type, date, time, title and full text are exactly the same. The second one is skipped and counted. The slightest difference keeps both.</p>
+  <h4>First paragraph</h4>
+  <p>Knipsel picks the first paragraph that matches none of these rules:</p>
+  <ol><li>it starts with "Bekijk ook/nu/meer", "Lees ook/nu/meer", "Read also/more", "See also/more", "Van onze redacteur/redactrice/correspondent/medewerker/reporter", "Dit artikel verscheen oorspronkelijk/eerder/eerst", "This article originally/first appeared/published", or with a hyphen directly followed by text (e.g. "-Photo");</li>
+  <li>it is in a box that Belga formats separately (Belga only);</li>
+  <li>it has fewer than 15 words (probably a subheading, byline or label).</li></ol>
+  <p>If every paragraph falls under rule 3, Knipsel takes the first paragraph that does not fall under rule 1 or 2. Belga only: if the chosen paragraph starts with a capitalised word of at least four letters stuck to a following capitalised word (e.g. "BrusselDe minister"), Knipsel inserts " – " between them.</p>
+  <h4>"Check first paragraph"</h4>
+  <p>This label only helps you review; it changes nothing. It appears when the tool skipped one or more paragraphs; the chosen paragraph has fewer than 15 words (only possible when every paragraph is that short); it ends in "..." or "…"; the source contains only one paragraph; there is no text; or the tool inserted " – " after a place name.</p>
+  <h4>Country and newspaper type</h4>
+  <ul><li>All Belga.press articles: Belgium.</li>
+  <li>Nexis Uni: Belgium if the newspaper name starts with a name on the Flemish list, the Netherlands if it starts with a name on the Dutch list, otherwise Unknown. Knipsel does not guess from the language of the article.</li>
+  <li>National or regional: only according to fixed lists; otherwise "unclassified".</li>
+  <li>Flemish list: ${lijst(VLAAMS)}.</li><li>Dutch list: ${lijst(NEDERLANDS)}.</li><li>National: ${lijst(NATIONAAL)}.</li><li>Regional: ${lijst(REGIONAAL)}.</li></ul>
+  <h4>Searching</h4>
+  <ul><li>Not case-sensitive; whole words only: <code>climate</code> does not find "climatic", <code>climate*</code> does.</li>
+  <li><code>*</code> stands for zero or more letters or digits. OR, OF or a comma separate alternatives; AND or EN means every part must occur somewhere in the parts you selected (not necessarily in the same part). Everything after NOT or NIET is excluded: if any of those words occurs in the parts you selected, the article is left out. Excluded words are not highlighted or counted as hits.</li>
+  <li>"First paragraph" means the current first paragraph, including your changes. Hits are counted per search term in title, subtitle, lead and full text; each article and the export show the count per term, plus the total. A word that matches two search terms (e.g. <code>vaccin*</code> and <code>vaccination</code>) counts for both. Removed paragraphs never count.</li></ul>
+  <h4>Similar articles</h4>
+  <ul><li>Knipsel looks for articles that largely share the same text, such as the same news agency report in several newspapers. Nothing is removed or merged; articles only get a label.</li>
+  <li>The text (title, lead and paragraphs, including your edits, without removed paragraphs) is lowercased, accents and punctuation are dropped, and the text is cut into overlapping sequences of ${SH} consecutive words.</li>
+  <li>For each pair of articles, Knipsel calculates which share of the sequences of the shorter article also occurs in the longer one (<i>containment</i>, Broder 1997), so a shortened version of a report also matches the original. Two articles are similar when that value reaches the threshold (50% by default, adjustable under the status in the filter sentence).</li>
+  <li>Articles with fewer than ${SH_MIN} word sequences (about ${SH_MIN + SH - 1} words) are not compared. Word sequences that occur in more than ${SH_MAX_DF} articles are ignored: these are usually standard website phrases.</li>
+  <li>Groups are chained: if A resembles B and B resembles C, A, B and C are in the same group, even if A and C stay below the threshold. The label on each article therefore lists the direct matches with their percentage.</li></ul>
+  <h4>Other</h4>
+  <ul><li>Word count: words in the lead and text, separated by spaces.</li>
+  <li>Timeline: per day for periods up to 62 days, per week (Monday to Sunday) up to about two years, otherwise per month.</li>
+  <li>Storage: your project is kept in this browser (IndexedDB) and in the files you save yourself. Nothing is sent anywhere.</li></ul>`;
+  return `
+  <p>Knipsel neemt bij het inlezen een paar beslissingen automatisch. Alles hieronder kan je achteraf zelf aanpassen; je aanpassingen staan in de export en in de verantwoording.</p>
+  <h4>Inlezen van Belga.press (.html)</h4>
+  <ul><li>Krant: de eerste regel boven het soort publicatie; editie: de tweede regel, als die er is.</li>
+  <li>Type: NEWSPAPER → print, WEBSITE → online, MAGAZINE → magazine.</li>
+  <li>Titel: de eerste regel van de kop; volgende regels worden de ondertitel. Lead: de inleiding die Belga apart aanduidt.</li>
+  <li>Tekst: elke alinea of regeleinde in de bron wordt een aparte alinea; lege regels vallen weg en witruimte wordt gelijkgetrokken.</li></ul>
+  <h4>Inlezen van Nexis Uni (.rtf)</h4>
+  <ul><li>Titel: de regel(s) boven de krantnaam (eerste regel titel, de rest ondertitel). Editie: de regels tussen de datum en het eerste metadataveld.</li>
+  <li>Gebruikte velden: Section → rubriek, Byline → journalist, Highlight → lead, Publication-Type → type (krant of newspaper → print; alles met web, online of blog → online).</li>
+  <li>Tekst: alles tussen "Body" en "Graphic" (of "Classification"). Fotobijschriften onder "Graphic" vallen weg. Regels met "PDF-bestand van dit document", "Link naar PDF", "Bekijk de oorspronkelijke pagina…" en "* Vervangende titel…" worden verwijderd.</li>
+  <li>Titel gemaakt door Nexis: heeft een artikel geen eigen titel, dan maakt Nexis Uni er zelf een, tussen [vierkante haken] en gevolgd door een sterretje. Knipsel behoudt die titel, maar geeft het artikel het label "titel gemaakt door Nexis".</li></ul>
+  <h4>Identieke records</h4>
+  <p>Twee records zijn identiek als krant, type, datum, tijd, titel en volledige tekst exact gelijk zijn. Het tweede wordt overgeslagen en geteld. Bij het kleinste verschil blijven beide staan.</p>
+  <h4>Eerste alinea</h4>
+  <p>Knipsel kiest de eerste alinea waarop geen van deze regels van toepassing is:</p>
+  <ol><li>ze begint met "Bekijk ook/nu/meer", "Lees ook/nu/meer", "Read also/more", "See also/more", "Van onze redacteur/redactrice/correspondent/medewerker/reporter", "Dit artikel verscheen oorspronkelijk/eerder/eerst", of met een streepje direct gevolgd door tekst (bv. "-Foto");</li>
+  <li>ze staat in een kader dat Belga apart opmaakt (alleen Belga);</li>
+  <li>ze telt minder dan 15 woorden (waarschijnlijk een tussenkop, auteursregel of label).</li></ol>
+  <p>Vallen alle alinea's onder regel 3, dan neemt Knipsel de eerste alinea die niet onder regel 1 of 2 valt. Alleen bij Belga: begint de gekozen alinea met een woord van minstens vier letters met een hoofdletter dat vastzit aan een volgend woord met een hoofdletter (bv. "BrusselDe minister"), dan zet Knipsel er " – " tussen.</p>
+  <h4>"Eerste alinea nakijken"</h4>
+  <p>Dit label helpt alleen bij het nakijken; het verandert niets. Het verschijnt als de tool een of meer alinea's oversloeg; als de gekozen alinea minder dan 15 woorden telt (alleen mogelijk als alle alinea's zo kort zijn); als ze eindigt op "..." of "…"; als de bron maar één alinea bevat; als er geen tekst is; of als de tool " – " na een plaatsnaam zette.</p>
+  <h4>Land en soort krant</h4>
+  <ul><li>Alle artikels uit Belga.press: België.</li>
+  <li>Nexis Uni: België als de krantnaam begint met een naam op de Vlaamse lijst, Nederland als ze begint met een naam op de Nederlandse lijst, anders Onbekend. Knipsel raadt niet op basis van de taal van het artikel.</li>
+  <li>Nationaal of regionaal: alleen volgens vaste lijsten; anders "niet ingedeeld".</li>
+  <li>Vlaamse lijst: ${lijst(VLAAMS)}.</li><li>Nederlandse lijst: ${lijst(NEDERLANDS)}.</li><li>Nationaal: ${lijst(NATIONAAL)}.</li><li>Regionaal: ${lijst(REGIONAAL)}.</li></ul>
+  <h4>Zoeken</h4>
+  <ul><li>Niet hoofdlettergevoelig; alleen volledige woorden: <code>klimaat</code> vindt "klimaatbeleid" niet, <code>klimaat*</code> wel.</li>
+  <li><code>*</code> staat voor nul of meer letters of cijfers. OR, OF of een komma scheiden alternatieven; AND of EN betekent dat elk deel ergens moet voorkomen in de onderdelen die je koos (niet noodzakelijk in hetzelfde onderdeel). Alles na NOT of NIET wordt uitgesloten: komt een van die woorden voor in de onderdelen die je koos, dan valt het artikel weg. Uitgesloten woorden worden niet gemarkeerd en niet als treffer geteld.</li>
+  <li>"Eerste alinea" is de huidige eerste alinea, inclusief jouw aanpassingen. Treffers worden per zoekterm geteld in titel, ondertitel, lead en volledige tekst; bij elk artikel en in de export staat het aantal per term, plus het totaal. Een woord dat bij twee zoektermen past (bv. <code>vaccin*</code> en <code>vaccinatie</code>), telt bij beide. Verwijderde alinea's tellen nooit mee.</li></ul>
+  <h4>Gelijkaardige artikels</h4>
+  <ul><li>Knipsel zoekt artikels die grotendeels dezelfde tekst delen, zoals hetzelfde persagentschapsbericht in meerdere kranten. Er wordt niets verwijderd of samengevoegd; artikels krijgen alleen een label.</li>
+  <li>De tekst (titel, lead en alinea's, inclusief jouw bewerkingen, zonder verwijderde alinea's) wordt in kleine letters gezet, accenten en leestekens vallen weg, en de tekst wordt opgeknipt in overlappende reeksen van ${SH} opeenvolgende woorden.</li>
+  <li>Voor elk paar artikels berekent Knipsel welk deel van de reeksen van het kortste artikel ook in het langste voorkomt (<i>containment</i>, Broder 1997). Zo valt een ingekorte versie van een bericht ook samen met het origineel. Twee artikels lijken op elkaar als die waarde minstens de drempel haalt (standaard 50%, aan te passen bij de status in de filterzin).</li>
+  <li>Artikels met minder dan ${SH_MIN} woordreeksen (ongeveer ${SH_MIN + SH - 1} woorden) worden niet vergeleken. Woordreeksen die in meer dan ${SH_MAX_DF} artikels voorkomen, tellen niet mee: dat zijn meestal standaardzinnen van de website.</li>
+  <li>Groepen worden aaneengeschakeld: lijkt A op B en B op C, dan zitten A, B en C in dezelfde groep, ook als A en C onderling onder de drempel blijven. Het label bij elk artikel toont daarom de rechtstreekse overeenkomsten met hun percentage.</li></ul>
+  <h4>Overige</h4>
+  <ul><li>Aantal woorden: woorden in lead en tekst, gescheiden door spaties.</li>
+  <li>Tijdlijn: per dag bij een periode tot 62 dagen, per week (maandag tot zondag) tot ongeveer twee jaar, anders per maand.</li>
+  <li>Bewaren: je project wordt in deze browser bewaard (IndexedDB) en in de bestanden die je zelf opslaat. Er wordt niets doorgestuurd.</li></ul>`;
+}
+
 function tekenInlezen(){
   $('#app').innerHTML = `<p style="max-width:760px;font-size:16px;line-height:1.55;margin:28px 0 0">${t('over')}</p>
   <h1 class="t">${t('inl')}</h1><p class="m" style="margin:0;max-width:760px">${t('inlS')}</p>
   <div class="drop" id="drop"><div style="font-size:18px;font-weight:500">${t('drop')} <button class="v" data-a="kies">${t('kies')}</button></div><div class="m s" style="margin-top:8px">${t('dropS')}</div></div>
   ${meldingen.map(m => `<div class="warn">${esc(m)}</div>`).join('')}
-  ${P.bestanden.length ? `<table class="f"><tr><th>${t('bestand')}</th><th>${t('bron')}</th><th>${t('art')}</th><th></th></tr>${P.bestanden.map(b => `<tr><td>${esc(b.naam)}</td><td>${b.bron}</td><td>${b.n}</td><td class="m">${b.dub ? t('dubbels', {n: b.dub}) : ''}</td></tr>`).join('')}
-   <tr><td><b>${P.bestanden.length}</b></td><td></td><td><b>${P.art.length}</b></td><td></td></tr></table>
-   <button class="b p" data-view="2">${t('verder')} →</button> <button class="b" data-a="nieuw">${t('nieuw')}</button>` : `<p class="m">${t('geen')}</p>`}
+  ${P.bestanden.length ? `<table class="f"><tr><th>${t('bestand')}</th><th>${t('bron')}</th><th>${t('art')}</th><th></th><th></th></tr>${P.bestanden.map((b, i) => `<tr><td>${esc(b.naam)}</td><td>${b.bron}</td><td>${b.n}</td><td class="m">${b.dub ? t('dubbels', {n: b.dub, rec: P.taal === 'en' ? (b.dub === 1 ? 'identical record' : 'identical records') : (b.dub === 1 ? 'identiek record' : 'identieke records')}) : ''}</td><td><button class="b" style="min-height:24px;padding:0 8px" data-wegbestand="${i}" aria-label="${t('wegLabel')} ${esc(b.naam)}" title="${t('wegLabel')}">×</button></td></tr>`).join('')}
+   <tr><td><b>${P.bestanden.length}</b></td><td></td><td><b>${P.art.length}</b></td><td></td><td></td></tr></table>
+   <button class="b p" data-view="2">${t('verder')} →</button>
+   <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center"><button class="b" data-a="nieuw">${t('nieuw')}</button><span class="m s" style="max-width:520px">${t('nieuwS')}</span></div>` : `<p class="m">${t('geen')}</p>`}
   <h2 style="font-size:15px;margin:32px 0 8px">${t('hoe')}</h2><div class="note" style="color:var(--ink);font-size:14px;line-height:1.55"><p style="margin:0 0 10px">${t('belga')}</p><p style="margin:0">${t('nexis')}</p></div>
-  <ul class="note" style="margin-top:22px;padding-left:18px"><li>${t('n1')}</li><li>${t('n4')}</li><li>${t('n3')}</li><li>${t('n2')}</li></ul>`;
+  <details class="hoe"><summary>${t('hoeT')}</summary>${hoeTekst()}</details>
+  <ul class="note" style="margin-top:22px;padding-left:18px"><li>${t('n1')}</li><li>${t('n4')}</li><li>${t('n3')}</li><li>${t('n2')}</li></ul>
+  <p class="m s" style="margin:26px 0 0">${t('versie')} ${VERSIE} · <button class="v s" style="background:none;color:inherit;text-decoration:underline;text-underline-offset:3px" data-a="feedback">${t('feedback')}</button></p>
+  <p style="margin:10px 0 0;font-size:14px"><a href="${t('contactUrl')}" target="_blank" rel="noopener" style="color:var(--ink);text-decoration-color:var(--accent-line);text-underline-offset:3px">${t('contact')} ↗</a></p>`;
 }
 
 /* ---------- Stap 2: zin ---------- */
@@ -455,17 +696,31 @@ const landNaam = c => T.nl[c] ? t(c) : c;
 const types = () => [...new Set(P.art.map(a => typeGroep(veld(a, 'type'))))];
 const reeks = l => l.length < 2 ? l.join('') : l.slice(0, -1).join(', ') + ' ' + t('en') + ' ' + l[l.length - 1];
 function zinDelen(n){
-  const f = P.f, kr = kranten(), aan = kr.filter(k => past0Krant(k[0])).length, ld = landen().filter(l => !f.landUit.includes(l)), ty = types().filter(x => !f.typeUit.includes(x));
+  const f = P.f, nArt = ['n', n + ' ' + (n === 1 ? t('artikel') : t('artikels'))];
+  if (f.groep) return [[null, t('toon')], nArt, [null, t('uitGroep')], ['groep', t('groepN', {n: f.groep})], [null, '.']];
+  const kr = kranten(), aan = kr.filter(k => past0Krant(k[0])).length, ld = landen().filter(l => !f.landUit.includes(l)), ty = types().filter(x => !f.typeUit.includes(x));
   const w = ['titel', 'lead', 'eerste', 'tekst'].filter(k => f.waar[k]).map(k => t('w_' + k));
-  const d = [[null, t('toon')], ['n', n + ' ' + (n === 1 ? t('artikel') : t('artikels'))], [null, t('uit')], ['land', f.landUit.length ? reeks(ld.map(landNaam)) || '…' : t('alleLanden')],
+  const d = [[null, t('toon')], nArt, [null, t('uit')], ['land', f.landUit.length ? reeks(ld.map(landNaam)) || '…' : t('alleLanden')],
     [null, ', ' + t('inK')], ['krant', aan === kr.length ? t('alleKr', {n: kr.length}) : t('vanKr', {a: aan, n: kr.length})],
     [null, '('], ['type', f.typeUit.length ? reeks(ty.map(x => t(x))) || '…' : t('alleTypes')], [null, '), ' + t('tussen')],
-    ['datum', f.van ? dmy(f.van) : t('begin')], [null, t('en')], ['datum', f.tot ? dmy(f.tot) : t('einde')], [null, ', ' + t('met')], ['q', f.q.trim() || t('elkWoord')]];
-  if (f.q.trim()){ d.push([null, t('inW')], ['waar', w.length ? (w.length > 1 ? w.slice(0, -1).join(', ') + ' ' + t('of') + ' ' + w[w.length - 1] : w[0]) : '…']); if (f.min > 1) d.push([null, ','], ['waar', t('minstens', {n: f.min})]); }
-  d.push([null, ', ' + t('van')], ['auteur', f.zonderJ ? t('zonderJ') : f.auteur ? '“' + f.auteur + '”' : t('elkeJ')]);
-  const st = [f.besl !== 'alle' ? t('st_' + f.besl) : '', f.ea !== 'alle' ? t('ea_' + f.ea) : '', f.minW ? '≥ ' + f.minW + ' w' : ''].filter(Boolean);
-  d.push([null, ';'], ['status', st.length ? st.join(', ') : t('st_alle')], [null, '.']);
+    ['datum', f.van ? dmy(f.van) : t('begin')], [null, t('en')], ['datum', f.tot ? dmy(f.tot) : t('einde')]];
+  if (f.q.trim()){ d.push([null, ', ' + t('met')], ['q', f.q.trim()], [null, t('inW')], ['waar', w.length ? (w.length > 1 ? w.slice(0, -1).join(', ') + ' ' + t('of') + ' ' + w[w.length - 1] : w[0]) : '…']); if (f.min > 1) d.push([null, ','], ['waar', t('minstens', {n: f.min})]); }
+  else d.push([null, ','], ['q', t('zonderZoek')]);
+  const c = [f.besl !== 'alle' ? t('z_' + f.besl) : '', f.ea !== 'alle' ? t('z_ea') : '', f.simAlleen ? t('z_sim') : '', f.minW ? t('z_minW', {n: f.minW}) : ''].filter(Boolean);
+  if (c.length){ d.push([null, ',']); c.forEach((x, i) => { if (i) d.push([null, i === c.length - 1 ? t('en') : ',']); d.push(['status', x]); }); }
+  else d.push([null, ';'], ['status', t('st_alle')]);
+  d.push([null, '.']);
   return d;
+}
+function origNamen(k){ return [...new Set(P.art.filter(a => basisKrant(a) === k).map(a => a.krant))]; }
+function voorstel(k){ const i = k.indexOf(' - '); if (i < 1 || /regio/i.test(k.slice(i))) return ''; const basis = k.slice(0, i); const alle = kranten().map(x => x[0]); return alle.includes(basis) ? basis : (alle.find(x => x.replace(/^(Het|De) /, '') === basis.replace(/^(Het|De) /, '')) || ''); }
+function hernoem(oud, nieuw){
+  nieuw = (nieuw || '').trim(); if (!nieuw || nieuw === oud) return; snap(t('l_krant'));
+  P.alias = P.alias || {};
+  for (const o of origNamen(oud)){ if (o === nieuw) delete P.alias[o]; else P.alias[o] = nieuw; }
+  if (!P.kranten[nieuw] && P.kranten[oud]) P.kranten[nieuw] = Object.assign({}, P.kranten[oud]);
+  P.f.krantUit = P.f.krantUit.filter(x => x !== oud);
+  filterGewijzigd();
 }
 function past0Krant(k){ const f = P.f, ki = krantInfo(k); return !f.krantUit.includes(k) && !f.soortUit.includes(ki.soort) && !f.landUit.includes(ki.land); }
 function zinTekst(n){ return zinDelen(n).map(x => x[1]).join(' ').replace(/ ([,;.)])/g, '$1').replace(/\( /g, '('); }
@@ -481,18 +736,22 @@ function tekenPop(){
   if (pop === 'krant'){ const so = ['nat', 'reg', 'nin'];
     h = `<h3>${t('pKrant')}</h3><div class="rij"><span class="m s">${t('soortKr')}:</span>${so.map(s => `<label class="s"><input type="checkbox" data-f="soortUit" value="${s}" ${f.soortUit.includes(s) ? '' : 'checked'}> ${t(s)}</label>`).join(' ')}
      <span style="flex:1"></span><button class="b" data-a="krAlles">${t('alles')}</button><button class="b" data-a="krNiets">${t('niets')}</button></div>
-     <div class="lst">${kranten().map(([k, n]) => { const ki = krantInfo(k); return `<div class="kr"><input type="checkbox" data-f="krantUit" value="${esc(k)}" ${f.krantUit.includes(k) ? '' : 'checked'} aria-label="${esc(k)}"><span class="nm" title="${esc(k)}">${esc(k)}</span><span class="m">${n}</span>
+     <p class="m s" style="margin:0 0 8px">${P.taal === 'nl' ? 'Klik op een naam om ze aan te passen. Geef je twee kranten dezelfde naam, dan worden ze samengevoegd. De oorspronkelijke naam blijft in de export staan.' : 'Click a name to change it. Give two newspapers the same name to merge them. The original name stays in the export.'}</p>
+     <div class="lst">${kranten().map(([k, n]) => { const ki = krantInfo(k), org = origNamen(k), vs = voorstel(k); return `<div class="kr" style="flex-wrap:wrap"><input type="checkbox" data-f="krantUit" value="${esc(k)}" ${f.krantUit.includes(k) ? '' : 'checked'} aria-label="${esc(k)}"><span class="nm" style="display:flex;flex-direction:column"><input type="text" class="knm" data-kn="${esc(k)}" value="${esc(k)}" aria-label="${t('krant')}">${org.length > 1 || (org[0] && org[0] !== k) ? `<span class="m" style="font-size:11px;white-space:normal">← ${org.map(esc).join(', ')} <button class="v" style="border-bottom-width:1px;font-size:11px" data-ksplit="${esc(k)}">${P.taal === 'nl' ? 'ongedaan maken' : 'undo'}</button></span>` : ''}</span>${vs ? `<button class="b" style="min-height:26px;font-size:12px" data-kmerge="${esc(k)}" data-naar="${esc(vs)}">→ ${esc(vs)}</button>` : ''}<span class="m">${n}</span>${krEdit[k] ? `
       <select data-kl="${esc(k)}" aria-label="${t('landVan')}">${['BE', 'NL', 'ON'].concat(landen().filter(l => !T.nl[l])).map(l => `<option value="${esc(l)}" ${ki.land === l ? 'selected' : ''}>${esc(landNaam(l))}</option>`).join('')}<option value="+">+ …</option></select>
-      <select data-ks="${esc(k)}" aria-label="${t('soortKr')}">${so.map(s => `<option value="${s}" ${ki.soort === s ? 'selected' : ''}>${t(s)}</option>`).join('')}</select></div>`; }).join('')}</div>`; }
+      <select data-ks="${esc(k)}" aria-label="${t('soortKr')}">${so.map(s => `<option value="${s}" ${ki.soort === s ? 'selected' : ''}>${t(s)}</option>`).join('')}</select>` : `<button class="lnk s" style="white-space:nowrap" data-kedit="${esc(k)}">${esc(landNaam(ki.land))} · ${t(ki.soort)}</button>`}</div>`; }).join('')}</div>`; }
   if (pop === 'type') h = `<h3>${t('pType')}</h3><div class="lst">${types().map(x => chk('typeUit', x, !f.typeUit.includes(x), t(x), P.art.filter(a => typeGroep(veld(a, 'type')) === x).length)).join('')}</div>`;
   if (pop === 'datum') h = `<h3>${t('pDatum')}</h3><div class="rij"><input type="date" data-fv="van" value="${f.van}" aria-label="van"> – <input type="date" data-fv="tot" value="${f.tot}" aria-label="tot"> <button class="b" data-a="hele">${t('hele')}</button></div><p class="m s">${t('sleep')}.</p>`;
-  if (pop === 'q' || pop === 'waar') h = `<h3>${t('pQ')}</h3><div class="rij"><input type="text" data-fv="q" value="${esc(f.q)}" style="flex:1 1 300px" placeholder="*chloroquin* OR plaquenil" aria-label="${t('pQ')}"></div><p class="m s" style="margin-top:0">${t('qUitleg')}</p>
+  if (pop === 'q' || pop === 'waar') h = `<h3>${t('pQ')}</h3><div class="rij"><input type="text" data-fv="q" value="${esc(f.q)}" style="flex:1 1 300px" placeholder='klimaat* OR "opwarming van de aarde"' aria-label="${t('pQ')}"></div><p class="m s" style="margin-top:0">${t('qUitleg')}</p>
      <h3>${t('pWaar')}</h3><div class="rij">${['titel', 'lead', 'eerste', 'tekst'].map(k => `<label class="s"><input type="checkbox" data-waar="${k}" ${f.waar[k] ? 'checked' : ''}> ${t('w_' + k)}</label>`).join(' ')}</div>
      <div class="rij"><label class="s">${t('minT')} <input type="number" min="1" data-fv="min" value="${f.min}" style="width:64px"></label></div>`;
   if (pop === 'auteur') h = `<h3>${t('pAuteur')}</h3><div class="rij"><label class="s">${t('jBevat')} <input type="text" data-fv="auteur" value="${esc(f.auteur)}"></label><label class="s"><input type="checkbox" data-fb="zonderJ" ${f.zonderJ ? 'checked' : ''}> ${t('zonderJ')}</label></div>`;
   if (pop === 'status') h = `<h3>${t('pStatus')}</h3><div class="rij"><span class="s m">${t('beoord')}</span>${['alle', 'open', 'ja', 'twijfel', 'nee'].map(k => `<button class="b ${f.besl === k ? 'on' : ''}" data-set="besl" data-val="${k}">${t('st_' + k)}</button>`).join('')}</div>
-     <div class="rij"><span class="s m">${t('eaStatus')}</span>${['alle', 'open', 'twijfel'].map(k => `<button class="b ${f.ea === k ? 'on' : ''}" data-set="ea" data-val="${k}">${k === 'alle' ? t('alles') : t('ea_' + k)}</button>`).join('')}</div>
-     <div class="rij"><label class="s">${t('minW')} <input type="number" min="0" data-fv="minW" value="${f.minW}" style="width:80px"></label></div>`;
+     <div class="rij"><span class="s m">${t('eaStatus')}</span>${['alle', 'twijfel'].map(k => `<button class="b ${f.ea === k ? 'on' : ''}" data-set="ea" data-val="${k}">${k === 'alle' ? t('alles') : t('ea_' + k)}</button>`).join('')}</div>
+     <div class="rij"><label class="s">${t('minW')} <input type="number" min="0" data-fv="minW" value="${f.minW}" style="width:80px"></label></div>
+     <h3 style="margin-top:14px">${t('simT')}</h3><div class="rij"><label class="s"><input type="checkbox" data-fb="simAlleen" ${f.simAlleen ? 'checked' : ''}> ${t('simAlleen')}</label></div>
+     <div class="rij"><label class="s">${t('simDrempel')} <input type="number" min="10" max="100" step="5" data-sim value="${Math.round(f.sim * 100)}" style="width:70px"> %</label><span class="m s">${t('simUitleg', {g: SIM.aantal, n: Object.keys(SIM.groep).length})}</span></div>`;
+  if (pop === 'groep') h = `<h3>${t('simT')}</h3><p class="s" style="margin:0 0 8px">${t('inGroepUitleg', {n: f.groep, k: groepGrootte(f.groep)})}</p><button class="b" data-a="groepUit">${t('groepUit')}</button>`;
   e.innerHTML = `<div class="pop">${h}<div style="text-align:right;margin-top:6px"><button class="b" data-pop="${pop}">${t('klaar')}</button></div></div>`;
 }
 
@@ -503,20 +762,31 @@ function bucket(d, eenheid){ if (eenheid === 'dag') return d; if (eenheid === 'm
 function volgende(d, eenheid){ const x = new Date(d + 'T00:00:00Z'); if (eenheid === 'dag') x.setUTCDate(x.getUTCDate() + 1); else if (eenheid === 'week') x.setUTCDate(x.getUTCDate() + 7); else x.setUTCMonth(x.getUTCMonth() + 1); return x.toISOString().slice(0, 10); }
 const dagVoor = d => { const x = new Date(d + 'T00:00:00Z'); x.setUTCDate(x.getUTCDate() - 1); return x.toISOString().slice(0, 10); };
 function tekenTijdlijn(){
-  const lijst = P.art.filter(a => past(a, true)), e = $('#tl');
+  let lijst = P.art.filter(a => past(a, true)); const e = $('#tl');
   if (!lijst.length){ e.innerHTML = ''; TLb = []; return; }
-  const ds = lijst.map(a => veld(a, 'datum')).sort(), min = ds[0], max = ds[ds.length - 1], dagen = (new Date(max) - new Date(min)) / 864e5;
-  const eenheid = dagen <= 62 ? 'dag' : dagen <= 800 ? 'week' : 'maand';
-  const tel = {}; const lt = {};
-  for (const a of lijst){ const b = bucket(veld(a, 'datum'), eenheid), l = landVan(a); (tel[b] = tel[b] || {})[l] = (tel[b][l] || 0) + 1; lt[l] = (lt[l] || 0) + 1; }
-  const top = Object.keys(lt).sort((a, b) => lt[b] - lt[a]), kleur = l => top.indexOf(l) === 0 ? 'var(--ink)' : top.indexOf(l) === 1 ? 'var(--accent)' : 'var(--muted)';
+  const ds = lijst.map(a => veld(a, 'datum')).sort(), dd = (x, y) => (new Date(y) - new Date(x)) / 864e5;
+  const kN = Math.max(2, Math.ceil(ds.length * 0.8)); let kMin = ds[0], kMax = ds[ds.length - 1], kBest = Infinity;
+  for (let i = 0; i + kN - 1 < ds.length; i++){ const sp = dd(ds[i], ds[i + kN - 1]); if (sp < kBest){ kBest = sp; kMin = ds[i]; kMax = ds[i + kN - 1]; } }
+  const kanZoom = ds.length > 20 && dd(ds[0], ds[ds.length - 1]) > 2 * Math.max(dd(kMin, kMax), 14), zoom = kanZoom && P.f.tlZoom === 'kern';
+  let min = ds[0], max = ds[ds.length - 1], buiten = 0;
+  if (zoom){ min = kMin; max = kMax; const n0 = lijst.length; lijst = lijst.filter(a => { const d = veld(a, 'datum'); return d >= min && d <= max; }); buiten = n0 - lijst.length; }
+  const dagen = dd(min, max);
+  const eenheid = dagen <= 62 ? 'dag' : dagen <= 800 ? 'week' : 'maand', perKrant = P.f.tlg === 'krant';
+  const sleutel = a => perKrant ? veld(a, 'krant') : landVan(a), naam = k => perKrant ? k : landNaam(k);
+  const lt = {}; for (const a of lijst){ const k = sleutel(a); lt[k] = (lt[k] || 0) + 1; }
+  const max_g = perKrant ? 6 : 4, alle = Object.keys(lt).sort((a, b) => lt[b] - lt[a]);
+  const top = alle.length > max_g ? alle.slice(0, max_g - 1) : alle, OV = '\u0000ov', groep = k => top.includes(k) ? k : OV;
+  const KL = ['var(--ink)', '#FECBA2', '#70B9BB', '#BFAAC8', '#C4D792'];
+  const kleur = g => g === OV ? '#E6E4DF' : KL[top.indexOf(g)];
+  const groepen = top.concat(alle.length > top.length ? [OV] : []), gt = {};
+  const tel = {}; for (const a of lijst){ const b = bucket(veld(a, 'datum'), eenheid), g = groep(sleutel(a)); (tel[b] = tel[b] || {})[g] = (tel[b][g] || 0) + 1; gt[g] = (gt[g] || 0) + 1; }
   TLb = []; for (let b = bucket(min, eenheid); b <= max; b = volgende(b, eenheid)){ TLb.push(b); if (TLb.length > 1500) break; }
   const hoog = Math.max(...TLb.map(b => Object.values(tel[b] || {}).reduce((x, y) => x + y, 0)), 1), f = P.f;
   const inSel = b => (!f.van || volgende(b, eenheid) > f.van) && (!f.tot || b <= f.tot);
   e.dataset.eenheid = eenheid;
-  e.innerHTML = `<div class="tlk"><span>${t(eenheid === 'dag' ? 'perDag' : eenheid === 'week' ? 'perWeek' : 'perMaand')} · ${t('sleep')}${f.van || f.tot ? ` · <button class="v" style="border-bottom-width:1px" data-a="hele">${t('hele')}</button>` : ''}</span>
-   <span>${top.slice(0, 3).map(l => `<i style="background:${kleur(l)}"></i>${esc(top.indexOf(l) > 1 && top.length > 3 ? t('overig') : landNaam(l))} ${lt[l]}`).join('')}</span></div>
-   <div class="bars" id="bars" role="img" aria-label="${t('perWeek')}">${TLb.map(b => `<div class="w ${inSel(b) ? '' : 'uit'}" title="${dmy(b)}">${top.slice().reverse().map(l => tel[b] && tel[b][l] ? `<div style="height:${tel[b][l] / hoog * 100}%;background:${kleur(l)}"></div>` : '').join('')}</div>`).join('')}<div class="sel" id="sel" style="display:none"></div></div>
+  e.innerHTML = `<div class="tlk"><span>${t(eenheid === 'dag' ? 'perDag' : eenheid === 'week' ? 'perWeek' : 'perMaand')} · <span class="tlsw"><button class="${perKrant ? '' : 'on'}" data-a="${perKrant ? 'tlg' : ''}">${t('perLand')}</button><button class="${perKrant ? 'on' : ''}" data-a="${perKrant ? '' : 'tlg'}">${t('perKrant')}</button></span>${kanZoom ? ` · <span class="tlsw"><button class="${zoom ? '' : 'on'}" data-a="${zoom ? 'tlz' : ''}">${t('zAlles')}</button><button class="${zoom ? 'on' : ''}" data-a="${zoom ? '' : 'tlz'}">${t('zKern')}</button></span>${buiten ? ` (${t('buiten', {n: buiten})})` : ''}` : ''} · ${t('sleep')}${f.van || f.tot ? ` · <button class="v" data-a="hele">${t('hele')}</button>` : ''}</span>
+   <span>${groepen.map(g => `<i style="background:${kleur(g)}"></i>${esc(g === OV ? t('overig') + ' (' + (alle.length - top.length) + ')' : naam(g))} ${gt[g]}`).join('')}</span></div>
+   <div class="bars" id="bars" role="img" aria-label="${t('perWeek')}">${TLb.map(b => `<div class="w ${inSel(b) ? '' : 'uit'}" title="${dmy(b)}: ${groepen.filter(g => tel[b] && tel[b][g]).map(g => (g === OV ? t('overig') : naam(g)) + ' ' + tel[b][g]).join(', ') || 0}">${groepen.slice().reverse().map(g => tel[b] && tel[b][g] ? `<div style="height:${tel[b][g] / hoog * 100}%;background:${kleur(g)}"></div>` : '').join('')}</div>`).join('')}<div class="sel" id="sel" style="display:none"></div></div>
    <div class="as"><span>${dmy(min)}</span><span>${dmy(max)}</span></div>`;
 }
 function sleepTijdlijn(ev){
@@ -534,20 +804,57 @@ function sleepTijdlijn(ev){
 /* ---------- Stap 2: stroom ---------- */
 function tekenFilter(){
   $('#app').innerHTML = `<div class="zin" id="zin"></div><div id="pop"></div><div class="tl" id="tl"></div>
-   <div class="cols"><aside class="zij" id="zij"></aside><div class="stroom" id="stroom"></div></div>`;
+   <div class="cols"><aside class="zij" id="zij"></aside><div class="stroom"><div id="groepbalk"></div><div style="display:flex;gap:16px;align-items:flex-start;justify-content:space-between;margin:0 0 10px">${hintWeg() ? '<span></span>' : `<p class="m s" style="margin:0;max-width:600px">${t('hint')} <button class="lnk s" data-a="hintWeg">${t('begrepen')}</button></p>`}<button class="v s" style="white-space:nowrap" data-a="sorteer">${P.f.sort === 'nieuw' ? t('nieuwEerst') : t('oudEerst')}</button></div><div id="stroom"></div></div></div>`;
   ververs(true);
 }
 function ververs(metPop){
-  zichtbaar = P.art.filter(a => past(a));
+  zorgSim(); setTimeout(tekenGroepbalk); if (P.f.groep && P.f.groep > SIM.aantal) P.f.groep = 0;
+  zichtbaar = P.art.filter(a => past(a)); if (P.f.sort === 'nieuw') zichtbaar.reverse();
   if (actief >= zichtbaar.length) actief = Math.max(0, zichtbaar.length - 1);
   tekenZin(zichtbaar.length); if (metPop) tekenPop(); tekenTijdlijn(); tekenZij(); tekenStroom();
 }
-function filterGewijzigd(metPop){ bouwZoek(); actief = 0; getoond = 40; ververs(metPop !== false); bewaar(); }
+function filterGewijzigd(metPop){ wijzig(); bouwZoek(); actief = 0; getoond = 40; ververs(metPop !== false); bewaar(); }
+let groepVan = null;
+function groepTerug(){ P.f.groep = 0; pop = null; filterGewijzigd(); const i = groepVan ? zichtbaar.findIndex(a => a.id === groepVan) : -1; groepVan = null; if (i >= 0) zetActief(i, true); }
+function techInfo(){
+  const ua = navigator.userAgent, br = /Edg\//.test(ua) ? 'Edge' : /Firefox\//.test(ua) ? 'Firefox' : /Chrome\//.test(ua) ? 'Chrome' : /Safari\//.test(ua) ? 'Safari' : 'onbekend';
+  const v = (ua.match(/(Edg|Firefox|Chrome|Version)\/([\d.]+)/) || [])[2] || '';
+  const os = /Mac OS X|Macintosh/.test(ua) ? 'macOS' : /Windows/.test(ua) ? 'Windows' : /Android/.test(ua) ? 'Android' : /iPhone|iPad/.test(ua) ? 'iOS' : /Linux/.test(ua) ? 'Linux' : 'onbekend';
+  const bron = {}; for (const b of P.bestanden) bron[b.bron] = (bron[b.bron] || 0) + 1;
+  return ['Knipsel ' + VERSIE, 'Taal: ' + P.taal, 'Browser: ' + br + ' ' + v + ' · ' + os, 'Scherm: ' + screen.width + '×' + screen.height + ', venster ' + innerWidth + '×' + innerHeight,
+    'Stap: ' + view + ' · artikels: ' + P.art.length + ' · bestanden: ' + (Object.entries(bron).map(([k, n]) => n + ' ' + k).join(', ') || 0)].join('\n');
+}
+function openFeedback(){
+  const d = $('#fb'); d.innerHTML = `<div class="dk"><b>${t('feedback')}</b><button class="b" data-a="sluitFb" aria-label="${t('sluit')}">×</button></div>
+   <div class="fbb"><p style="margin:0 0 10px">${t('fbUitleg')}</p><textarea id="fbTekst" aria-label="${t('feedback')}"></textarea>
+   <div class="fbnm"><label class="s">${t('fbNaam')}<input type="text" id="fbNaam" autocomplete="name"></label><label class="s">${t('fbMail')}<input type="email" id="fbMail" autocomplete="email"></label></div>
+   <label class="s" style="display:flex;gap:6px;align-items:center;margin-top:10px"><input type="checkbox" id="fbTech" checked> ${t('fbTech')}</label><pre id="fbInfo">${esc(techInfo())}</pre>
+   <p class="m s" style="margin:10px 0 0">${FEEDBACK_VELD ? t('fbStap1') : t('fbStap2')}</p>
+   <div style="display:flex;justify-content:flex-end;gap:6px;margin-top:12px"><button class="b" data-a="sluitFb">${t('annuleer')}</button><button class="b p" data-a="stuurFb">${t('fbVerstuur')}</button></div></div>`;
+  d.showModal(); $('#fbTekst').focus();
+  $('#fbTech').addEventListener('change', e => { $('#fbInfo').style.display = e.target.checked ? '' : 'none'; });
+}
+async function kopieer(tekst){ try { await navigator.clipboard.writeText(tekst); return true; } catch (e){ const ta = document.createElement('textarea'); ta.value = tekst; document.body.append(ta); ta.select(); let ok = false; try { ok = document.execCommand('copy'); } catch (e2){} ta.remove(); return ok; } }
+async function stuurFeedback(){
+  const msg = $('#fbTekst').value.trim(); if (!msg){ $('#fbTekst').focus(); return; }
+  const nm = $('#fbNaam').value.trim(), ml = $('#fbMail').value.trim();
+  const tekst = msg + (nm || ml ? '\n\n' + [nm ? (P.taal === 'en' ? 'Name: ' : 'Naam: ') + nm : '', ml ? 'E-mail: ' + ml : ''].filter(Boolean).join('\n') : '') + ($('#fbTech').checked ? '\n\n---\n' + techInfo() : '');
+  let url = FEEDBACK_URL;
+  if (FEEDBACK_VELD && (url.length + encodeURIComponent(tekst).length) < 4000) url += '&' + FEEDBACK_VELD + '=' + encodeURIComponent(tekst);
+  else { const ok = await kopieer(tekst); toast(ok ? t('fbGekopieerd') : t('fbNietGekopieerd')); if (!ok){ $('#fbTekst').value = tekst; $('#fbTekst').select(); return; } }
+  window.open(url, '_blank', 'noopener'); $('#fb').close();
+}
+function hintWeg(){ try { return localStorage.getItem('knipsel-hint') === '1'; } catch (e){ return false; } }
+function tekenGroepbalk(){ const e = $('#groepbalk'); if (!e) return;
+  e.innerHTML = P.f.groep ? `<div class="gbalk"><span>${t('gBalk', {n: P.f.groep, k: zichtbaar.length})}</span><button class="b on" data-a="groepUit">${t('terugAlle')}</button></div>` : ''; }
 function tekenZij(){
   let b = 0, ja = 0; for (const a of zichtbaar){ const s = P.st[a.id]; if (s && s.b){ b++; if (s.b === 'ja') ja++; } }
   $('#zij').innerHTML = `<div class="g">${zichtbaar.length}</div><div class="m s">${t('vanN', {n: P.art.length})}</div>
    <div class="spoor"><div style="width:${zichtbaar.length ? b / zichtbaar.length * 100 : 0}%"></div></div><div class="m s">${t('nagekeken', {n: b})} · ${t('opgen', {n: ja})}</div>
-   <div class="kbd"><div><b>J</b>${t('kJ')}</div><div><b>T</b>${t('kT')}</div><div><b>N</b>${t('kN')}</div><div><b>K</b>${t('kE')}</div><div><b>↑ ↓</b>${t('kP')}</div></div>`;
+   <div class="kbd"><div class="kg">${t('kCorpus')}</div><button class="kr2" data-key="j"><span class="kk"><kbd class="sel">J</kbd></span><span>${t('kJ')}</span></button><button class="kr2" data-key="t"><span class="kk"><kbd class="sel">T</kbd></span><span>${t('kT')}</span></button><button class="kr2" data-key="n"><span class="kk"><kbd class="sel">N</kbd></span><span>${t('kN')}</span></button>
+   <div class="kg">${t('kNav')}</div><button class="kr2" data-key="o"><span class="kk"><kbd>O</kbd></span><span>${t('kO')}</span></button><button class="kr2" data-key="v"><span class="kk"><kbd>V</kbd></span><span>${t('kV')}</span></button><div class="kr2"><span class="kk"><button class="kpijl" data-key="up" aria-label="${t('kP')}"><kbd>↑</kbd></button><button class="kpijl" data-key="down" aria-label="${t('kP')}"><kbd>↓</kbd></button></span><span>${t('kP')}</span></div>
+   <div class="kg">${t('kAlg')}</div><button class="kr2 ${UNDO.length ? '' : 'leeg'}" id="undo" data-key="z" title="${UNDO.length ? esc(t('ongedaanT') + ': ' + UNDO[UNDO.length - 1].label) : ''}"><span class="kk"><kbd>${/Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl'}</kbd><kbd>Z</kbd></span><span>${t('kZ')}</span></button></div>
+   <p class="s m" style="margin-top:22px;line-height:1.5;display:flex;flex-direction:column;align-items:flex-start;gap:6px"><button class="lnk" data-a="uitleg">${t('uitlegK')}</button><button class="lnk" data-a="feedback">${t('feedback')}</button><span>${t('versie')} ${VERSIE}</span></p>`;
 }
 const VELDEN = {nl: {krant: 'Krant', land: 'Land', datum: 'Datum', tijd: 'Tijd', auteur: 'Journalist', type: 'Type', editie: 'Editie', sectie: 'Rubriek', titel: 'Titel', onder: 'Ondertitel', lead: 'Lead'},
   en: {krant: 'Newspaper', land: 'Country', datum: 'Date', tijd: 'Time', auteur: 'Journalist', type: 'Type', editie: 'Edition', sectie: 'Section', titel: 'Title', onder: 'Subtitle', lead: 'Lead'}};
@@ -564,23 +871,86 @@ function corrPaneel(a){
     <div style="flex:1 1 100%;display:flex;gap:6px;align-items:center"><span class="m s" style="flex:1">${P.taal === 'nl' ? 'Wijzigingen gelden alleen voor dit artikel en staan met de originele waarde in de export. Het land van een hele krant pas je aan bij Kranten.' : 'Changes apply to this article only and are listed with the original value in the export. To change the country of a whole newspaper, use Newspapers.'}</span>
     <button class="b" data-herstel="${id}">${t('herstel')}</button><button class="b p" data-corr="${id}">${t('klaar')}</button></div></div>`;
 }
+function waaromOver(x){ const nl = P.taal !== 'en'; return /^-\S/.test(x) ? (nl ? 'begint met een streepje' : 'starts with a hyphen')
+    : NIET_INH.test(x) ? (nl ? 'begint met "' : 'starts with "') + x.split(/\s+/).slice(0, 2).join(' ') + '"'
+    : x.split(/\s+/).length < MIN_W ? (nl ? 'minder dan ' + MIN_W + ' woorden' : 'fewer than ' + MIN_W + ' words')
+    : (nl ? 'staat in een kader' : 'is in a box'); }
+function kortLabel(a){
+  const al = a.al, ei = a.ei, e = ei >= 0 ? al[ei] : '', n = e ? e.split(/\s+/).length : 0, nl = P.taal !== 'en', k = [];
+  if (ei > 0) k.push(nl ? `alinea ${ei + 1} gekozen` : `paragraph ${ei + 1} chosen`);
+  if (e && n < MIN_W) k.push(nl ? `maar ${n} ${n === 1 ? 'woord' : 'woorden'}` : `only ${n} ${n === 1 ? 'word' : 'words'}`);
+  if (e.endsWith('...') || e.endsWith('…')) k.push(nl ? 'eindigt op …' : 'ends in …');
+  if (al.length === 1) k.push(nl ? "geen alinea's in bron" : 'no paragraphs in source');
+  if (!al.length) k.push(nl ? 'geen tekst' : 'no text');
+  if (a.c.includes('plaatsnaam losgemaakt')) k.push(nl ? 'plaatsnaam gesplitst' : 'place name split');
+  return k;
+}
+function redenen(a){
+  const c = [], al = a.al, ei = a.ei, e = ei >= 0 ? al[ei] : '', n = e ? e.split(/\s+/).length : 0, nl = P.taal !== 'en';
+  const waarom = waaromOver;
+  const reeks2 = l => l.length < 2 ? l.join('') : l.slice(0, -1).join(', ') + (nl ? ' en ' : ' and ') + l[l.length - 1];
+  let zin = '';
+  if (ei > 0){
+    const groep = new Map(); al.slice(0, ei).forEach((x, j) => { const w = waarom(x); groep.set(w, (groep.get(w) || []).concat(j + 1)); });
+    zin = (nl ? `de tool koos alinea ${ei + 1} als eerste alinea en sloeg ` : `the tool chose paragraph ${ei + 1} as the first paragraph and skipped `)
+      + [...groep].map(([w, js]) => (nl ? (js.length > 1 ? "alinea's " : 'alinea ') : (js.length > 1 ? 'paragraphs ' : 'paragraph ')) + reeks2(js) + ' (' + (nl && js.length > 1 ? w.replace(/^begint/, 'beginnen').replace(/^staat/, 'staan') : !nl && js.length > 1 ? w.replace(/^starts/, 'start').replace(/^is in/, 'are in') : w) + ')').join(nl ? ' en ' : ' and ')
+      + (nl ? ' over' : '');
+  }
+  if (e && n < MIN_W) zin = zin ? zin + (nl ? `; alinea ${ei + 1} telt maar ${n} woorden` : `; paragraph ${ei + 1} has only ${n} words`)
+    : (nl ? `de tool koos alinea 1, maar die telt maar ${n} ${n === 1 ? 'woord' : 'woorden'}` : `the tool chose paragraph 1, but it has only ${n} ${n === 1 ? 'word' : 'words'}`);
+  if (zin) c.push(zin);
+  if (e.endsWith('...') || e.endsWith('…')) c.push(nl ? `alinea ${ei + 1} eindigt op "…"` : `paragraph ${ei + 1} ends in "…"`);
+  if (al.length === 1) c.push(nl ? 'de bron bevat maar één alinea' : 'the source contains only one paragraph');
+  if (!al.length) c.push(nl ? 'geen tekst gevonden' : 'no text found');
+  if (a.c.includes('plaatsnaam losgemaakt')) c.push(nl ? 'de tool zette " – " na een plaatsnaam' : 'the tool inserted " – " after a place name');
+  return c;
+}
+const nexisTitel = a => a.c.includes('titel door Nexis vervangen');
+function bewerk(el){
+  if (el.querySelector('textarea')) return;
+  const id = el.dataset.id, k = el.dataset.ed, a = P.art.find(x => x.id === id), oud = k === 'lead' ? veld(a, 'lead') : alOf(a)[+k];
+  el.innerHTML = `<textarea class="edt" rows="1" aria-label="${t('klikBewerk')}">${esc(oud)}</textarea>`;
+  const ta = el.querySelector('textarea'), hoog = () => { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 2 + 'px'; };
+  hoog(); ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
+  let klaar = false;
+  const bewaarTekst = opslaan => { if (klaar) return; klaar = true;
+    if (opslaan){ const v = ta.value.replace(/\s+/g, ' ').trim(); if (v !== (oud || '').trim()) snap(t('l_tekst')); const s = S(id);
+      if (k === 'lead'){ s.v = s.v || {}; if (v === (a.lead || '')) delete s.v.lead; else s.v.lead = v; if (!Object.keys(s.v).length) delete s.v; }
+      else { const j = +k; s.tx = s.tx || {}; if (!v){ delete s.tx[j]; s.weg = (s.weg || []).concat(j); } else if (v === a.al[j]) delete s.tx[j]; else s.tx[j] = v; if (!Object.keys(s.tx).length) delete s.tx; }
+      tekstGewijzigd(); bewaar(); }
+    herteken(zichtbaar.findIndex(x => x.id === id)); tekenZij(); };
+  ta.addEventListener('input', hoog);
+  ta.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); bewaarTekst(true); } else if (e.key === 'Escape'){ e.preventDefault(); bewaarTekst(false); } });
+  ta.addEventListener('blur', () => bewaarTekst(true));
+}
 function kaart(a, i){
   const s = P.st[a.id] || {}, ei = eIdx(a), act = i === actief, corr = s.v && Object.keys(s.v).length;
-  const meta = [dmy(veld(a, 'datum')), veld(a, 'krant'), landNaam(landVan(a)), t(typeGroep(veld(a, 'type'))), veld(a, 'auteur') || '—', a.w + ' w'].map(esc).join(' · ');
-  const tag = s.b ? `<span class="tag ${s.b === 'ja' ? 'ja' : s.b === 'twijfel' ? 'tw' : ''}">${t('st_' + s.b)}</span>` : '';
-  const eaTag = s.e != null ? `<span class="tag">${t('handm')}</span>` : s.ok ? '' : a.c.length ? `<span class="tag" title="${esc(a.c.join('; '))}">${t('twijfelT')}</span>` : '';
-  let h = `<div class="m s">${meta} · <button class="v" style="border-bottom-width:1px;font-size:12px" data-corr="${a.id}">${t('corr')}</button>${corr ? `<span class="tag">${t('gecorr')}</span>` : ''}${tag}${eaTag}</div>`;
+  const meta = [dmy(veld(a, 'datum')), veld(a, 'krant'), landNaam(landVan(a)), t(typeGroep(veld(a, 'type'))), veld(a, 'auteur') || '—', woorden(a) + (P.taal === 'en' ? ' words' : ' woorden')].map(esc).join(' · ');
+  const tag = s.b ? `<span class="tag st">${t('st_' + s.b)}</span>` : '';
+  const rd = redenen(a), eaTag = (aangepast(a) ? `<button class="tag klik" data-pas="${a.id}">${t('handm')}</button>` : rd.length ? `<button class="tag klik" data-pas="${a.id}" title="${esc(rd.join('; '))}">${t('twijfelT')}: ${esc(kortLabel(a).join(', '))}</button>` : ''); const nxTag = (nexisTitel(a) ? `<span class="tag">${P.taal === 'en' ? 'title made by Nexis' : 'titel gemaakt door Nexis'}</span>` : '');
+  let h = `<div class="m s">${meta} · <button class="tag klik" data-corr="${a.id}">${t('corr')}</button></div>`;
+  if (zoek.termen.length) h += `<div class="m s tref">${t('trefK')}: ${trefPerTerm(a).map(([l, n]) => `<span class="${n ? '' : 'nul'}">${esc(l)} <b>${n}</b></span>`).join(' · ')}</div>`;
+  const sg = SIM.groep[a.id], sb = burenTekst(a), simTag = sg ? `<button class="tag klik" data-groep="${sg}" title="${esc(t('lijktOp') + ': ' + sb.join('; '))}">${t('simTag', {n: sb.length, n2: P.taal === 'en' ? (sb.length === 1 ? 'other article' : 'other articles') : (sb.length === 1 ? 'ander artikel' : 'andere artikels'), p: pct(SIM.buren[a.id][0][1])})}</button>` : '';
+  const tags = [tag, simTag, corr ? `<button class="tag klik" data-corr="${a.id}">${t('gecorr')}</button>` : '', eaTag, nxTag].filter(Boolean);
+  if (tags.length) h += `<div class="tags">${tags.join('<span class="sep">·</span>')}</div>`;
   if (corrOpen[a.id]) h += corrPaneel(a);
   h += `<h2>${mark(veld(a, 'titel'))}${veld(a, 'onder') ? ` <span class="m" style="font-weight:500">${mark(veld(a, 'onder'))}</span>` : ''}</h2>`;
-  if (veld(a, 'lead')) h += `<p class="lead">${mark(veld(a, 'lead'))}</p>`;
-  if (open[a.id]) h += `<div class="vol"><p class="m s" style="margin:0 0 8px">${t('kiesE')}</p>${a.al.map((p, j) => `<div class="al ${j === ei ? 'e1' : ''}"><button class="b ${j === ei ? 'p' : ''}" data-eerste="${j}" data-id="${a.id}" aria-label="${t('w_eerste')} ${j + 1}">${P.taal === 'nl' ? '1e' : '1st'}</button><span>${mark(p)}</span></div>`).join('')}</div>`;
-  else h += `<p class="ea">${ei >= 0 ? mark(a.al[ei]) : '<span class="m">—</span>'}</p>`;
-  h += `<div class="acts"><button class="b ${s.ok ? 'on' : ''}" data-ok="${a.id}">${s.ok ? '✓ ' + t('bevestigd') : t('klopt')}</button><button class="b" data-open="${a.id}">${open[a.id] ? t('sluit') + ' ↑' : t('lees') + ' ↓'}</button><span class="sp"></span>
+  if (veld(a, 'lead')) h += `<p class="lead"><span class="txt" data-ed="lead" data-id="${a.id}" tabindex="0" title="${t('klikBewerk')}">${mark(veld(a, 'lead'))}</span></p>`;
+  const wg = weg(a), ed = s.tx || {};
+  const rij = (p, j) => { const x = wg.includes(j), e1 = j === ei;
+    const ctl = x ? `<button class="m1" data-weg="${j}" data-id="${a.id}" title="${t('terug')}" aria-label="${t('terug')}">↺</button>`
+      : `<button class="m1 ${e1 ? 'aan' : ''}" data-eerste="${j}" data-id="${a.id}" title="${e1 ? t('w_eerste') : t('maakEerste')}" aria-label="${t('maakEerste')}" ${e1 ? 'aria-pressed="true"' : ''}>1</button><button class="m1 kr" data-weg="${j}" data-id="${a.id}" title="${t('verwijder')}" aria-label="${t('verwijder')}">×</button>`
+        + (ed[j] != null ? `<button class="m1 txr" data-txreset="${j}" data-id="${a.id}" title="${t('origTekst')}" aria-label="${t('origTekst')}">↺</button>` : '');
+    return `<div class="al ${e1 ? 'e1' : ''} ${x ? 'x' : ''}"><span class="ctl">${ctl}</span><span class="txt" ${x ? '' : `data-ed="${j}" data-id="${a.id}" tabindex="0" title="${t('klikBewerk')}"`}>${mark(p)}</span></div>`; };
+  if (open[a.id]) h += `<div class="vol">${alOf(a).map(rij).join('')}${aangepast(a) ? `<div style="text-align:right"><button class="b" data-pasreset="${a.id}">${t('herstel')}</button></div>` : ''}</div>`;
+  else h += ei >= 0 ? `<div class="vol kort">${rij(alOf(a)[ei], ei)}</div>` : '<p class="ea m">—</p>';
+  h += `<div class="acts"><button class="b ${open[a.id] ? 'on' : ''}" data-open="${a.id}">${open[a.id] ? t('sluit') : t('lees')}</button><span class="sp"></span>
    <button class="b ${s.b === 'ja' ? 'p' : ''}" data-b="ja" data-id="${a.id}">${t('ja')}</button><button class="b ${s.b === 'twijfel' ? 'on' : ''}" data-b="twijfel" data-id="${a.id}">${t('twijfel')}</button><button class="b ${s.b === 'nee' ? 'on' : ''}" data-b="nee" data-id="${a.id}">${t('nee')}</button></div>`;
-  if (act || s.opm) h += `<input type="text" data-opm="${a.id}" value="${esc(s.opm || '')}" placeholder="${t('opm')}" aria-label="${t('opm')}" style="width:100%;margin-top:8px">`;
+  if (s.opm || opmOpen[a.id]) h += `<input type="text" data-opm="${a.id}" value="${esc(s.opm || '')}" placeholder="${t('opm')}" aria-label="${t('opm')}" style="width:100%;margin-top:8px">`;
+  else if (act) h += `<button class="lnk s" style="margin-top:8px" data-opmopen="${a.id}">+ ${t('opm').toLowerCase()}</button>`;
   return `<article class="k ${act ? 'act' : ''} ${s.b === 'nee' ? 'nee' : ''}" data-i="${i}" id="k${i}">${h}</article>`;
 }
-let obs = null;
+let obs = null; const krEdit = {}; const opmOpen = {};
 function tekenStroom(){
   const e = $('#stroom'); if (!e) return;
   if (!zichtbaar.length){ e.innerHTML = `<p class="m" style="padding:20px 0">${t('geenRes')}</p>`; return; }
@@ -593,7 +963,8 @@ function meer(){ const m = $('#meer'); if (!m) return; const van = getoond; geto
 function herteken(i){ const e = $('#k' + i); if (e && zichtbaar[i]) e.outerHTML = kaart(zichtbaar[i], i); }
 function zetActief(i, scroll){ if (i < 0 || i >= zichtbaar.length) return; while (i >= getoond) meer(); const oud = actief; actief = i; herteken(oud); herteken(i);
   if (scroll){ const e = $('#k' + i); if (e) e.scrollIntoView({block: 'center', behavior: 'smooth'}); } }
-function beslis(id, b){ const s = S(id); s.b = s.b === b ? undefined : b; const i = zichtbaar.findIndex(a => a.id === id); tekenZij(); bewaar();
+function volgOpen(){ const n = zichtbaar.length; for (let k = 1; k <= n; k++){ const i = (actief + k) % n; if (!(P.st[zichtbaar[i].id] || {}).b){ zetActief(i, true); return; } } toast(t('allesbeoordeeld')); }
+function beslis(id, b){ snap(t('l_besl')); const s = S(id); s.b = s.b === b ? undefined : b; const i = zichtbaar.findIndex(a => a.id === id); tekenZij(); bewaar();
   if (i >= 0){ if (s.b && i === actief && i + 1 < zichtbaar.length) { herteken(i); zetActief(i + 1, true); } else { actief = i; teken2(i); } } }
 function teken2(i){ document.querySelectorAll('.k.act').forEach(e => { const j = +e.dataset.i; if (j !== i) { e.classList.remove('act'); } }); herteken(i); }
 
@@ -602,23 +973,26 @@ let expWelke = 'ja';
 function expLijst(){ return expWelke === 'f' ? P.art.filter(a => past(a)) : P.art.filter(a => { const b = (P.st[a.id] || {}).b; return past(a) && (b === 'ja' || (expWelke === 'jt' && b === 'twijfel')); }); }
 function verantwoording(){
   const alle = P.art.filter(a => past(a)), tel = {ja: 0, twijfel: 0, nee: 0, open: 0}; let hand = 0, ok = 0;
-  for (const a of alle){ const s = P.st[a.id] || {}; tel[s.b || 'open']++; if (s.e != null) hand++; else if (s.ok) ok++; }
-  return [t('v_tot', {a: P.art.length, b: P.bestanden.length, c: P.dubbels}), P.bestanden.map(b => '  - ' + b.naam + ' (' + b.bron + ', ' + b.n + ')').join('\n'), t('v_f', {z: zinTekst(alle.length)}),
-    t('v_r', {a: alle.length, b: tel.ja, c: tel.twijfel, d: tel.nee, e: tel.open}), t('v_e', {a: hand, b: ok}), t('v_d', {d: dmy(new Date().toISOString().slice(0, 10))})].join('\n');
+  for (const a of alle){ const s = P.st[a.id] || {}; tel[s.b || 'open']++; if (s.e != null) hand++; if (s.weg && s.weg.length) ok++; }
+  return [t('v_tot', {a: P.art.length, b: P.bestanden.length, c: t('dubbels', {n: P.dubbels, rec: P.taal === 'en' ? (P.dubbels === 1 ? 'identical record' : 'identical records') : (P.dubbels === 1 ? 'identiek record' : 'identieke records')})}), P.bestanden.map(b => '  - ' + b.naam + ' (' + b.bron + ', ' + b.n + ')').join('\n'), t('v_f', {z: zinTekst(alle.length)}),
+    t('v_r', {a: alle.length, b: tel.ja, c: tel.twijfel, d: tel.nee, e: tel.open}), t('v_e', {a: hand, b: ok}), ...Object.entries(P.alias || {}).map(([o, n]) => (P.taal === 'nl' ? 'Krantnaam aangepast: "' : 'Newspaper name changed: "') + o + '" → "' + n + '"'), t('v_d', {d: dmy(new Date().toISOString().slice(0, 10))})].join('\n');
 }
 function tekenExport(){
-  const n = expLijst().length;
+  if (!tekenExport.gezien){ tekenExport.gezien = 1; if (expWelke === 'ja' && !expLijst().length) expWelke = 'f'; }
+  const n = expLijst().length, keuze = ['ja', 'jt', 'f'].map(k => { const o = expWelke; expWelke = k; const m = expLijst().length; expWelke = o; return [k, m]; });
+  const dl = (a, titel, uitleg, prim) => `<div class="exr"><button class="b ${prim ? 'p' : ''}" data-a="${a}" ${n ? '' : 'disabled'}>${titel}</button><span class="m s">${uitleg}</span></div>`;
   $('#app').innerHTML = `<h1 class="t">${t('exp')}</h1>
-   <p style="margin:14px 0 6px;font-weight:600">${t('welke')}</p><div class="hr" style="margin-bottom:14px">${['ja', 'jt', 'f'].map(k => `<button class="b ${expWelke === k ? 'on' : ''}" data-exp="${k}">${t('e_' + k)}</button>`).join('')}<span class="m">→ ${n} ${t('artikels')}</span></div>
-   <div class="hr"><button class="b p" data-a="xlsx" ${n ? '' : 'disabled'}>${t('xlsx')}</button><button class="b" data-a="zip" ${n ? '' : 'disabled'}>${t('zip')}</button><button class="b" data-a="opslaan">${t('opslaan')}</button></div>
-   <p style="margin:26px 0 6px;font-weight:600">${t('verant')}</p><textarea class="ver" readonly>${esc(verantwoording())}</textarea>`;
+   <h2 class="exh">1 · ${t('welke')}</h2><div class="exk">${keuze.map(([k, m]) => `<label><input type="radio" name="exw" data-exp="${k}" ${expWelke === k ? 'checked' : ''}> ${t('e_' + k)} <span class="m">(${m})</span></label>`).join('')}</div>
+   <h2 class="exh">2 · ${t('hoeExp')}</h2>
+   ${dl('xlsx', t('xlsx'), t('xlsxU'), 1)}${dl('csv', t('csv'), t('csvUitleg'))}${dl('zip', t('zipK'), t('zipU'))}
+   <h2 class="exh">3 · ${t('verant')}</h2><textarea class="ver" readonly>${esc(verantwoording())}</textarea><div><button class="b" data-a="kopVer">${t('kopieer')}</button></div>`;
 }
-const KOL = ['nr', 'beslissing', 'opmerking', 'datum', 'krant', 'land', 'soort_krant', 'type', 'editie', 'sectie', 'journalist', 'titel', 'ondertitel', 'lead', 'eerste_alinea', 'eerste_alinea_status', 'treffers', 'woorden', 'tekst', 'bron', 'bronbestand', 'positie_in_bron', 'correcties', 'opmerkingen_tool', 'id'];
+const KOL = ['nr', 'beslissing', 'opmerking', 'datum', 'krant', 'krant_in_bron', 'land', 'soort_krant', 'type', 'editie', 'sectie', 'journalist', 'titel', 'ondertitel', 'lead', 'eerste_alinea', 'eerste_alinea_status', 'treffers', 'treffers_per_term', 'gelijkaardig_groep', 'gelijkaardig_aan', 'woorden', 'tekst', 'bron', 'bronbestand', 'positie_in_bron', 'correcties', 'verwijderde_alineas', 'opmerkingen_tool', 'id'];
 function rijen(lijst){
   return lijst.map((a, i) => { const s = P.st[a.id] || {}, ki = krantInfo(veld(a, 'krant'));
-    return [i + 1, s.b || '', s.opm || '', veld(a, 'datum'), veld(a, 'krant'), landNaam(landVan(a)), t(ki.soort), veld(a, 'type'), veld(a, 'editie'), veld(a, 'sectie'), veld(a, 'auteur'), veld(a, 'titel'), veld(a, 'onder'), veld(a, 'lead'), eersteTekst(a),
-      s.e != null ? 'handmatig gekozen' : s.ok ? 'bevestigd' : 'door tool gekozen', treffers(a), a.w, a.al.join('\n\n'), a.bron, a.bestand, a.pos,
-      s.v ? Object.keys(s.v).map(k => k + ': "' + (k === 'land' ? krantInfo(veld(a, 'krant')).land : (a[k] || '')) + '" → "' + s.v[k] + '"').join('; ') : '', a.c.join('; '), a.id]; });
+    return [i + 1, s.b || '', s.opm || '', veld(a, 'datum'), veld(a, 'krant'), a.krant, landNaam(landVan(a)), t(ki.soort), veld(a, 'type'), veld(a, 'editie'), veld(a, 'sectie'), veld(a, 'auteur'), veld(a, 'titel'), veld(a, 'onder'), veld(a, 'lead'), eersteTekst(a),
+      s.e != null ? 'handmatig gekozen' : 'door tool gekozen', treffers(a), trefPerTerm(a).map(([l, n]) => l + ': ' + n).join('; '), SIM.groep[a.id] || '', burenTekst(a).join('; '), woorden(a), alineas(a).join('\n\n'), a.bron, a.bestand, a.pos,
+      Object.keys(s.v || {}).map(k => k + ': "' + (k === 'land' ? krantInfo(veld(a, 'krant')).land : (a[k] || '')) + '" → "' + s.v[k] + '"').concat(Object.keys(s.tx || {}).map(j => 'alinea ' + (+j + 1) + ': "' + a.al[j] + '" → "' + s.tx[j] + '"')).join('; '), weg(a).map(j => alOf(a)[j]).join(' | '), redenen(a).concat(nexisTitel(a) ? ['titel gemaakt door Nexis Uni'] : []).join('; '), a.id]; });
 }
 /* zip zonder compressie + minimale xlsx, zodat er geen externe bibliotheek nodig is */
 const CRC = (() => { const tb = new Uint32Array(256); for (let n = 0; n < 256; n++){ let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; tb[n] = c; } return tb; })();
@@ -646,19 +1020,24 @@ function xlsx(bladen){
   bladen.forEach((b, i) => files.push({naam: `xl/worksheets/sheet${i + 1}.xml`, data: blad(b.rijen)}));
   return zip(files);
 }
+function maakCsv(lijst){ const c = v => { const x = String(v == null ? '' : v); return /[",\n\r]/.test(x) ? '"' + x.replace(/"/g, '""') + '"' : x; };
+  return '\uFEFF' + [KOL, ...rijen(lijst)].map(r => r.map(c).join(',')).join('\r\n') + '\r\n'; }
 function maakXlsx(lijst){ return xlsx([{naam: 'corpus', rijen: [KOL, ...rijen(lijst)]}, {naam: P.taal === 'nl' ? 'verantwoording' : 'procedure', rijen: verantwoording().split('\n').map(r => [r])}]); }
 function exporteer(soort){
+  zorgSim();
   const lijst = expLijst(), basis = bestandsnaam() + '_' + new Date().toISOString().slice(0, 10);
   if (soort === 'xlsx') return download(basis + '.xlsx', maakXlsx(lijst));
+  if (soort === 'csv') return download(basis + '.csv', maakCsv(lijst), 'text/csv;charset=utf-8');
   const veilig = s => s.replace(/[\\/:*?"<>|]+/g, '-').trim(), files = [];
   lijst.forEach((a, i) => files.push({naam: 'artikels/' + String(i + 1).padStart(4, '0') + '_' + veilig(veld(a, 'krant')) + '_' + veld(a, 'datum').replace(/-/g, '') + '.txt',
-    data: [veld(a, 'titel'), veld(a, 'onder'), [veld(a, 'krant'), dmy(veld(a, 'datum')), veld(a, 'auteur')].filter(Boolean).join(' | '), '', veld(a, 'lead'), veld(a, 'lead') ? '' : null, a.al.join('\n\n')].filter(x => x !== null && x !== undefined && !(x === '' && false)).join('\n')}));
-  maakXlsx(lijst).arrayBuffer().then(buf => { files.push({naam: basis + '.xlsx', data: new Uint8Array(buf)}, {naam: 'verantwoording.txt', data: verantwoording()}, {naam: basis + '_project.json', data: JSON.stringify(P)}); download(basis + '.zip', zip(files)); });
+    data: [veld(a, 'titel'), veld(a, 'onder'), [veld(a, 'krant'), dmy(veld(a, 'datum')), veld(a, 'auteur')].filter(Boolean).join(' | '), '', veld(a, 'lead'), veld(a, 'lead') ? '' : null, alineas(a).join('\n\n')].filter(x => x !== null && x !== undefined && !(x === '' && false)).join('\n')}));
+  maakXlsx(lijst).arrayBuffer().then(buf => { files.push({naam: basis + '.xlsx', data: new Uint8Array(buf)}, {naam: basis + '.csv', data: maakCsv(lijst)}, {naam: 'verantwoording.txt', data: verantwoording()}, {naam: basis + '_project.json', data: JSON.stringify(P)}); download(basis + '.zip', zip(files)); });
 }
 
 /* ---------- Gebeurtenissen ---------- */
 const wissel = (lijst, w, aan) => { const i = lijst.indexOf(w); if (aan && i >= 0) lijst.splice(i, 1); if (!aan && i < 0) lijst.push(w); };
 document.addEventListener('click', ev => {
+  const edEl = ev.target.closest('[data-ed]'); if (edEl && !ev.target.closest('textarea,button')){ bewerk(edEl); return; }
   const b = ev.target.closest('button'); if (!b){ const k = ev.target.closest('.k'); if (k && !ev.target.closest('input,select') && +k.dataset.i !== actief) zetActief(+k.dataset.i); return; }
   const d = b.dataset;
   if (d.view){ view = +d.view; pop = null; teken(); window.scrollTo(0, 0); }
@@ -666,56 +1045,88 @@ document.addEventListener('click', ev => {
   else if (d.accent){ P.accent = d.accent; zetAccent(); bewaar(); }
   else if (d.pop){ pop = pop === d.pop ? null : d.pop; tekenZin(zichtbaar.length); tekenPop(); }
   else if (d.set){ P.f[d.set] = d.val; filterGewijzigd(); }
-  else if (d.exp){ expWelke = d.exp; tekenExport(); }
   else if (d.b) beslis(d.id, d.b);
   else if (d.ok){ const s = S(d.ok); s.ok = s.ok ? undefined : 1; bewaar(); herteken(zichtbaar.findIndex(a => a.id === d.ok)); }
-  else if (d.open){ open[d.open] = !open[d.open]; herteken(zichtbaar.findIndex(a => a.id === d.open)); }
-  else if (d.eerste){ const a = P.art.find(x => x.id === d.id), s = S(d.id), j = +d.eerste; if (j === a.ei) delete s.e; else s.e = j; s.ok = 1; bewaar(); herteken(zichtbaar.findIndex(x => x.id === d.id)); }
+  else if (d.open || d.pas){ const id = d.open || d.pas; open[id] = !open[id]; herteken(zichtbaar.findIndex(a => a.id === id)); }
+  else if (d.pasreset){ snap(t('herstel')); tekstGewijzigd(); const s = S(d.pasreset); delete s.e; delete s.weg; delete s.al; delete s.tx; if (s.v && s.leadPlak){ delete s.v.lead; if (!Object.keys(s.v).length) delete s.v; } delete s.leadPlak; bewaar(); herteken(zichtbaar.findIndex(a => a.id === d.pasreset)); tekenZij(); }
+  else if (d.txreset != null){ snap(t('origTekst')); tekstGewijzigd(); const s = S(d.id); delete s.tx[d.txreset]; if (!Object.keys(s.tx).length) delete s.tx; bewaar(); herteken(zichtbaar.findIndex(x => x.id === d.id)); }
+  else if (d.weg){ snap(t('l_weg')); tekstGewijzigd(); const s = S(d.id), j = +d.weg; s.weg = s.weg || []; const i = s.weg.indexOf(j); if (i >= 0) s.weg.splice(i, 1); else { s.weg.push(j); if (s.e === j) delete s.e; } if (!s.weg.length) delete s.weg; bewaar(); herteken(zichtbaar.findIndex(a => a.id === d.id)); }
+  else if (d.eerste){ snap(t('maakEerste')); const a = P.art.find(x => x.id === d.id), s = S(d.id), j = +d.eerste; if (j === a.ei) delete s.e; else s.e = j; bewaar(); herteken(zichtbaar.findIndex(x => x.id === d.id)); }
   else if (d.corr){ corrOpen[d.corr] = !corrOpen[d.corr]; if (!corrOpen[d.corr]) ververs(false); else herteken(zichtbaar.findIndex(a => a.id === d.corr)); }
-  else if (d.herstel){ delete S(d.herstel).v; bewaar(); herteken(zichtbaar.findIndex(a => a.id === d.herstel)); }
+  else if (d.herstel){ snap(t('herstel')); delete S(d.herstel).v; bewaar(); herteken(zichtbaar.findIndex(a => a.id === d.herstel)); }
   else if (d.a === 'kies' || d.a === 'openen') $('#fin').click();
   else if (d.a === 'opslaan') slaOp();
   else if (d.a === 'nieuw'){ if (confirm(t('wis'))){ const o = nieuwProject(); o.taal = P.taal; o.accent = P.accent; P = o; view = 1; meldingen = []; bewaar(); teken(); } }
+  else if (d.kmerge) hernoem(d.kmerge, d.naar);
+  else if (d.ksplit){ snap(t('l_krant')); for (const o of origNamen(d.ksplit)) delete P.alias[o]; filterGewijzigd(); }
+  else if (d.wegbestand != null) verwijderBestand(+d.wegbestand);
+  else if (d.a === 'uitleg'){ $('#uitlegT').textContent = t('uitlegK'); $('#uitlegB').innerHTML = nakijkTekst() + `<h4 style="font-size:15px;margin-top:22px">${t('hoeT')}</h4>` + hoeTekst(); $('#uitleg').showModal(); }
+  else if (d.a === 'sluitUitleg') $('#uitleg').close();
+  else if (d.a === 'feedback') openFeedback();
+  else if (d.a === 'sluitFb') $('#fb').close();
+  else if (d.a === 'stuurFb') stuurFeedback();
+  else if (d.a === 'hintWeg'){ try { localStorage.setItem('knipsel-hint', '1'); } catch (e){} const p = b.closest('p'); if (p) p.remove(); }
+  else if (d.opmopen){ opmOpen[d.opmopen] = 1; const i = zichtbaar.findIndex(x => x.id === d.opmopen); herteken(i); const e = $('#k' + i + ' [data-opm]'); if (e) e.focus(); }
+  else if (d.kedit){ krEdit[d.kedit] = 1; tekenPop(); }
+  else if (d.a === 'kopVer'){ kopieer(verantwoording()).then(ok => toast(ok ? t('gekopieerd') : t('fbNietGekopieerd'))); }
+  else if (d.a === 'volgOpen') volgOpen();
+  else if (d.key){ const k = d.key, a = zichtbaar[actief];
+    if (k === 'z') ongedaan(); else if (k === 'v') volgOpen(); else if (k === 'up') zetActief(actief - 1, true); else if (k === 'down') zetActief(actief + 1, true);
+    else if (a && k === 'o'){ open[a.id] = !open[a.id]; herteken(actief); } else if (a) beslis(a.id, {j: 'ja', t: 'twijfel', n: 'nee'}[k]); }
+  else if (d.groep){ groepVan = (b.closest('.k') && zichtbaar[+b.closest('.k').dataset.i] || {}).id || null; P.f.groep = +d.groep; pop = null; filterGewijzigd(); const e = $('#groepbalk'); if (e) e.scrollIntoView({block: 'start', behavior: 'smooth'}); }
+  else if (d.a === 'groepUit') groepTerug();
+  else if (d.a === 'undo') ongedaan();
+  else if (d.a === 'sorteer'){ P.f.sort = P.f.sort === 'nieuw' ? 'oud' : 'nieuw'; wijzig(); bewaar(); actief = 0; getoond = 40; tekenFilter(); }
+  else if (d.a === 'tlz'){ P.f.tlZoom = P.f.tlZoom === 'kern' ? 'alles' : 'kern'; wijzig(); bewaar(); tekenTijdlijn(); }
+  else if (d.a === 'tlg'){ P.f.tlg = P.f.tlg === 'krant' ? 'land' : 'krant'; wijzig(); bewaar(); tekenTijdlijn(); }
   else if (d.a === 'meer') meer();
   else if (d.a === 'hele'){ P.f.van = P.f.tot = ''; filterGewijzigd(); }
   else if (d.a === 'krAlles'){ P.f.krantUit = []; filterGewijzigd(); }
   else if (d.a === 'krNiets'){ P.f.krantUit = kranten().map(k => k[0]); filterGewijzigd(); }
-  else if (d.a === 'xlsx' || d.a === 'zip') exporteer(d.a);
+  else if (d.a === 'xlsx' || d.a === 'csv' || d.a === 'zip') exporteer(d.a);
 });
 let invT = null;
 document.addEventListener('input', ev => {
   const e = ev.target, d = e.dataset;
-  if (e.id === 'naam'){ P.naam = e.value; bewaar(); return; }
-  if (d.opm){ S(d.opm).opm = e.value || undefined; bewaar(); return; }
+  if (e.id === 'naam'){ P.naam = e.value; wijzig(); bewaar(); return; }
+  if (d.opm){ S(d.opm).opm = e.value || undefined; wijzig(); bewaar(); return; }
   if (d.fv){ P.f[d.fv] = e.type === 'number' ? Math.max(0, +e.value || 0) : e.value; if (d.fv === 'min' && P.f.min < 1) P.f.min = 1; clearTimeout(invT); invT = setTimeout(() => filterGewijzigd(false), 250); }
 });
 document.addEventListener('change', ev => {
   const e = ev.target, d = e.dataset;
+  if (d.exp){ expWelke = d.exp; tekenExport(); return; }
   if (e.id === 'fin'){ leesBestanden([...e.files]); e.value = ''; return; }
   if (d.f){ wissel(P.f[d.f], e.value, e.checked); filterGewijzigd(d.f === 'soortUit'); }
   else if (d.waar){ P.f.waar[d.waar] = e.checked ? 1 : 0; filterGewijzigd(false); }
   else if (d.fb){ P.f[d.fb] = e.checked ? 1 : 0; filterGewijzigd(false); }
-  else if (d.kl){ let v = e.value; if (v === '+'){ v = (prompt(t('pLand')) || '').trim(); if (!v){ tekenPop(); return; } } krantInfo(d.kl).land = v; filterGewijzigd(); }
-  else if (d.ks){ krantInfo(d.ks).soort = e.value; filterGewijzigd(); }
-  else if (d.cv){ const a = P.art.find(x => x.id === d.id), s = S(d.id); s.v = s.v || {}; const orig = d.cv === 'land' ? krantInfo(veld(a, 'krant')).land : (a[d.cv] || '');
+  else if (d.sim != null){ const v = Math.min(100, Math.max(10, +e.value || 50)); P.f.sim = v / 100; filterGewijzigd(); }
+  else if (d.kl){ snap(t('l_krant')); let v = e.value; if (v === '+'){ v = (prompt(t('pLand')) || '').trim(); if (!v){ tekenPop(); return; } } krantInfo(d.kl).land = v; filterGewijzigd(); }
+  else if (d.ks){ snap(t('l_krant')); krantInfo(d.ks).soort = e.value; filterGewijzigd(); }
+  else if (d.kn){ hernoem(d.kn, e.value); }
+  else if (d.cv){ snap(t('l_corr')); const a = P.art.find(x => x.id === d.id), s = S(d.id); s.v = s.v || {}; const orig = d.cv === 'land' ? krantInfo(veld(a, 'krant')).land : d.cv === 'krant' ? basisKrant(a) : (a[d.cv] || '');
     if (e.value === orig || (d.cv === 'datum' && !e.value)) delete s.v[d.cv]; else s.v[d.cv] = e.value; if (!Object.keys(s.v).length) delete s.v; bewaar(); }
 });
 document.addEventListener('pointerdown', sleepTijdlijn);
 document.addEventListener('keydown', ev => {
+  if ((ev.ctrlKey || ev.metaKey) && !ev.shiftKey && ev.key.toLowerCase() === 'z' && !ev.target.closest('input,textarea,select')){ ev.preventDefault(); ongedaan(); return; }
+  if (ev.key === 'Enter' && ev.target.dataset && ev.target.dataset.ed != null){ ev.preventDefault(); bewerk(ev.target); return; }
   if (view !== 2 || ev.ctrlKey || ev.metaKey || ev.altKey || ev.target.closest('input,select,textarea')) return;
   const a = zichtbaar[actief], k = ev.key.toLowerCase();
   if (ev.key === 'ArrowDown'){ ev.preventDefault(); zetActief(actief + 1, true); }
   else if (ev.key === 'ArrowUp'){ ev.preventDefault(); zetActief(actief - 1, true); }
   else if (ev.key === 'Escape' && pop){ pop = null; tekenZin(zichtbaar.length); tekenPop(); }
+  else if (ev.key === 'Escape' && P.f.groep){ groepTerug(); }
   else if (!a) return;
   else if (k === 'j' || k === 'y') beslis(a.id, 'ja'); else if (k === 't' || k === 'u') beslis(a.id, 'twijfel'); else if (k === 'n') beslis(a.id, 'nee');
-  else if (k === 'k'){ const s = S(a.id); s.ok = s.ok ? undefined : 1; bewaar(); herteken(actief); }
+  else if (k === 'v'){ volgOpen(); }
+  else if (k === 'o'){ open[a.id] = !open[a.id]; herteken(actief); }
 });
 ['dragover', 'dragleave', 'drop'].forEach(n => document.addEventListener(n, ev => {
   if (n !== 'dragleave') ev.preventDefault(); const dz = $('#drop'); if (dz) dz.classList.toggle('over', n === 'dragover');
   if (n === 'drop' && ev.dataTransfer && ev.dataTransfer.files.length){ if (view !== 1 && ![...ev.dataTransfer.files].some(f => /\.json$/i.test(f.name))) view = 1; leesBestanden([...ev.dataTransfer.files]); }
 }));
 zetAccent(); teken(); herstel();
+window.addEventListener('beforeunload', e => { if (P.ongesaved && P.art.length){ e.preventDefault(); e.returnValue = ''; } });
 </script>
 </body>
 </html>
