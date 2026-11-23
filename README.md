@@ -8,13 +8,13 @@
 
 Open de tool: https://GEBRUIKERSNAAM.github.io/knipsel/
 
-Alles gebeurt in je eigen browser. Je exports worden nergens naartoe gestuurd. Je kan `index.html` ook downloaden en offline openen. Je werk wordt automatisch in je browser bewaard; met "Project opslaan" maak je een bestand dat je later of op een andere computer weer opent.
+**Je artikels verlaten je computer niet.** Knipsel verwerkt je exports in je eigen browser: er wordt niets geüpload of op een server bewaard. Je kan Knipsel dus ook helemaal offline gebruiken: download `index.html` en open dat bestand zonder internetverbinding. Je werk wordt automatisch in je browser bewaard; met "Project opslaan" maak je een bestand dat je later of op een andere computer weer opent.
 
-Everything runs in your own browser. Your exports are not sent anywhere. You can also download `index.html` and open it offline. Your work is saved automatically in your browser; "Save project" creates a file you can reopen later or on another computer.
+**Your articles never leave your computer.** Knipsel processes your exports in your own browser: nothing is uploaded or stored on a server. You can therefore also use Knipsel fully offline: download `index.html` and open it without an internet connection. Your work is saved automatically in your browser; "Save project" creates a file you can reopen later or on another computer.
 
-Hoe Knipsel automatische beslissingen neemt (eerste alinea, identieke records, land, gelijkaardige artikels, zoeken) staat volledig beschreven in de tool zelf, onder "Hoe Knipsel beslist".
+Hoe Knipsel automatische beslissingen neemt (eerste alinea, identieke records, land, gelijkaardige artikels, zoeken) staat volledig beschreven in de tool zelf, onder "Automatische beslissingen".
 
-How Knipsel makes automatic decisions (first paragraph, identical records, country, similar articles, searching) is fully described in the tool itself, under "How Knipsel decides".
+How Knipsel makes automatic decisions (first paragraph, identical records, country, similar articles, searching) is fully described in the tool itself, under "Automatic decisions".
 
 ## Feedback
 
@@ -26,4 +26,4 @@ MIT. De tool is bedoeld voor wetenschappelijk onderzoek; gebruikers blijven zelf
 
 ## Citeren / Cite
 
-Nelissen, E. (2026). *Knipsel* (versie 0.9) [software]. https://github.com/GEBRUIKERSNAAM/knipsel
+Nelissen, E. (2026). *Knipsel* (versie 0.9.1) [software]. https://github.com/GEBRUIKERSNAAM/knipsel

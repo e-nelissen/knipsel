@@ -127,9 +127,12 @@ table.f th{color:var(--muted);font-size:12px}
 .exr{display:grid;grid-template-columns:220px 1fr;gap:12px;align-items:center;max-width:860px;padding:8px 0;border-bottom:1px solid var(--line)}
 .exr .b{width:100%}
 .note{max-width:760px;color:var(--muted);font-size:13px}
+.priv{max-width:760px;background:var(--hl);padding:16px 20px;margin:22px 0 8px;font-size:14px;line-height:1.55}.priv b{font-size:15px}.priv p{margin:4px 0 0}
+.stap summary,.stapK{cursor:pointer;font-size:17px;font-weight:600;margin:30px 0 10px;padding:0}.stap summary{margin-bottom:0}.stap[open] summary{margin-bottom:10px}.stapK{cursor:auto}.stap summary{list-style:none;width:max-content}.stap summary::-webkit-details-marker{display:none}.stap summary::after{content:'+';font-weight:400;color:var(--muted);margin-left:10px}.stap[open] summary::after{content:'−'}.stap[open]{margin-bottom:6px}
+.voet{margin:30px 0 0}.voet .lnk,.voet a{color:inherit;font-size:inherit}.voet a{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:3px;text-underline-offset:3px}
 .hoe{max-width:760px;margin-top:26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px;line-height:1.55}
 .hoe summary{cursor:pointer;padding:10px 0;font-weight:600;font-size:15px}
-.hoe h4{font-size:13px;margin:16px 0 4px}.hoe p,.hoe ul,.hoe ol{margin:0 0 8px}.hoe ul,.hoe ol{padding-left:20px}.hoe li{margin-bottom:3px}.hoe code{font-size:12px;background:var(--panel);padding:0 3px}
+.hoe h4{font-size:13px;margin:16px 0 4px}.hw{max-width:820px}.hix{display:flex;flex-wrap:wrap;gap:4px 16px;margin:10px 0 6px;font-size:13px}.hsec{border-top:1px solid var(--line);padding-top:4px;margin-top:18px;scroll-margin-top:70px}.hw h4{font-size:15px!important;margin:12px 0 2px!important}.hkort{font-weight:500;margin:0 0 8px!important}.rg{display:grid;grid-template-columns:180px 1fr;gap:6px 20px;margin:0;font-size:13px;line-height:1.5}.rg dt{color:var(--muted)}.rg dd{margin:0}.rg ol,.rg ul{margin:0!important;padding-left:18px!important}.hoe .lijsten summary,.lijsten summary{font-weight:400;font-size:13px;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;color:var(--muted)}.lijsten p{margin:6px 0 0!important}@media(max-width:600px){.rg{grid-template-columns:1fr;gap:0}.rg dd{margin-bottom:8px}}.hoe p,.hoe ul,.hoe ol{margin:0 0 8px}.hoe ul,.hoe ol{padding-left:20px}.hoe li{margin-bottom:3px}.hoe code{font-size:12px;background:var(--panel);padding:0 3px}
 .note li{margin-bottom:4px}
 .warn{padding:8px 12px;background:var(--hl);max-width:760px;margin:8px 0;font-size:13px}
 textarea.ver{width:100%;max-width:760px;height:150px;padding:8px;font-size:12px}
@@ -166,7 +169,7 @@ dialog#uitleg::backdrop{background:rgba(43,44,46,.35)}
    Corpustool. Alles gebeurt in de browser: bestanden worden niet verstuurd.
    ========================================================================= */
 const T = {
-nl:{s1:'1 Inlezen',s2:'2 Filteren en nakijken',s3:'3 Exporteren',opslaan:'Project opslaan',openen:'Project openen',alIn:'dit bestand is al ingelezen en werd overgeslagen. Wil je het opnieuw inlezen, verwijder het dan eerst met ×.',wegLabel:'Bestand verwijderen',wegVraag:'{f} verwijderen? {n} artikels die alleen in dit bestand staan, verdwijnen uit je project.',wegBeoord:'Je verliest ook je beoordelingen en correcties van {n} van die artikels.',nieuw:'Alles wissen en opnieuw beginnen',nieuwS:'Wist alle ingelezen bestanden en je beoordelingen. Sla je project eerst op als je het wilt bewaren.',contact:'Vragen, een fout gevonden of een idee? Neem contact op met Elisa Nelissen (KU Leuven).',contactUrl:'https://www.kuleuven.be/wieiswie/nl/person/00065215',hoeT:'Hoe Knipsel beslist',
+nl:{s1:'1 Inlezen',s2:'2 Filteren en nakijken',s3:'3 Exporteren',opslaan:'Project opslaan',openen:'Project openen',alIn:'dit bestand is al ingelezen en werd overgeslagen. Wil je het opnieuw inlezen, verwijder het dan eerst met ×.',wegLabel:'Bestand verwijderen',wegVraag:'{f} verwijderen? {n} artikels die alleen in dit bestand staan, verdwijnen uit je project.',wegBeoord:'Je verliest ook je beoordelingen en correcties van {n} van die artikels.',nieuw:'Alles wissen en opnieuw beginnen',nieuwS:'Wist alle ingelezen bestanden en je beoordelingen. Sla je project eerst op als je het wilt bewaren.',contact:'Vragen, een fout gevonden of een idee? Neem contact op met Elisa Nelissen (KU Leuven).',contactUrl:'https://www.kuleuven.be/wieiswie/nl/person/00065215',hoeT:'Automatische beslissingen',
  projnaam:'naam van project',drop:'Sleep je exports hierheen, of',kies:'kies bestanden',dropS:'Belga.press (.html), Nexis Uni (.rtf) of een eerder bewaard project (.json)',
  inl:'Exports inlezen',inlS:'Voeg zoveel bestanden toe als je wilt. Komt hetzelfde record (zelfde krant, datum, titel en tekst) in meer dan één export voor, dan houdt de tool het maar één keer. Gelijkaardige artikels uit verschillende kranten, zoals overgenomen stukken of berichten van persagentschappen, blijven gewoon staan.',
  bestand:'Bestand',bron:'Bron',art:'Artikels',verder:'Verder naar filteren',geen:'Nog geen artikels ingelezen.',
@@ -174,7 +177,7 @@ nl:{s1:'1 Inlezen',s2:'2 Filteren en nakijken',s3:'3 Exporteren',opslaan:'Projec
  hoe:'Zo maak je je exports',
  belga:'<b>Belga.press</b>: voer je zoekopdracht uit en open de resultatenlijst. Doe alsof je die lijst wilt afdrukken, zodat alle artikels volledig onder elkaar op één pagina staan. Druk niet af, maar bewaar die pagina in je browser als html: in Chrome of Edge via <i>Bestand › Pagina opslaan als</i> en kies <i>Webpagina, volledig</i>; in Firefox via <i>Bestand › Pagina opslaan als</i>. Je krijgt een .html-bestand en een map met afbeeldingen; voor deze tool heb je alleen het .html-bestand nodig.',
  nexis:'<b>Nexis Uni</b>: selecteer de artikels in je resultatenlijst, kies <i>Downloaden</i>, zet het formaat op <i>RTF</i> en kies voor één bestand per download (niet elk artikel apart). Nexis Uni laat maximaal 100 artikels per download toe; maak dus meerdere downloads en lees ze hier allemaal samen in.',
- n1:'Je bestanden blijven op je eigen computer. Deze pagina stuurt niets door en werkt ook zonder internet.',
+ n1:'Je bestanden blijven op je eigen computer. Deze pagina stuurt niets door en werkt ook zonder internet.',privT:'Je artikels verlaten je computer niet',privP:'Knipsel verwerkt je exports in je eigen browser: er wordt niets geüpload of op een server bewaard. Je kan Knipsel dus ook helemaal offline gebruiken. De tool is bedoeld voor wetenschappelijk onderzoek.',privF:'Alleen wat je zelf in het feedbackformulier typt, wordt verstuurd.',stap1:'1. Maak je exports',stap2:'2. Lees ze in',makerV:'Gemaakt door',maker:'Elisa Nelissen (KU Leuven)',makerH:'met behulp van Claude Opus 5.5',
  n2:'De tool is bedoeld voor wetenschappelijk onderzoek. Jij blijft verantwoordelijk voor het naleven van de licentie van Belga.press en Nexis Uni.',
  n3:'Pdf-exports kunnen in deze versie nog niet ingelezen worden. Exporteer als html (Belga.press) of rtf (Nexis Uni).',
  n4:'Je werk wordt automatisch in deze browser bewaard. Gebruik "Project opslaan" om een bestand te maken dat je later of op een andere computer weer opent.',
@@ -200,7 +203,7 @@ nl:{s1:'1 Inlezen',s2:'2 Filteren en nakijken',s3:'3 Exporteren',opslaan:'Projec
  v_tot:'Ingelezen: {a} artikels uit {b} bestanden ({c}).',v_f:'Voorwaarden: {z}',v_r:'Resultaat: {a} artikels voldoen aan de voorwaarden; {b} opgenomen, {c} twijfel, {d} niet opgenomen, {e} nog niet beoordeeld.',
  v_e:'Eerste alinea: bij {a} artikels handmatig gekozen; bij {b} artikels alinea\'s verwijderd die niet bij het artikel hoorden.',v_d:'Datum van export: {d}.',wis:'Weet je zeker dat je een nieuw project wilt beginnen? Sla je huidige project eerst op.',
  BE:'België',NL:'Nederland',ON:'Onbekend'},
-en:{s1:'1 Import',s2:'2 Filter and review',s3:'3 Export',opslaan:'Save project',openen:'Open project',alIn:'this file has already been imported and was skipped. To import it again, remove it first with ×.',wegLabel:'Remove file',wegVraag:'Remove {f}? {n} articles that only occur in this file will disappear from your project.',wegBeoord:'You will also lose your reviews and corrections of {n} of those articles.',nieuw:'Clear everything and start over',nieuwS:'Removes all imported files and your reviews. Save your project first if you want to keep it.',contact:'Questions, found an error or have an idea? Contact Elisa Nelissen (KU Leuven).',contactUrl:'https://www.kuleuven.be/wieiswie/en/person/00065215',hoeT:'How Knipsel decides',
+en:{s1:'1 Import',s2:'2 Filter and review',s3:'3 Export',opslaan:'Save project',openen:'Open project',alIn:'this file has already been imported and was skipped. To import it again, remove it first with ×.',wegLabel:'Remove file',wegVraag:'Remove {f}? {n} articles that only occur in this file will disappear from your project.',wegBeoord:'You will also lose your reviews and corrections of {n} of those articles.',nieuw:'Clear everything and start over',nieuwS:'Removes all imported files and your reviews. Save your project first if you want to keep it.',contact:'Questions, found an error or have an idea? Contact Elisa Nelissen (KU Leuven).',contactUrl:'https://www.kuleuven.be/wieiswie/en/person/00065215',hoeT:'Automatic decisions',
  projnaam:'project name',drop:'Drop your exports here, or',kies:'choose files',dropS:'Belga.press (.html), Nexis Uni (.rtf) or a previously saved project (.json)',
  inl:'Import exports',inlS:'Add as many files as you like. If the same record (same newspaper, date, title and text) appears in more than one export, the tool keeps it only once. Similar articles in different newspapers, such as republished pieces or news agency reports, are kept.',
  bestand:'File',bron:'Source',art:'Articles',verder:'Continue to filtering',geen:'No articles imported yet.',
@@ -208,7 +211,7 @@ en:{s1:'1 Import',s2:'2 Filter and review',s3:'3 Export',opslaan:'Save project',
  hoe:'How to make your exports',
  belga:'<b>Belga.press</b>: run your search and open the results list. Act as if you were going to print that list, so that all articles appear in full on one page. Do not print it, but save that page in your browser as html: in Chrome or Edge via <i>File › Save page as</i> and choose <i>Webpage, complete</i>; in Firefox via <i>File › Save page as</i>. You get an .html file and a folder of images; this tool only needs the .html file.',
  nexis:'<b>Nexis Uni</b>: select the articles in your results list, choose <i>Download</i>, set the format to <i>RTF</i> and choose a single file per download (not one file per article). Nexis Uni allows at most 100 articles per download, so make several downloads and import them all here together.',
- n1:'Your files stay on your own computer. This page sends nothing anywhere and also works offline.',
+ n1:'Your files stay on your own computer. This page sends nothing anywhere and also works offline.',privT:'Your articles never leave your computer',privP:'Knipsel processes your exports in your own browser: nothing is uploaded or stored on a server. You can therefore also use Knipsel fully offline. The tool is meant for academic research.',privF:'Only what you type into the feedback form yourself is sent.',stap1:'1. Make your exports',stap2:'2. Import them',makerV:'Made by',maker:'Elisa Nelissen (KU Leuven)',makerH:'with the help of Claude Opus 5.5',
  n2:'The tool is meant for academic research. You remain responsible for complying with the Belga.press and Nexis Uni licences.',
  n3:'Pdf exports cannot be read in this version yet. Export as html (Belga.press) or rtf (Nexis Uni).',
  n4:'Your work is saved automatically in this browser. Use "Save project" to create a file you can reopen later or on another computer.',
@@ -234,7 +237,7 @@ en:{s1:'1 Import',s2:'2 Filter and review',s3:'3 Export',opslaan:'Save project',
  v_tot:'Imported: {a} articles from {b} files ({c}).',v_f:'Conditions: {z}',v_r:'Result: {a} articles match the conditions; {b} included, {c} unsure, {d} excluded, {e} not yet reviewed.',
  v_e:'First paragraph: chosen by hand in {a} articles; paragraphs that did not belong to the article removed in {b} articles.',v_d:'Export date: {d}.',wis:'Are you sure you want to start a new project? Save your current project first.',
  BE:'Belgium',NL:'Netherlands',ON:'Unknown'}};
-const MIN_W = 15, REGELS = 2, VERSIE = '0.9 · 20-11-2026';
+const MIN_W = 15, REGELS = 2, VERSIE = '0.9.1 · 23-11-2026';
 /* Feedbackformulier. FEEDBACK_VELD: naam van de URL-parameter voor vooraf invullen (bv. 'r1a2b3c4d'); leeg = via het klembord. */
 const FEEDBACK_URL = 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=m1hzOUCetU6ADrC2OD0WIY1IvtKchCpKr4MX6bqNUP5UODY1S0xVQ1RLQ1pOQUFZTFc0REVONUNOMy4u';
 const FEEDBACK_VELD = 'r9eca6724bb9140afa16640ae8ff88c20';
@@ -593,106 +596,134 @@ function nakijkTekst(){
 }
 function hoeTekst(){
   const lijst = l => l.map(esc).join(', ');
-  if (P.taal === 'en') return `
-  <p>Knipsel makes a few decisions automatically when importing your files. Everything below can be changed by hand afterwards; changes appear in the export and the account of the procedure.</p>
-  <h4>Importing Belga.press (.html)</h4>
-  <ul><li>Newspaper: the first line above the publication type; edition: the second line, if present.</li>
-  <li>Type: NEWSPAPER → print, WEBSITE → online, MAGAZINE → magazine.</li>
-  <li>Title: the first line of the headline; further lines become the subtitle. Lead: the introduction Belga marks separately.</li>
-  <li>Text: every paragraph or line break in the source becomes a separate paragraph; empty lines are dropped and spacing is normalised.</li></ul>
-  <h4>Importing Nexis Uni (.rtf)</h4>
-  <ul><li>Title: the line(s) above the newspaper name (first line title, rest subtitle). Edition: lines between the date and the first metadata field.</li>
-  <li>Fields used: Section → section, Byline → journalist, Highlight → lead, Publication-Type → type (newspaper → print; anything containing web, online or blog → online).</li>
-  <li>Text: everything between "Body" and "Graphic" (or "Classification"). Photo captions under "Graphic" are left out. Lines reading "PDF-bestand van dit document", "Link naar PDF"/"Link to PDF", "Bekijk de oorspronkelijke pagina…" and "* Vervangende titel…" are removed.</li>
-  <li>Title made by Nexis: when an article has no title of its own, Nexis Uni generates one, shown between [square brackets] followed by an asterisk. Knipsel keeps that title but labels the article "title made by Nexis".</li></ul>
-  <h4>Identical records</h4>
-  <p>Two records are identical when newspaper, type, date, time, title and full text are exactly the same. The second one is skipped and counted. The slightest difference keeps both.</p>
-  <h4>First paragraph</h4>
-  <p>Knipsel picks the first paragraph that matches none of these rules:</p>
-  <ol><li>it starts with "Bekijk ook/nu/meer", "Lees ook/nu/meer", "Read also/more", "See also/more", "Van onze redacteur/redactrice/correspondent/medewerker/reporter", "Dit artikel verscheen oorspronkelijk/eerder/eerst", "This article originally/first appeared/published", or with a hyphen directly followed by text (e.g. "-Photo");</li>
-  <li>it is in a box that Belga formats separately (Belga only);</li>
-  <li>it has fewer than 15 words (probably a subheading, byline or label).</li></ol>
-  <p>If every paragraph falls under rule 3, Knipsel takes the first paragraph that does not fall under rule 1 or 2. Belga only: if the chosen paragraph starts with a capitalised word of at least four letters stuck to a following capitalised word (e.g. "BrusselDe minister"), Knipsel inserts " – " between them.</p>
-  <h4>"Check first paragraph"</h4>
-  <p>This label only helps you review; it changes nothing. It appears when the tool skipped one or more paragraphs; the chosen paragraph has fewer than 15 words (only possible when every paragraph is that short); it ends in "..." or "…"; the source contains only one paragraph; there is no text; or the tool inserted " – " after a place name.</p>
-  <h4>Country and newspaper type</h4>
-  <ul><li>All Belga.press articles: Belgium.</li>
-  <li>Nexis Uni: Belgium if the newspaper name starts with a name on the Flemish list, the Netherlands if it starts with a name on the Dutch list, otherwise Unknown. Knipsel does not guess from the language of the article.</li>
-  <li>National or regional: only according to fixed lists; otherwise "unclassified".</li>
-  <li>Newspaper names are taken as the source gives them, including a section or supplement suffix (e.g. "De Standaard - DS2"). Under Newspapers you can rename or merge them; the original name stays in the export (column krant_in_bron).</li>
-  <li>Flemish list: ${lijst(VLAAMS)}.</li><li>Dutch list: ${lijst(NEDERLANDS)}.</li><li>National: ${lijst(NATIONAAL)}.</li><li>Regional: ${lijst(REGIONAAL)}.</li></ul>
-  <h4>Searching</h4>
-  <ul><li>Not case-sensitive; whole words only: <code>climate</code> does not find "climatic", <code>climate*</code> does.</li>
-  <li><code>*</code> stands for zero or more letters or digits. OR, OF or a comma separate alternatives; AND or EN means every part must occur somewhere in the parts you selected (not necessarily in the same part). Everything after NOT or NIET is excluded: if any of those words occurs in the parts you selected, the article is left out. Excluded words are not highlighted or counted as hits.</li>
-  <li>"First paragraph" means the current first paragraph, including your changes. Hits are counted per search term in title, subtitle, lead and full text; each article shows the count per term, the export also the total. A word that matches two search terms (e.g. <code>vaccin*</code> and <code>vaccination</code>) counts for both. Removed paragraphs never count.</li></ul>
-  <h4>Similar articles</h4>
-  <ul><li>Knipsel looks for articles that largely share the same text, such as the same news agency report in several newspapers. Nothing is removed or merged; articles only get a label.</li>
-  <li>The text (title, lead and paragraphs, including your edits, without removed paragraphs) is lowercased, accents and punctuation are dropped, and the text is cut into overlapping sequences of ${SH} consecutive words.</li>
-  <li>For each pair of articles, Knipsel calculates which share of the sequences of the shorter article also occurs in the longer one (<i>containment</i>, Broder 1997), so a shortened version of a report also matches the original. Two articles are similar when that value reaches the threshold (50% by default, adjustable under the status in the filter sentence).</li>
-  <li>Articles with fewer than ${SH_MIN} word sequences (about ${SH_MIN + SH - 1} words) are not compared. Word sequences that occur in more than ${SH_MAX_DF} articles are ignored: these are usually standard website phrases.</li>
-  <li>Groups are chained: if A resembles B and B resembles C, A, B and C are in the same group, even if A and C stay below the threshold. The label on each article therefore lists the direct matches with their percentage.</li></ul>
-  <h4>Other</h4>
-  <ul><li>Word count: words in the lead and text, separated by spaces.</li>
-  <li>Timeline: per day for periods up to 62 days, per week (Monday to Sunday) up to about two years, otherwise per month.</li>
-  <li>Storage: your project is kept in this browser (IndexedDB) and in the files you save yourself. Nothing is sent anywhere.</li></ul>`;
-  return `
-  <p>Knipsel neemt bij het inlezen een paar beslissingen automatisch. Alles hieronder kan je achteraf zelf aanpassen; je aanpassingen staan in de export en in de verantwoording.</p>
-  <h4>Inlezen van Belga.press (.html)</h4>
-  <ul><li>Krant: de eerste regel boven het soort publicatie; editie: de tweede regel, als die er is.</li>
-  <li>Type: NEWSPAPER → print, WEBSITE → online, MAGAZINE → magazine.</li>
-  <li>Titel: de eerste regel van de kop; volgende regels worden de ondertitel. Lead: de inleiding die Belga apart aanduidt.</li>
-  <li>Tekst: elke alinea of regeleinde in de bron wordt een aparte alinea; lege regels vallen weg en witruimte wordt gelijkgetrokken.</li></ul>
-  <h4>Inlezen van Nexis Uni (.rtf)</h4>
-  <ul><li>Titel: de regel(s) boven de krantnaam (eerste regel titel, de rest ondertitel). Editie: de regels tussen de datum en het eerste metadataveld.</li>
-  <li>Gebruikte velden: Section → rubriek, Byline → journalist, Highlight → lead, Publication-Type → type (krant of newspaper → print; alles met web, online of blog → online).</li>
-  <li>Tekst: alles tussen "Body" en "Graphic" (of "Classification"). Fotobijschriften onder "Graphic" vallen weg. Regels met "PDF-bestand van dit document", "Link naar PDF", "Bekijk de oorspronkelijke pagina…" en "* Vervangende titel…" worden verwijderd.</li>
-  <li>Titel gemaakt door Nexis: heeft een artikel geen eigen titel, dan maakt Nexis Uni er zelf een, tussen [vierkante haken] en gevolgd door een sterretje. Knipsel behoudt die titel, maar geeft het artikel het label "titel gemaakt door Nexis".</li></ul>
-  <h4>Identieke records</h4>
-  <p>Twee records zijn identiek als krant, type, datum, tijd, titel en volledige tekst exact gelijk zijn. Het tweede wordt overgeslagen en geteld. Bij het kleinste verschil blijven beide staan.</p>
-  <h4>Eerste alinea</h4>
-  <p>Knipsel kiest de eerste alinea waarop geen van deze regels van toepassing is:</p>
-  <ol><li>ze begint met "Bekijk ook/nu/meer", "Lees ook/nu/meer", "Read also/more", "See also/more", "Van onze redacteur/redactrice/correspondent/medewerker/reporter", "Dit artikel verscheen oorspronkelijk/eerder/eerst", of met een streepje direct gevolgd door tekst (bv. "-Foto");</li>
-  <li>ze staat in een kader dat Belga apart opmaakt (alleen Belga);</li>
-  <li>ze telt minder dan 15 woorden (waarschijnlijk een tussenkop, auteursregel of label).</li></ol>
-  <p>Vallen alle alinea's onder regel 3, dan neemt Knipsel de eerste alinea die niet onder regel 1 of 2 valt. Alleen bij Belga: begint de gekozen alinea met een woord van minstens vier letters met een hoofdletter dat vastzit aan een volgend woord met een hoofdletter (bv. "BrusselDe minister"), dan zet Knipsel er " – " tussen.</p>
-  <h4>"Eerste alinea nakijken"</h4>
-  <p>Dit label helpt alleen bij het nakijken; het verandert niets. Het verschijnt als de tool een of meer alinea's oversloeg; als de gekozen alinea minder dan 15 woorden telt (alleen mogelijk als alle alinea's zo kort zijn); als ze eindigt op "..." of "…"; als de bron maar één alinea bevat; als er geen tekst is; of als de tool " – " na een plaatsnaam zette.</p>
-  <h4>Land en soort krant</h4>
-  <ul><li>Alle artikels uit Belga.press: België.</li>
-  <li>Nexis Uni: België als de krantnaam begint met een naam op de Vlaamse lijst, Nederland als ze begint met een naam op de Nederlandse lijst, anders Onbekend. Knipsel raadt niet op basis van de taal van het artikel.</li>
-  <li>Nationaal of regionaal: alleen volgens vaste lijsten; anders "niet ingedeeld".</li>
-  <li>Krantnamen worden overgenomen zoals de bron ze geeft, ook met een katern of bijlage erachter (bv. "De Standaard - DS2"). Bij Kranten kan je ze hernoemen of samenvoegen; de oorspronkelijke naam blijft in de export (kolom krant_in_bron).</li>
-  <li>Vlaamse lijst: ${lijst(VLAAMS)}.</li><li>Nederlandse lijst: ${lijst(NEDERLANDS)}.</li><li>Nationaal: ${lijst(NATIONAAL)}.</li><li>Regionaal: ${lijst(REGIONAAL)}.</li></ul>
-  <h4>Zoeken</h4>
-  <ul><li>Niet hoofdlettergevoelig; alleen volledige woorden: <code>klimaat</code> vindt "klimaatbeleid" niet, <code>klimaat*</code> wel.</li>
-  <li><code>*</code> staat voor nul of meer letters of cijfers. OR, OF of een komma scheiden alternatieven; AND of EN betekent dat elk deel ergens moet voorkomen in de onderdelen die je koos (niet noodzakelijk in hetzelfde onderdeel). Alles na NOT of NIET wordt uitgesloten: komt een van die woorden voor in de onderdelen die je koos, dan valt het artikel weg. Uitgesloten woorden worden niet gemarkeerd en niet als treffer geteld.</li>
-  <li>"Eerste alinea" is de huidige eerste alinea, inclusief jouw aanpassingen. Treffers worden per zoekterm geteld in titel, ondertitel, lead en volledige tekst; bij elk artikel staat het aantal per term, in de export ook het totaal. Een woord dat bij twee zoektermen past (bv. <code>vaccin*</code> en <code>vaccinatie</code>), telt bij beide. Verwijderde alinea's tellen nooit mee.</li></ul>
-  <h4>Gelijkaardige artikels</h4>
-  <ul><li>Knipsel zoekt artikels die grotendeels dezelfde tekst delen, zoals hetzelfde persagentschapsbericht in meerdere kranten. Er wordt niets verwijderd of samengevoegd; artikels krijgen alleen een label.</li>
-  <li>De tekst (titel, lead en alinea's, inclusief jouw bewerkingen, zonder verwijderde alinea's) wordt in kleine letters gezet, accenten en leestekens vallen weg, en de tekst wordt opgeknipt in overlappende reeksen van ${SH} opeenvolgende woorden.</li>
-  <li>Voor elk paar artikels berekent Knipsel welk deel van de reeksen van het kortste artikel ook in het langste voorkomt (<i>containment</i>, Broder 1997). Zo valt een ingekorte versie van een bericht ook samen met het origineel. Twee artikels lijken op elkaar als die waarde minstens de drempel haalt (standaard 50%, aan te passen bij de status in de filterzin).</li>
-  <li>Artikels met minder dan ${SH_MIN} woordreeksen (ongeveer ${SH_MIN + SH - 1} woorden) worden niet vergeleken. Woordreeksen die in meer dan ${SH_MAX_DF} artikels voorkomen, tellen niet mee: dat zijn meestal standaardzinnen van de website.</li>
-  <li>Groepen worden aaneengeschakeld: lijkt A op B en B op C, dan zitten A, B en C in dezelfde groep, ook als A en C onderling onder de drempel blijven. Het label bij elk artikel toont daarom de rechtstreekse overeenkomsten met hun percentage.</li></ul>
-  <h4>Overige</h4>
-  <ul><li>Aantal woorden: woorden in lead en tekst, gescheiden door spaties.</li>
-  <li>Tijdlijn: per dag bij een periode tot 62 dagen, per week (maandag tot zondag) tot ongeveer twee jaar, anders per maand.</li>
-  <li>Bewaren: je project wordt in deze browser bewaard (IndexedDB) en in de bestanden die je zelf opslaat. Er wordt niets doorgestuurd.</li></ul>`;
+  const en = P.taal === 'en';
+  const S = en ? [
+   ['belga', 'Importing Belga.press (.html)', 'Knipsel reads newspaper, type, title, lead and text from the layout of the Belga page.', [
+    ['Newspaper', 'The first line above the publication type.'],
+    ['Edition', 'The second line, if present.'],
+    ['Type', 'NEWSPAPER → print, WEBSITE → online, MAGAZINE → magazine.'],
+    ['Title', 'The first line of the headline; further lines become the subtitle.'],
+    ['Lead', 'The introduction Belga marks separately.'],
+    ['Text', 'Every paragraph or line break in the source becomes a separate paragraph. Empty lines are dropped and spacing is normalised.']]],
+   ['nexis', 'Importing Nexis Uni (.rtf)', 'Knipsel uses the fixed fields of Nexis Uni.', [
+    ['Title', 'The line(s) above the newspaper name: first line title, the rest subtitle.'],
+    ['Edition', 'The lines between the date and the first metadata field.'],
+    ['Section', 'Field Section.'],
+    ['Journalist', 'Field Byline.'],
+    ['Lead', 'Field Highlight.'],
+    ['Type', 'Field Publication-Type: newspaper → print; anything containing web, online or blog → online.'],
+    ['Text', 'Everything between "Body" and "Graphic" (or "Classification"). Photo captions under "Graphic" are left out.'],
+    ['Removed lines', '"PDF-bestand van dit document", "Link naar PDF"/"Link to PDF", "Bekijk de oorspronkelijke pagina…" and "* Vervangende titel…".'],
+    ['Title made by Nexis', 'When an article has no title of its own, Nexis Uni generates one between [square brackets], followed by an asterisk. Knipsel keeps it and labels the article "title made by Nexis".']]],
+   ['dub', 'Identical records', 'Only exactly identical records are skipped.', [
+    ['Compared', 'Newspaper, type, date, time, title and full text.'],
+    ['Result', 'The second record is skipped and counted.'],
+    ['Any difference', 'Both records are kept.']]],
+   ['eerste', 'First paragraph', 'Knipsel takes the first paragraph that is not site text, a box or a short line.', [
+    ['Skipped', `<ol><li>Paragraphs starting with "Bekijk ook/nu/meer", "Lees ook/nu/meer", "Read also/more", "See also/more", "Van onze redacteur/redactrice/correspondent/medewerker/reporter", "Dit artikel verscheen oorspronkelijk/eerder/eerst", "This article originally/first appeared/published", or a hyphen directly followed by text (e.g. "-Photo").</li><li>Paragraphs in a box that Belga formats separately (Belga only).</li><li>Paragraphs with fewer than 15 words (probably a subheading, byline or label).</li></ol>`],
+    ['All short', 'If every paragraph falls under rule 3, Knipsel takes the first paragraph that does not fall under rule 1 or 2.'],
+    ['Place name (Belga only)', 'If the paragraph starts with a capitalised word of at least four letters stuck to a following capitalised word (e.g. "BrusselDe minister"), Knipsel inserts " – " between them.']]],
+   ['nakijk', 'Label "check first paragraph"', 'Only a reviewing aid: the label changes nothing.', [
+    ['Appears when', '<ul><li>the tool skipped one or more paragraphs;</li><li>the chosen paragraph has fewer than 15 words (only when every paragraph is that short);</li><li>it ends in "..." or "…";</li><li>the source has only one paragraph;</li><li>there is no text;</li><li>the tool inserted " – " after a place name.</li></ul>']]],
+   ['land', 'Country and newspaper type', 'Country and type come only from fixed lists; Knipsel does not guess.', [
+    ['Belga.press', 'Always Belgium.'],
+    ['Nexis Uni', 'Belgium if the newspaper name starts with a name on the Flemish list, the Netherlands if it starts with a name on the Dutch list, otherwise Unknown. Not based on the language of the article.'],
+    ['National or regional', 'Only according to the lists below; otherwise "unclassified".'],
+    ['Newspaper names', 'As the source gives them, including a section or supplement (e.g. "De Standaard - DS2"). Under Newspapers you can rename or merge them; the original name stays in the export (column krant_in_bron).'],
+    ['Lists', `<details class="lijsten"><summary>Show the lists</summary><p><b>Flemish:</b> ${lijst(VLAAMS)}</p><p><b>Dutch:</b> ${lijst(NEDERLANDS)}</p><p><b>National:</b> ${lijst(NATIONAAL)}</p><p><b>Regional:</b> ${lijst(REGIONAAL)}</p></details>`]]],
+   ['zoek', 'Searching', 'Whole words, not case-sensitive; use * for variants.', [
+    ['Words', '<code>climate</code> does not find "climatic", <code>climate*</code> does.'],
+    ['<code>*</code>', 'Zero or more letters or digits.'],
+    ['OR, OF, comma', 'Alternatives: one of them is enough.'],
+    ['AND, EN', 'Every part must occur somewhere in the parts you selected (not necessarily in the same part).'],
+    ['NOT, NIET', 'Everything after it is excluded: if one of those words occurs in the selected parts, the article is left out. Excluded words are not highlighted or counted.'],
+    ['First paragraph', 'The current first paragraph, including your changes.'],
+    ['Hits', 'Counted per search term in title, subtitle, lead and full text; the export also gives the total. A word matching two terms (e.g. <code>vaccin*</code> and <code>vaccination</code>) counts for both. Removed paragraphs never count.']]],
+   ['sim', 'Similar articles', 'A label for articles that largely share the same text; nothing is removed or merged.', [
+    ['Text used', 'Title, lead and paragraphs, including your edits, without removed paragraphs. Lowercased, without accents and punctuation, cut into overlapping sequences of ' + SH + ' consecutive words.'],
+    ['Measure', 'The share of the sequences of the shorter article that also occurs in the longer one (<i>containment</i>, Broder 1997). A shortened version of a report thus also matches the original.'],
+    ['Threshold', '50% by default, adjustable under the status in the filter sentence.'],
+    ['Not compared', `Articles with fewer than ${SH_MIN} word sequences (about ${SH_MIN + SH - 1} words). Sequences occurring in more than ${SH_MAX_DF} articles are ignored: usually standard website phrases.`],
+    ['Groups', 'Chained: if A resembles B and B resembles C, all three are in one group, even if A and C stay below the threshold. The label on each article therefore lists the direct matches with their percentage.']]],
+   ['ov', 'Other', '', [
+    ['Word count', 'Words in the lead and text, separated by spaces.'],
+    ['Timeline', 'Per day for periods up to 62 days, per week (Monday to Sunday) up to about two years, otherwise per month.'],
+    ['Storage', 'In this browser (IndexedDB) and in the files you save yourself. Nothing is sent anywhere.']]]
+  ] : [
+   ['belga', 'Inlezen van Belga.press (.html)', 'Knipsel haalt krant, type, titel, lead en tekst uit de opmaak van de Belga-pagina.', [
+    ['Krant', 'De eerste regel boven het soort publicatie.'],
+    ['Editie', 'De tweede regel, als die er is.'],
+    ['Type', 'NEWSPAPER → print, WEBSITE → online, MAGAZINE → magazine.'],
+    ['Titel', 'De eerste regel van de kop; volgende regels worden de ondertitel.'],
+    ['Lead', 'De inleiding die Belga apart aanduidt.'],
+    ['Tekst', 'Elke alinea of regeleinde in de bron wordt een aparte alinea. Lege regels vallen weg en witruimte wordt gelijkgetrokken.']]],
+   ['nexis', 'Inlezen van Nexis Uni (.rtf)', 'Knipsel gebruikt de vaste velden van Nexis Uni.', [
+    ['Titel', 'De regel(s) boven de krantnaam: eerste regel titel, de rest ondertitel.'],
+    ['Editie', 'De regels tussen de datum en het eerste metadataveld.'],
+    ['Rubriek', 'Veld Section.'],
+    ['Journalist', 'Veld Byline.'],
+    ['Lead', 'Veld Highlight.'],
+    ['Type', 'Veld Publication-Type: krant of newspaper → print; alles met web, online of blog → online.'],
+    ['Tekst', 'Alles tussen "Body" en "Graphic" (of "Classification"). Fotobijschriften onder "Graphic" vallen weg.'],
+    ['Verwijderde regels', '"PDF-bestand van dit document", "Link naar PDF", "Bekijk de oorspronkelijke pagina…" en "* Vervangende titel…".'],
+    ['Titel gemaakt door Nexis', 'Heeft een artikel geen eigen titel, dan maakt Nexis Uni er een, tussen [vierkante haken] en gevolgd door een sterretje. Knipsel behoudt die titel en geeft het artikel het label "titel gemaakt door Nexis".']]],
+   ['dub', 'Identieke records', 'Alleen exact dezelfde records worden overgeslagen.', [
+    ['Vergeleken', 'Krant, type, datum, tijd, titel en volledige tekst.'],
+    ['Gevolg', 'Het tweede record wordt overgeslagen en geteld.'],
+    ['Kleinste verschil', 'Beide records blijven staan.']]],
+   ['eerste', 'Eerste alinea', 'Knipsel neemt de eerste alinea die geen sitetekst, kader of korte regel is.', [
+    ['Overgeslagen', `<ol><li>Alinea's die beginnen met "Bekijk ook/nu/meer", "Lees ook/nu/meer", "Read also/more", "See also/more", "Van onze redacteur/redactrice/correspondent/medewerker/reporter", "Dit artikel verscheen oorspronkelijk/eerder/eerst", "This article originally/first appeared/published", of met een streepje direct gevolgd door tekst (bv. "-Foto").</li><li>Alinea's in een kader dat Belga apart opmaakt (alleen Belga).</li><li>Alinea's met minder dan 15 woorden (waarschijnlijk een tussenkop, auteursregel of label).</li></ol>`],
+    ['Alles kort', 'Vallen alle alinea\'s onder regel 3, dan neemt Knipsel de eerste alinea die niet onder regel 1 of 2 valt.'],
+    ['Plaatsnaam (alleen Belga)', 'Begint de alinea met een woord van minstens vier letters met een hoofdletter dat vastzit aan een volgend woord met een hoofdletter (bv. "BrusselDe minister"), dan zet Knipsel er " – " tussen.']]],
+   ['nakijk', 'Label "eerste alinea nakijken"', 'Alleen een hulp bij het nakijken: het label verandert niets.', [
+    ['Verschijnt als', '<ul><li>de tool een of meer alinea\'s oversloeg;</li><li>de gekozen alinea minder dan 15 woorden telt (alleen als alle alinea\'s zo kort zijn);</li><li>ze eindigt op "..." of "…";</li><li>de bron maar één alinea bevat;</li><li>er geen tekst is;</li><li>de tool " – " na een plaatsnaam zette.</li></ul>']]],
+   ['land', 'Land en soort krant', 'Land en soort komen alleen uit vaste lijsten; Knipsel raadt niet.', [
+    ['Belga.press', 'Altijd België.'],
+    ['Nexis Uni', 'België als de krantnaam begint met een naam op de Vlaamse lijst, Nederland als ze begint met een naam op de Nederlandse lijst, anders Onbekend. Niet op basis van de taal van het artikel.'],
+    ['Nationaal of regionaal', 'Alleen volgens de lijsten hieronder; anders "niet ingedeeld".'],
+    ['Krantnamen', 'Zoals de bron ze geeft, ook met een katern of bijlage (bv. "De Standaard - DS2"). Bij Kranten kan je ze hernoemen of samenvoegen; de oorspronkelijke naam blijft in de export (kolom krant_in_bron).'],
+    ['Lijsten', `<details class="lijsten"><summary>Toon de lijsten</summary><p><b>Vlaams:</b> ${lijst(VLAAMS)}</p><p><b>Nederlands:</b> ${lijst(NEDERLANDS)}</p><p><b>Nationaal:</b> ${lijst(NATIONAAL)}</p><p><b>Regionaal:</b> ${lijst(REGIONAAL)}</p></details>`]]],
+   ['zoek', 'Zoeken', 'Volledige woorden, niet hoofdlettergevoelig; gebruik * voor varianten.', [
+    ['Woorden', '<code>klimaat</code> vindt "klimaatbeleid" niet, <code>klimaat*</code> wel.'],
+    ['<code>*</code>', 'Nul of meer letters of cijfers.'],
+    ['OR, OF, komma', 'Alternatieven: een ervan volstaat.'],
+    ['AND, EN', 'Elk deel moet ergens voorkomen in de onderdelen die je koos (niet noodzakelijk in hetzelfde onderdeel).'],
+    ['NOT, NIET', 'Alles erna wordt uitgesloten: komt een van die woorden voor in de gekozen onderdelen, dan valt het artikel weg. Uitgesloten woorden worden niet gemarkeerd of geteld.'],
+    ['Eerste alinea', 'De huidige eerste alinea, inclusief jouw aanpassingen.'],
+    ['Treffers', 'Per zoekterm geteld in titel, ondertitel, lead en volledige tekst; in de export ook het totaal. Een woord dat bij twee termen past (bv. <code>vaccin*</code> en <code>vaccinatie</code>), telt bij beide. Verwijderde alinea\'s tellen nooit mee.']]],
+   ['sim', 'Gelijkaardige artikels', 'Een label voor artikels die grotendeels dezelfde tekst delen; er wordt niets verwijderd of samengevoegd.', [
+    ['Gebruikte tekst', 'Titel, lead en alinea\'s, inclusief jouw bewerkingen, zonder verwijderde alinea\'s. In kleine letters, zonder accenten en leestekens, opgeknipt in overlappende reeksen van ' + SH + ' opeenvolgende woorden.'],
+    ['Maat', 'Het deel van de reeksen van het kortste artikel dat ook in het langste voorkomt (<i>containment</i>, Broder 1997). Zo valt een ingekorte versie van een bericht ook samen met het origineel.'],
+    ['Drempel', 'Standaard 50%, aan te passen bij de status in de filterzin.'],
+    ['Niet vergeleken', `Artikels met minder dan ${SH_MIN} woordreeksen (ongeveer ${SH_MIN + SH - 1} woorden). Reeksen die in meer dan ${SH_MAX_DF} artikels voorkomen, tellen niet mee: meestal standaardzinnen van de website.`],
+    ['Groepen', 'Aaneengeschakeld: lijkt A op B en B op C, dan zitten ze alle drie in één groep, ook als A en C onderling onder de drempel blijven. Het label bij elk artikel toont daarom de rechtstreekse overeenkomsten met hun percentage.']]],
+   ['ov', 'Overige', '', [
+    ['Aantal woorden', 'Woorden in lead en tekst, gescheiden door spaties.'],
+    ['Tijdlijn', 'Per dag bij een periode tot 62 dagen, per week (maandag tot zondag) tot ongeveer twee jaar, anders per maand.'],
+    ['Bewaren', 'In deze browser (IndexedDB) en in de bestanden die je zelf opslaat. Er wordt niets doorgestuurd.']]]
+  ];
+  const intro = en ? 'Knipsel makes a few decisions automatically. You can change all of them by hand afterwards; your changes appear in the export and the account of the procedure.' : 'Knipsel neemt een paar beslissingen automatisch. Je kan ze achteraf allemaal zelf aanpassen; je aanpassingen staan in de export en in de verantwoording.';
+  return `<div class="hw"><p>${intro}</p>
+  <nav class="hix">${S.map(([id, titel]) => `<button class="lnk" data-naar="${id}">${titel}</button>`).join('')}</nav>
+  ${S.map(([id, titel, kort, rijen]) => `<section class="hsec" data-sec="${id}"><h4>${titel}</h4>${kort ? `<p class="hkort">${kort}</p>` : ''}<dl class="rg">${rijen.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>`).join('')}</div>`;
 }
 
 function tekenInlezen(){
+  const heeft = P.bestanden.length > 0;
   $('#app').innerHTML = `<p style="max-width:760px;font-size:16px;line-height:1.55;margin:28px 0 0">${t('over')}</p>
-  <h1 class="t">${t('inl')}</h1><p class="m" style="margin:0;max-width:760px">${t('inlS')}</p>
+  <div class="priv"><b>${t('privT')}</b><p>${t('privP')}</p></div>
+  <details class="stap"${heeft ? '' : ' open'}><summary>${t('stap1')}</summary>
+   <div style="font-size:14px;line-height:1.55;max-width:760px"><p style="margin:0 0 10px">${t('belga')}</p><p style="margin:0 0 10px">${t('nexis')}</p><p class="m s" style="margin:0">${t('n3')}</p></div></details>
+  <h2 class="stapK">${t('stap2')}</h2><p class="m" style="margin:0;max-width:760px">${t('inlS')}</p>
   <div class="drop" id="drop"><div style="font-size:18px;font-weight:500">${t('drop')} <button class="v" data-a="kies">${t('kies')}</button></div><div class="m s" style="margin-top:8px">${t('dropS')}</div></div>
   ${meldingen.map(m => `<div class="warn">${esc(m)}</div>`).join('')}
-  ${P.bestanden.length ? `<table class="f"><tr><th>${t('bestand')}</th><th>${t('bron')}</th><th>${t('art')}</th><th></th><th></th></tr>${P.bestanden.map((b, i) => `<tr><td>${esc(b.naam)}</td><td>${b.bron}</td><td>${b.n}</td><td class="m">${b.dub ? t('dubbels', {n: b.dub, rec: P.taal === 'en' ? (b.dub === 1 ? 'identical record' : 'identical records') : (b.dub === 1 ? 'identiek record' : 'identieke records')}) : ''}</td><td><button class="b" style="min-height:24px;padding:0 8px" data-wegbestand="${i}" aria-label="${t('wegLabel')} ${esc(b.naam)}" title="${t('wegLabel')}">×</button></td></tr>`).join('')}
+  ${heeft ? `<table class="f"><tr><th>${t('bestand')}</th><th>${t('bron')}</th><th>${t('art')}</th><th></th><th></th></tr>${P.bestanden.map((b, i) => `<tr><td>${esc(b.naam)}</td><td>${b.bron}</td><td>${b.n}</td><td class="m">${b.dub ? t('dubbels', {n: b.dub, rec: P.taal === 'en' ? (b.dub === 1 ? 'identical record' : 'identical records') : (b.dub === 1 ? 'identiek record' : 'identieke records')}) : ''}</td><td><button class="b" style="min-height:24px;padding:0 8px" data-wegbestand="${i}" aria-label="${t('wegLabel')} ${esc(b.naam)}" title="${t('wegLabel')}">×</button></td></tr>`).join('')}
    <tr><td><b>${P.bestanden.length}</b></td><td></td><td><b>${P.art.length}</b></td><td></td><td></td></tr></table>
    <button class="b p" data-view="2">${t('verder')} →</button>
    <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center"><button class="b" data-a="nieuw">${t('nieuw')}</button><span class="m s" style="max-width:520px">${t('nieuwS')}</span></div>` : `<p class="m">${t('geen')}</p>`}
-  <h2 style="font-size:15px;margin:32px 0 8px">${t('hoe')}</h2><div class="note" style="color:var(--ink);font-size:14px;line-height:1.55"><p style="margin:0 0 10px">${t('belga')}</p><p style="margin:0">${t('nexis')}</p></div>
-  <details class="hoe"><summary>${t('hoeT')}</summary>${hoeTekst()}</details>
-  <ul class="note" style="margin-top:22px;padding-left:18px"><li>${t('n1')}</li><li>${t('n4')}</li><li>${t('n3')}</li><li>${t('n2')}</li></ul>
-  <p class="m s" style="margin:26px 0 0">${t('versie')} ${VERSIE} · <button class="v s" style="background:none;color:inherit;text-decoration:underline;text-underline-offset:3px" data-a="feedback">${t('feedback')}</button></p>
-  <p style="margin:10px 0 0;font-size:14px"><a href="${t('contactUrl')}" target="_blank" rel="noopener" style="color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness:3px;text-underline-offset:3px">${t('contact')} ↗</a></p>`;
+  <p class="m s" style="max-width:760px;margin:14px 0 0">${t('n4')}</p>
+  <details class="hoe" style="margin-top:28px"><summary>${t('hoeT')}</summary>${hoeTekst()}</details>
+  <p class="m s voet">${t('versie')} ${VERSIE} · <button class="lnk" data-a="feedback">${t('feedback')}</button> · ${t('makerV')} <a href="${t('contactUrl')}" target="_blank" rel="noopener">${t('maker')} ↗</a> ${t('makerH')}</p>`;
 }
 
 /* ---------- Stap 2: zin ---------- */
@@ -1071,6 +1102,7 @@ document.addEventListener('click', ev => {
   else if (d.a === 'uitleg'){ $('#uitlegT').textContent = t('uitlegK'); $('#uitlegB').innerHTML = nakijkTekst() + `<h4 style="font-size:15px;margin-top:22px">${t('hoeT')}</h4>` + hoeTekst(); $('#uitleg').showModal(); }
   else if (d.a === 'sluitUitleg') $('#uitleg').close();
   else if (d.a === 'feedback') openFeedback();
+  else if (d.naar){ const w = b.closest('.hw'); const x = w && w.querySelector(`[data-sec="${d.naar}"]`); if (x) x.scrollIntoView({behavior: 'smooth', block: 'start'}); }
   else if (d.a === 'sluitFb') $('#fb').close();
   else if (d.a === 'stuurFb') stuurFeedback();
   else if (d.a === 'hintWeg'){ try { localStorage.setItem('knipsel-hint', '1'); } catch (e){} const p = b.closest('p'); if (p) p.remove(); }
