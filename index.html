@@ -41,7 +41,7 @@ nav.st button.on{color:var(--ink);font-weight:600;border-bottom:3px solid var(--
 .v{border:0;background:linear-gradient(transparent 70%,var(--accent) 70%);padding:0 2px;font:inherit;letter-spacing:inherit;line-height:1.2}
 .nw{white-space:nowrap}
 .tlk .v{background:none;border-bottom:3px solid var(--accent)}
-.v:hover,.v.on{background:var(--panel)}
+.v:hover,.v.on{background:var(--hl)}
 .pop{border:1px solid var(--ink);padding:14px 16px;margin:4px 0 12px;max-width:760px;background:var(--bg)}
 .pop h3{margin:0 0 8px;font-size:13px;font-weight:600}
 .pop .rij{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
@@ -539,7 +539,8 @@ const alineas = a => { const w = weg(a), al = alOf(a); return w.length ? al.filt
 const woorden = a => weg(a).length || (P.st[a.id] || {}).tx ? (alineas(a).join(' ') + ' ' + (veld(a, 'lead') || '')).split(/\s+/).filter(Boolean).length : a.w;
 const aangepast = a => { const s = P.st[a.id]; return !!(s && (s.e != null || s.tx || (s.weg && s.weg.length))); };
 const eersteTekst = a => { const i = eIdx(a); return i >= 0 ? alOf(a)[i] || '' : ''; };
-const typeGroep = ty => ty === 'krant' ? 'print' : ty === 'online' ? 'online' : ty;
+const PRINT = /^(krant|magazine|tijdschrift|weekblad|journal|newspapers?|magazines?)$/i;
+const typeGroep = ty => PRINT.test(ty || '') ? 'print' : ty === 'online' ? 'online' : ty;
 function past(a, zonderDatum){
   const f = P.f, kr = veld(a, 'krant'), ki = krantInfo(kr), d = veld(a, 'datum'), s = P.st[a.id] || {};
   if (f.groep) return SIM.groep[a.id] === f.groep;
@@ -689,19 +690,24 @@ function hoeTekst(){
    ['belga', 'Importing Belga.press (.html)', 'Knipsel reads outlet, type, title, lead and text from the layout of the Belga page.', [
     ['Outlet', 'The first line above the publication type.'],
     ['Edition', 'The second line, if present.'],
-    ['Type', 'NEWSPAPER → print, WEBSITE → online, MAGAZINE → magazine.'],
+    ['Date and time', 'From the date line (dd/mm/yyyy - hh:mm).'],
+    ['Type', 'NEWSPAPER → newspaper, MAGAZINE → magazine, WEBSITE → online. Other values are kept as Belga gives them.'],
+    ['Journalist', 'The author line below the metadata.'],
     ['Title', 'The first line of the headline; further lines become the subtitle.'],
     ['Lead', 'The introduction Belga marks separately.'],
     ['Text', 'Every paragraph or line break in the source becomes a separate paragraph. Empty lines are dropped and spacing is normalised.'],
+    ['Boxes', 'Text in a box that Belga formats separately stays in the article but is never chosen as the first paragraph.'],
     ['No full text', 'Some publishers do not release their online articles. Belga.press then shows only the title and lead, with a notice about the EU copyright directive. Knipsel recognises that notice, does not take it as the journalist or text, and labels the article "title and lead only (copyright)". Under the status in the filter sentence you can hide these articles or view them separately; the export has a column volledige_tekst.']]],
    ['nexis', 'Importing Nexis Uni (.rtf)', 'Knipsel uses the fixed fields of Nexis Uni.', [
     ['Title', 'The line(s) above the outlet name: first line title, the rest subtitle.'],
+    ['Outlet', 'The line above the date.'],
+    ['Date and time', 'The first line with a date in Dutch or English (e.g. 18 februari 2020 or February 18, 2020), with a time if given.'],
     ['Edition', 'The lines between the date and the first metadata field.'],
     ['Section', 'Field Section.'],
     ['Journalist', 'Field Byline.'],
     ['Lead', 'Field Highlight.'],
-    ['Type', 'Field Publication-Type: newspaper → print; anything containing web, online or blog → online.'],
-    ['Text', 'Everything between "Body" and "Graphic" (or "Classification"). Photo captions under "Graphic" are left out.'],
+    ['Type', 'Field Publication-Type: newspaper → newspaper; anything containing web, online or blog → online. Other values (e.g. magazine) are kept as Nexis gives them.'],
+    ['Text', 'Everything between "Body" and "Graphic" (or "Classification"). Photo captions under "Graphic" are left out. Soft hyphens are removed and non-breaking spaces become normal spaces.'],
     ['Removed lines', '"PDF-bestand van dit document", "Link naar PDF"/"Link to PDF", "Bekijk de oorspronkelijke pagina…" and "* Vervangende titel…".'],
     ['Title made by Nexis', 'When an article has no title of its own, Nexis Uni generates one between [square brackets], followed by an asterisk. Knipsel keeps it and labels the article "title made by Nexis".']]],
    ['dub', 'Identical records', 'Only exactly identical records are skipped.', [
@@ -717,9 +723,10 @@ function hoeTekst(){
    ['land', 'Country and outlet type', 'Country and type come only from fixed lists; Knipsel does not guess.', [
     ['Belga.press', 'Always Belgium.'],
     ['Nexis Uni', 'Belgium if the outlet name starts with a name on the Flemish list, the Netherlands if it starts with a name on the Dutch list, otherwise Unknown. Not based on the language of the article.'],
-    ['National or regional', 'Only according to the lists below; otherwise "unclassified". Under Outlets you can change this per outlet or create your own label.'],
-    ['Own grouping', 'Under Outlets you can also give each outlet a label of your own, for example quality or popular. Knipsel never fills this in itself. You can filter on it; the export has a column eigen_indeling.'],
-    ['Outlet names', 'As the source gives them, including a section or supplement (e.g. "De Standaard - DS2"). Under Outlets you can rename or merge them; the original name stays in the export (column medium_in_bron).'],
+    ['National or regional', 'Only according to the lists below; otherwise "unclassified". In the list of outlets you can change this per outlet or create your own label.'],
+    ['Own grouping', 'In the list of outlets you can also give each outlet a label of your own, for example quality or popular. Knipsel never fills this in itself. You can filter on it; the export has a column eigen_indeling.'],
+    ['Outlet names', 'As the source gives them, including a section or supplement (e.g. "De Standaard - DS2"). In the list of outlets you can rename or merge them; the original name stays in the export (column medium_in_bron).'],
+    ['Merge suggestions', 'Knipsel suggests merging names that differ only in an article (Het/De), a trailing ".nl" or ".be", or a section after a dash (e.g. "De Standaard - DS2"). Regional editions and AD editions stay separate. Knipsel never merges by itself.'],
     ['Lists', `<details class="lijsten"><summary>Show the lists</summary><p><b>Flemish:</b> ${lijst(VLAAMS)}</p><p><b>Dutch:</b> ${lijst(NEDERLANDS)}</p><p><b>National:</b> ${lijst(NATIONAAL)}</p><p><b>Regional:</b> ${lijst(REGIONAAL)}</p></details>`]]],
    ['zoek', 'Searching', 'Whole words, not case-sensitive; use * for variants.', [
     ['Words', '<code>climate</code> does not find "climatic", <code>climate*</code> does.'],
@@ -738,26 +745,34 @@ function hoeTekst(){
     ['Not compared', `Articles with fewer than ${SH_MIN} word sequences (about ${SH_MIN + SH - 1} words). Sequences occurring in more than ${SH_MAX_DF} articles are ignored: usually standard website phrases.`],
     ['Groups', 'Chained: if A resembles B and B resembles C, all three are in one group, even if A and C stay below the threshold. The label on each article therefore lists the direct matches with their percentage.']]],
    ['ov', 'Other', '', [
+    ['Print and online', 'Print covers the types newspaper and magazine (also tijdschrift, weekblad or journal); online covers online. Other types get a choice of their own. The export keeps the original type.'],
+    ['Order', 'Articles are sorted by date, time and outlet.'],
     ['Word count', 'Words in the lead and text, separated by spaces.'],
     ['Timeline', 'Per day for periods up to 62 days, per week (Monday to Sunday) up to about two years, otherwise per month.'],
-    ['Storage', 'In this browser (IndexedDB) and in the files you save yourself. Nothing is sent anywhere.']]]
+    ['Storage', 'In this browser (IndexedDB) and in the files you save yourself. Nothing is sent anywhere.'],
+    ['Older projects', 'When you open a project from an earlier version, Knipsel applies the current rules: the automatically chosen first paragraph and the detection of articles without full text are determined again. Your own choices and changes are kept.']]]
   ] : [
    ['belga', 'Inlezen van Belga.press (.html)', 'Knipsel haalt medium, type, titel, lead en tekst uit de opmaak van de Belga-pagina.', [
     ['Medium', 'De eerste regel boven het soort publicatie.'],
     ['Editie', 'De tweede regel, als die er is.'],
-    ['Type', 'NEWSPAPER → print, WEBSITE → online, MAGAZINE → magazine.'],
+    ['Datum en tijd', 'Uit de regel met de datum (dd/mm/jjjj - uu:mm).'],
+    ['Type', 'NEWSPAPER → krant, MAGAZINE → magazine, WEBSITE → online. Andere waarden blijven zoals Belga ze geeft.'],
+    ['Journalist', 'De auteursregel onder de metadata.'],
     ['Titel', 'De eerste regel van de kop; volgende regels worden de ondertitel.'],
     ['Lead', 'De inleiding die Belga apart aanduidt.'],
     ['Tekst', 'Elke alinea of regeleinde in de bron wordt een aparte alinea. Lege regels vallen weg en witruimte wordt gelijkgetrokken.'],
+    ['Kaders', 'Tekst in een kader dat Belga apart opmaakt, blijft in het artikel, maar komt niet in aanmerking als eerste alinea.'],
     ['Geen volledige tekst', 'Sommige uitgevers geven hun online artikels niet vrij. Belga.press toont dan alleen titel en lead, met een melding over de Europese auteursrechtrichtlijn. Knipsel herkent die melding, neemt ze niet over als journalist of tekst, en geeft het artikel het label "alleen titel en lead (auteursrecht)". Bij de status in de filterzin kun je die artikels verbergen of apart bekijken; in de export staat de kolom volledige_tekst.']]],
    ['nexis', 'Inlezen van Nexis Uni (.rtf)', 'Knipsel gebruikt de vaste velden van Nexis Uni.', [
     ['Titel', 'De regel(s) boven de naam van het medium: eerste regel titel, de rest ondertitel.'],
+    ['Medium', 'De regel boven de datum.'],
+    ['Datum en tijd', 'De eerste regel met een datum in het Nederlands of Engels (bv. 18 februari 2020 of February 18, 2020), met een eventueel tijdstip.'],
     ['Editie', 'De regels tussen de datum en het eerste metadataveld.'],
     ['Rubriek', 'Veld Section.'],
     ['Journalist', 'Veld Byline.'],
     ['Lead', 'Veld Highlight.'],
-    ['Type', 'Veld Publication-Type: krant of newspaper → print; alles met web, online of blog → online.'],
-    ['Tekst', 'Alles tussen "Body" en "Graphic" (of "Classification"). Fotobijschriften onder "Graphic" vallen weg.'],
+    ['Type', 'Veld Publication-Type: krant of newspaper → krant; alles met web, online of blog → online. Andere waarden (bv. magazine) blijven zoals Nexis ze geeft.'],
+    ['Tekst', 'Alles tussen "Body" en "Graphic" (of "Classification"). Fotobijschriften onder "Graphic" vallen weg. Zachte afbreekstreepjes verdwijnen, harde spaties worden gewone spaties.'],
     ['Verwijderde regels', '"PDF-bestand van dit document", "Link naar PDF", "Bekijk de oorspronkelijke pagina…" en "* Vervangende titel…".'],
     ['Titel gemaakt door Nexis', 'Heeft een artikel geen eigen titel, dan maakt Nexis Uni er zelf een en plaatst het deze tussen [vierkante haken] en gevolgd door een sterretje. Knipsel behoudt die titel en geeft het artikel het label "titel gemaakt door Nexis".']]],
    ['dub', 'Identieke records', 'Alleen exact dezelfde records worden overgeslagen.', [
@@ -773,9 +788,10 @@ function hoeTekst(){
    ['land', 'Land en soort medium', 'Land en soort komen alleen uit vaste lijsten; Knipsel raadt niet.', [
     ['Belga.press', 'Altijd België.'],
     ['Nexis Uni', 'België als de naam van het medium begint met een naam op de Vlaamse lijst, Nederland als ze begint met een naam op de Nederlandse lijst, anders Onbekend. Niet op basis van de taal van het artikel.'],
-    ['Nationaal of regionaal', 'Alleen volgens de lijsten hieronder; anders "niet ingedeeld". Bij Media kun je dat per medium aanpassen of een eigen label maken.'],
-    ['Eigen indeling', 'Bij Media kun je elk medium ook een eigen label geven, bijvoorbeeld kwaliteit of populair. Knipsel vult dat nooit zelf in. Je kunt erop filteren; in de export staat de kolom eigen_indeling.'],
-    ['Namen van media', 'Zoals de bron ze geeft, ook met een katern of bijlage (bv. "De Standaard - DS2"). Bij Media kun je ze hernoemen of samenvoegen; de oorspronkelijke naam blijft in de export (kolom medium_in_bron).'],
+    ['Nationaal of regionaal', 'Alleen volgens de lijsten hieronder; anders "niet ingedeeld". In de lijst met media kun je dat per medium aanpassen of een eigen label maken.'],
+    ['Eigen indeling', 'In de lijst met media kun je elk medium ook een eigen label geven, bijvoorbeeld kwaliteit of populair. Knipsel vult dat nooit zelf in. Je kunt erop filteren; in de export staat de kolom eigen_indeling.'],
+    ['Namen van media', 'Zoals de bron ze geeft, ook met een katern of bijlage (bv. "De Standaard - DS2"). In de lijst met media kun je ze hernoemen of samenvoegen; de oorspronkelijke naam blijft in de export (kolom medium_in_bron).'],
+    ['Voorstellen samenvoegen', 'Knipsel stelt voor om namen samen te voegen die alleen verschillen in lidwoord (Het/De), in ".nl" of ".be" aan het einde, of in een katern na een streepje (bv. "De Standaard - DS2"). Regionale edities en AD-edities blijven apart. Knipsel voegt nooit zelf samen.'],
     ['Lijsten', `<details class="lijsten"><summary>Toon de lijsten</summary><p><b>Vlaams:</b> ${lijst(VLAAMS)}</p><p><b>Nederlands:</b> ${lijst(NEDERLANDS)}</p><p><b>Nationaal:</b> ${lijst(NATIONAAL)}</p><p><b>Regionaal:</b> ${lijst(REGIONAAL)}</p></details>`]]],
    ['zoek', 'Zoeken', 'Volledige woorden, niet hoofdlettergevoelig; gebruik * voor varianten.', [
     ['Woorden', '<code>klimaat</code> vindt "klimaatbeleid" niet, <code>klimaat*</code> wel.'],
@@ -794,9 +810,12 @@ function hoeTekst(){
     ['Niet vergeleken', `Artikels met minder dan ${SH_MIN} woordreeksen (ongeveer ${SH_MIN + SH - 1} woorden). Reeksen die in meer dan ${SH_MAX_DF} artikels voorkomen, tellen niet mee: meestal standaardzinnen van de website.`],
     ['Groepen', 'Aaneengeschakeld: lijkt A op B en B op C, dan zitten ze alle drie in één groep, ook als A en C onderling onder de drempel blijven. Het label bij elk artikel toont daarom de rechtstreekse overeenkomsten met hun percentage.']]],
    ['ov', 'Overige', '', [
+    ['Print en online', 'Print omvat de types krant en magazine (ook tijdschrift, weekblad of journal); online omvat online. Andere types krijgen een eigen keuze. In de export staat het oorspronkelijke type.'],
+    ['Volgorde', 'Artikels staan op datum, tijd en medium.'],
     ['Aantal woorden', 'Woorden in lead en tekst, gescheiden door spaties.'],
     ['Tijdlijn', 'Per dag bij een periode tot 62 dagen, per week (maandag tot zondag) tot ongeveer twee jaar, anders per maand.'],
-    ['Bewaren', 'In deze browser (IndexedDB) en in de bestanden die je zelf opslaat. Er wordt niets doorgestuurd.']]]
+    ['Bewaren', 'In deze browser (IndexedDB) en in de bestanden die je zelf opslaat. Er wordt niets doorgestuurd.'],
+    ['Oudere projecten', 'Open je een project uit een vorige versie, dan past Knipsel de huidige regels toe: de automatisch gekozen eerste alinea en de herkenning van artikels zonder volledige tekst worden opnieuw bepaald. Jouw eigen keuzes en aanpassingen blijven staan.']]]
   ];
   const intro = en ? 'Knipsel makes a few decisions automatically. You can change all of them by hand afterwards; your changes appear in the export and the account of the procedure.' : 'Knipsel neemt een paar beslissingen automatisch. Je kunt ze achteraf allemaal zelf aanpassen; je aanpassingen staan in de export en in de verantwoording.';
   return sectiesHtml(S, intro);
@@ -839,10 +858,10 @@ function zinDelen(n){
   else if (f.van) d.push([null, t('vanaf')], ['datum', dmy(f.van)]);
   else if (f.tot) d.push([null, t('totEnMet')], ['datum', dmy(f.tot)]);
   else d.push([null, t('inDe')], ['datum', t('heelP')]);
-  d.push([null, '.'], ['br', '']);
+  d.push([null, '.']);
   if (f.q.trim()){ d.push([null, t('zoekNaar')], ['q', f.q.trim()], [null, t('inW')], ['waar', w.length ? (w.length > 1 ? w.slice(0, -1).join(', ') + ' ' + t('of') + ' ' + w[w.length - 1] : w[0]) : '…']); if (f.min > 1) d.push([null, t('en')], ['waar', t('minstens', {n: f.min})]); }
   else d.push([null, t('erIs')], ['q', t('geenZoek')]);
-  d.push([null, '.'], ['br', '']);
+  d.push([null, '.']);
   const c = [f.besl !== 'alle' ? t('z_' + f.besl) : '', f.ea !== 'alle' ? t('z_ea') : '', f.bep && f.bep !== 'alle' ? t('z_bep_' + f.bep) : '', f.simAlleen ? t('z_sim') : '', f.minW ? t('z_minW', {n: f.minW}) : ''].filter(Boolean);
   if (c.length){ d.push([null, t('beperkTot')]); c.forEach((x, i) => { if (i) d.push([null, i === c.length - 1 ? t('en') : ',']); d.push(['status', x]); }); }
   else d.push([null, t('erIs')], ['status', t('geenStatus')]);
